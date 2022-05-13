@@ -1,0 +1,5 @@
+controller_list:
+  - name: "arm/vel_based_pos_traj_controller"
+    action_ns: "follow_joint_trajectory"
+    type: FollowJointTrajectory
+    joints: [robot_arm_elbow_joint,robot_arm_shoulder_lift_joint,robot_arm_shoulder_pan_joint,robot_arm_wrist_1_joint,robot_arm_wrist_2_joint,robot_arm_wrist_3_joint]

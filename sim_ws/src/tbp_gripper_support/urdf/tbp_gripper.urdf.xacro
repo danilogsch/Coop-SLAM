@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<robot name="tbp_gripper" xmlns:xacro="http://wiki.ros.org/xacro">
+
+    <xacro:property name="M_PI" value="3.1415926535897931" />
+
+    <xacro:macro name="tbp_gripper" params="prefix parent *origin ">
+
+        <joint name="${prefix}_base_joint" type="fixed">
+            <insert_block name="origin"/>
+            <parent link="${parent}"/>
+            <child link="${prefix}_base_link"/>
+        </joint>
+
+        <!-- BASE LINK -->
+        <link name="${prefix}_base_link">
+            <inertial>
+                <mass value="2.3" />
+                <origin xyz="0 0 0" />
+                <inertia  ixx="1.0" ixy="0.0"  ixz="0.0"  iyy="1.0"  iyz="0.0"  izz="1.0" />
+            </inertial>
+
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+                <geometry>
+                    <mesh filename="package://tbp_gripper_support/meshes/tbp_tool_holder.stl" scale="0.001 0.001 0.001"/>
+                </geometry>
+                <material name="grey">
+                    <color rgba="1 0.5 0.5 1"/>
+                </material>
+            </visual>
+
+            <collision>
+                <origin xyz="0.0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://tbp_gripper_support/meshes/tbp_tool_holder_collision.stl" scale="0.001 0.001 0.001"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <gazebo reference="${prefix}_base_link">
+            <material>Gazebo/Grey</material>
+            <turnGravityOff>false</turnGravityOff>
+        </gazebo>
+
+        <!-- SCREW NUT -->
+
+        <joint name="${prefix}_screw_nut" type="fixed">
+            <origin xyz="-0.04584 0 0.23099" rpy="0.0 -0.522 0.0" />
+            <parent link="${prefix}_base_link"/>
+            <child link="${prefix}_screw_nut" />
+        </joint>
+
+        <link name="${prefix}_screw_nut">
+            <inertial>
+                <mass value="0.05" />
+                <origin xyz="0 0 0" />
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+                    iyy="1.0" iyz="0.0"
+                    izz="1.0" />
+            </inertial>
+
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://tbp_gripper_support/meshes/tbp_hex_nut_19mm.stl" scale="0.001 0.001 0.001"/>
+                </geometry>
+                <material name="grey">
+                <color rgba="0.5 1 0.5 1"/>
+                </material>
+            </visual>
+
+            <collision>
+                <origin xyz="0 0 0.0175" rpy="0 0 0" />
+                <geometry>
+                    <cylinder length="0.035" radius="0.015"/>
+                </geometry>
+            </collision>
+            <contact_coefficients kd="1.0" kp="1000.0" mu="0"/>
+        </link>
+
+         <!-- CAMERA HOLDER -->
+
+        <joint name="${prefix}_camera_holder" type="fixed">
+            <origin xyz="0 0 0" rpy="0.0 0.0 0.0" />
+            <parent link="${prefix}_base_link"/>
+            <child link="${prefix}_camera_holder" />
+        </joint>
+
+        <link name="${prefix}_camera_holder">
+            <inertial>
+                <mass value="0.05" />
+                <origin xyz="0 0 0.013" />
+                <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+                        iyy="1.0" iyz="0.0"
+                        izz="1.0" />
+            </inertial>
+
+            <visual>
+                <origin xyz="0 0 0.013" rpy="0.0 0.0 0.0" />
+                <geometry>
+                    <mesh filename="package://tbp_gripper_support/meshes/tbp_cam_holder.stl" scale="0.001 0.001 0.001"/>
+                </geometry>
+                <material name="grey">
+                    <color rgba="0.5 1 0.5 1"/>
+                </material>
+            </visual>
+
+            <collision>
+                <origin xyz="0 0 0.013" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://tbp_gripper_support/meshes/tbp_cam_holder_collision.stl" scale="0.001 0.001 0.001"/>
+                </geometry>
+            </collision>
+        </link>
+    </xacro:macro>
+</robot>

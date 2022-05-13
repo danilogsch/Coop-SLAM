@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<robot name="truck_f" xmlns:xacro="http://wiki.ros.org/xacro">
+
+        <xacro:property name="leg_width" value="0.08" />
+        <xacro:property name="leg_length_front" value="0.74" />
+        <xacro:property name="leg_length_rear" value="0.82" />
+        <xacro:property name="pi" value="3.1415926535897931" />
+        <xacro:property name="leg_spread_front" value="1.2" />
+        <xacro:property name="leg_spread_rear" value="0.85" />
+        <xacro:property name="leg_offset_rear" value="1.72" />
+        <xacro:property name="leg_offset_front" value="3.27" />
+        <xacro:property name="leg_offset_top" value="0.25" />
+
+    <link name="truck_frame">
+        <visual>
+            <origin xyz="0 0 0" rpy="3.1415926535897931 0 0" />
+            <geometry>
+                <mesh filename="package://truck_frame_support/meshes/visual/truck_frame.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="black">
+                <color rgba="0.2 0.2 0.2 1"/>
+            </material>
+        </visual>   
+        <collision>
+            <origin xyz="0 0 0" rpy="3.1415926535897931 0 0" />
+            <geometry>
+                <mesh filename="package://truck_frame_support/meshes/collision/truck_frame.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+		<inertial>
+            <mass value="10"/>
+            <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+        </inertial>
+    </link>
+
+    <joint name="base_to_front_left_leg" type="fixed">
+        <parent link="truck_frame"/>
+        <child link="front_left_leg"/>
+        <origin xyz="3.27 0.6 0.2" />
+    </joint>
+
+    <link name="front_left_leg">
+        <visual>
+            <geometry>
+                <box size="0.08 0.08 0.74"/>
+            </geometry>
+            <origin xyz="0 0 -0.37" rpy="0 0 0"/>
+            <material name="aluminium">
+                <color rgba="0.7 0.7 0.7 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.08 0.08 0.74"/>
+            </geometry>
+            <origin xyz="0 0 -0.37" rpy="0 0 0"/>
+        </collision>
+		<inertial>
+            <mass value="10"/>
+            <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+        </inertial>
+    </link>
+
+
+    <joint name="base_to_front_right_leg" type="fixed">
+        <parent link="truck_frame"/>
+        <child link="front_right_leg"/>
+        <origin xyz="3.27 -0.6 0.2" />
+    </joint>
+
+    <link name="front_right_leg">
+        <visual>
+            <geometry>
+                <box size="0.08 0.08 0.74"/>
+            </geometry>
+            <origin xyz="0 0 -0.37" rpy="0 0 0"/>
+            <material name="aluminium">
+                <color rgba="0.7 0.7 0.7 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.08 0.08 0.74"/>
+            </geometry>
+            <origin xyz="0 0 -0.37" rpy="0 0 0"/>
+        </collision>
+		<inertial>
+            <mass value="10"/>
+            <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+        </inertial>
+    </link>
+
+    <joint name="base_to_rear_left_leg" type="fixed">
+        <parent link="truck_frame"/>
+        <child link="rear_left_leg"/>
+        <origin xyz="-1.72 0.425 0.16" />
+    </joint>
+
+    <link name="rear_left_leg">
+        <visual>
+            <geometry>
+                <box size="0.08 0.08 0.82"/>
+            </geometry>
+            <origin xyz="0 0 -0.41" rpy="0 0 0"/>
+            <material name="aluminium">
+                <color rgba="0.7 0.7 0.7 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.08 0.08 0.82"/>
+            </geometry>
+            <origin xyz="0 0 -0.41" rpy="0 0 0"/>
+        </collision>
+		<inertial>
+            <mass value="10"/>
+            <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+        </inertial>
+    </link>
+
+
+    <joint name="base_to_rear_right_leg" type="fixed">
+        <parent link="truck_frame"/>
+        <child link="rear_right_leg"/>
+        <origin xyz="-1.72 -0.425 0.16" />
+    </joint>
+    
+    <link name="rear_right_leg">
+        <visual>
+            <geometry>
+                <box size="0.08 0.08 0.82"/>
+            </geometry>
+            <origin xyz="0 0 -0.41" rpy="0 0 0"/>
+            <material name="aluminium">
+                <color rgba="0.7 0.7 0.7 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.08 0.08 0.82"/>
+            </geometry>
+            <origin xyz="0 0 -0.41" rpy="0 0 0"/>
+        </collision>
+		<inertial>
+            <mass value="10"/>
+            <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+        </inertial>
+    </link>
+
+</robot>
+

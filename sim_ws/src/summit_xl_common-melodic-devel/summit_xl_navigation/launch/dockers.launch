@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="config_package" default="$(optenv ROBOT_NAVIGATION_CONFIG_PACKAGE summit_xl_navigation)"/>
+  <arg name="config_folder" default="config/docking"/>
+  <arg name="config_path" default="$(eval find(config_package) + '/' + config_folder)"/>
+
+  <arg name="id_robot" default="$(optenv ROBOT_ID robot)"/>
+  <arg name="prefix" value="$(arg id_robot)_"/>
+
+  <arg name="differential_robot" default="$(optenv ROBOT_DIFFERENTIAL_KINEMATICS true)"/>
+
+  <!-- Docker frames -->
+  <arg name="fixed_frame" default="$(arg prefix)odom"/>
+  <arg name="robot_base_frame" default="$(arg prefix)base_footprint"/>
+  
+  
+  <!-- Dockers -->
+  <node name="diff_docker" pkg="robotnik_docker" type="diff_docker_node" respawn="false" output="screen">
+    <param name="robot_base_frame" type="string" value="$(arg robot_base_frame)" />
+    <param name="fixed_frame" type="string" value="$(arg fixed_frame)" />
+    
+    <rosparam command="load" file="$(arg config_path)/diff_docker.yaml"/>
+    <remap from="cmd_vel" to="docker/cmd_vel"/>
+  </node>
+
+  <node unless="$(arg differential_robot)" name="omni_docker" pkg="robotnik_docker" type="omni_docker_node" respawn="false" output="screen">
+    <param name="robot_base_frame" type="string" value="$(arg robot_base_frame)" />
+    <param name="fixed_frame" type="string" value="$(arg fixed_frame)" />
+    
+    <rosparam command="load" file="$(arg config_path)/omni_docker.yaml"/>
+    <remap from="cmd_vel" to="docker/cmd_vel"/>
+  </node>
+
+  <node name="pp_docker" pkg="robotnik_docker" type="purepursuit_docker_node" respawn="false" output="screen">
+    <param name="robot_base_frame" type="string" value="$(arg robot_base_frame)" />
+    <param name="fixed_frame" type="string" value="$(arg fixed_frame)" />
+
+    <rosparam command="load" file="$(arg config_path)/pp_docker.yaml"/>    
+    <remap from="cmd_vel" to="docker/cmd_vel"/>
+  </node>
+
+</launch>

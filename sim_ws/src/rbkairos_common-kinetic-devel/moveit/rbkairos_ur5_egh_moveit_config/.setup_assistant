@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: rbkairos_description
+    relative_path: robots/versions/rbkairos_ur5_egh.urdf.xacro
+    xacro_args: --inorder load_kinematics_file:=true prefix:=robot_
+  SRDF:
+    relative_path: config/rbkairos.srdf
+  CONFIG:
+    author_name: Jose Gómez
+    author_email: jgomez@robotnik.es
+    generated_timestamp: 1580976263

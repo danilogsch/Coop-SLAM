@@ -1,0 +1,19 @@
+controller_list:
+  - name: arm/scaled_pos_traj_controller
+    action_ns: follow_joint_trajectory
+    default: True
+    type: FollowJointTrajectory
+    joints:
+      - robot_arm_shoulder_pan_joint
+      - robot_arm_shoulder_lift_joint
+      - robot_arm_elbow_joint
+      - robot_arm_wrist_1_joint
+      - robot_arm_wrist_2_joint
+      - robot_arm_wrist_3_joint
+#  - name: egh_gripper_controller
+#    action_ns: follow_joint_trajectory
+#    default: True
+#    type: FollowJointTrajectory
+#    joints:
+#      - robot_egh_gripper_finger_left_joint
+#      - robot_egh_gripper_finger_right_joint

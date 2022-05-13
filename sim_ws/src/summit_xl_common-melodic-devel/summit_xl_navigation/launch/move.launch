@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="config_package" default="$(optenv ROBOT_NAVIGATION_CONFIG_PACKAGE summit_xl_navigation)"/>
+  <arg name="config_folder" default="config"/>
+  <arg name="config_path" default="$(eval find(config_package) + '/' + config_folder)"/>
+
+  <arg name="id_robot" default="$(optenv ROBOT_ID robot)"/>
+  <arg name="prefix" default="$(arg id_robot)_"/>
+  
+  <arg name="odom_frame" default="$(arg prefix)odom"/> 
+  <arg name="base_frame" default="$(arg prefix)base_footprint"/>
+
+  <arg name="has_safety_controller" default="false"/>
+  <arg name="cmd_vel_topic" default="move/cmd_vel"/>
+  <arg name="differential_robot" default="true"/>
+  
+  <node name="move" pkg="robotnik_move" type="move_node" respawn="false" output="screen">
+    <param name="robot_base_frame" type="string" value="$(arg base_frame)" />
+    <param name="fixed_frame" type="string" value="$(arg odom_frame)" />
+    
+    <rosparam command="load" file="$(arg config_path)/move.yaml"/>
+    
+    <remap unless="$(arg has_safety_controller)" from="cmd_vel" to="~cmd_vel" /> 
+    <remap if="$(arg has_safety_controller)" from="cmd_vel" to="~cmd_vel_unsafe" /> 
+
+    <param name="differential_robot" value="$(arg differential_robot)" />
+  </node>
+  
+</launch>

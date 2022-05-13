@@ -1,0 +1,6 @@
+# List of markers to save (if no one, it saves any marker detected)
+uint32[] id
+# (optional) Filename to save the marker list
+string filename
+---
+bool ret

@@ -1,0 +1,185 @@
+<?xml version="1.0"?>
+<robot name="egh_gripper" xmlns:xacro="http://wiki.ros.org/xacro">
+
+    <xacro:property name="M_PI" value="3.1415926535897931" />
+  
+    <xacro:macro name="egh_gripper" params="prefix parent *origin ">
+        
+        <joint name="${prefix}_base_joint" type="fixed">
+            <insert_block name="origin"/>
+            <parent link="${parent}"/>
+            <child link="${prefix}_base_link"/>
+        </joint>
+
+        <!-- BASE LINK -->
+        <link name="${prefix}_base_link">
+            <inertial>
+                <mass value="0.25" />
+                <origin xyz="0 0 0" />
+                <inertia  ixx="1.0" ixy="0.0"  ixz="0.0"  iyy="1.0"  iyz="0.0"  izz="1.0" />
+            </inertial>
+
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+                <geometry>
+                    <mesh filename="package://egh_gripper_description/meshes/egh_base.stl" scale="1 1 1"/>
+                </geometry>
+                <material name="grey">
+                <color rgba="0.5 0.5 0.5 1"/>
+                </material>
+            </visual>
+
+            <collision>
+                <origin xyz="0.0 0 0" rpy="0 0 0" />
+                <geometry>
+                <!--box size="0.146 0.05 0.0735"/-->
+                    <mesh filename="package://egh_gripper_description/meshes/egh_base.stl" scale="1 1 1"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <gazebo reference="${prefix}_base_link">
+            <material>Gazebo/Grey</material>
+            <turnGravityOff>false</turnGravityOff>
+        </gazebo>
+
+        <!-- FINGER LEFT -->
+        
+        <joint name="${prefix}_finger_left_joint" type="prismatic">
+            <limit lower="0.0" upper="0.048" effort="1.0" velocity="0.0125"/>
+            <axis xyz="0 -1 0"/>
+            <origin xyz="0.11 -0.013 0" rpy="0.0 0.0 0.0" /> 
+            <parent link="${prefix}_base_link"/>
+            <child link="${prefix}_left_finger" />
+            <dynamics friction="100" damping="100" />
+        </joint>
+
+        <transmission name="${prefix}_base_trans_left">
+            <type>transmission_interface/SimpleTransmission</type>
+            <actuator name="${prefix}_base_motor_left">
+                <mechanicalReduction>1</mechanicalReduction>
+                <motorTorqueConstant>1</motorTorqueConstant>
+            </actuator>
+            <joint name="${prefix}_finger_left_joint" >
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+        </transmission>
+
+        <link name="${prefix}_left_finger">
+            <inertial>
+                <mass value="0.1" />
+                <origin xyz="0 0 0" />
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+                    iyy="1.0" iyz="0.0" 
+                    izz="1.0" />
+            </inertial>
+
+            <visual>
+                <origin xyz="0.0 0 0" rpy="${pi} 0 0" />
+                <geometry>
+                    <mesh filename="package://egh_gripper_description/meshes/egh_finger.stl" scale="1.0 1.0 1.0"/>
+                </geometry>
+                <material name="black">
+                <color rgba="0 0 0 0"/>
+                </material>
+            </visual>
+
+            <collision>
+                <origin xyz="0 0 0" rpy="${pi} 0 0" />
+                <geometry>
+                    <mesh filename="package://egh_gripper_description/meshes/egh_finger.stl" scale="1.0 1.0 1.0"/>
+                </geometry>
+            </collision>
+            <contact_coefficients kd="1.0" kp="1000.0" mu="0"/>
+        </link>
+
+        <gazebo reference="${prefix}_left_finger">
+            <material>Gazebo/Blue</material>
+            <turnGravityOff>false</turnGravityOff>
+        </gazebo>
+
+        <!-- FINGER RIGHT -->
+        <joint name="${prefix}_finger_right_joint" type="prismatic">
+            <limit lower="0.0" upper="0.048" effort="1.0" velocity="0.0125"/>
+            <axis xyz="0 1 0"/>
+            <origin xyz="0.11 0.013 0" rpy="0 0 0" /> 
+            <parent link="${prefix}_base_link"/>
+            <child link="${prefix}_right_finger" />
+            <dynamics friction="100" damping="100" />
+            <mimic joint="${prefix}_finger_left_joint" multiplier="1" offset="0"/>
+        </joint>
+
+        <!-- 
+            The transmission is not defined cause the right finger is mirroring
+            the left finger using mimic plugin
+        -->
+        <!--transmission name="${prefix}_base_trans_right">
+            <type>transmission_interface/SimpleTransmission</type>
+            <actuator name="${prefix}_base_motor_right">
+                <mechanicalReduction>1</mechanicalReduction>
+                <motorTorqueConstant>1</motorTorqueConstant>
+            </actuator>
+            <joint name="${prefix}_finger_right_joint" >
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+        </transmission-->
+
+        <xacro:macro name="mimic_joint_plugin_gazebo" params="parent_joint mimic_joint has_pid:=false multiplier:=1.0 offset:=0 sensitiveness:=0.0 max_effort:=1.0 robot_namespace:=''">
+            <gazebo>
+                <plugin name="${mimic_joint}_mimic_joint_plugin" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+                    <joint>${parent_joint}</joint>
+                    <mimicJoint>${mimic_joint}</mimicJoint>
+                    <xacro:if value="${has_pid}">                    
+                    <hasPID />
+                    </xacro:if>
+                    <multiplier>${multiplier}</multiplier>
+                    <offset>${offset}</offset>
+                    <sensitiveness>${sensitiveness}</sensitiveness>   
+                    <maxEffort>${max_effort}</maxEffort>              
+                    <xacro:unless value="${robot_namespace == ''}">
+                        <robotNamespace>($robot_namespace)</robotNamespace>
+                    </xacro:unless>
+                </plugin>
+            </gazebo>
+        </xacro:macro>
+
+        <xacro:mimic_joint_plugin_gazebo parent_joint="${prefix}_finger_left_joint" 
+        mimic_joint="${prefix}_finger_right_joint" has_pid="false" multiplier="1.0" 
+        max_effort="10.0" />
+      
+        <link name="${prefix}_right_finger">
+            <inertial>
+            <mass value="0.1" />
+                <origin xyz="0 0 0" />
+                <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+                        iyy="1.0" iyz="0.0" 
+                        izz="1.0" />
+            </inertial>
+
+            <visual>
+                <origin xyz="0.0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://egh_gripper_description/meshes/egh_finger.stl" scale="1.0 1.0 1.0"/>
+                </geometry>
+                <material name="black">
+                <color rgba="0 0 0 0"/>
+                </material>
+            </visual>
+
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://egh_gripper_description/meshes/egh_finger.stl" scale="1.0 1.0 1.0"/>
+                </geometry>
+            </collision>
+            <contact_coefficients kd="1.0" kp="1000.0" mu="0"/>
+        </link>
+
+        <gazebo reference="${prefix}_right_finger">
+            <material>Gazebo/Blue</material>
+            <turnGravityOff>false</turnGravityOff>
+        </gazebo>
+
+    </xacro:macro>
+
+</robot>

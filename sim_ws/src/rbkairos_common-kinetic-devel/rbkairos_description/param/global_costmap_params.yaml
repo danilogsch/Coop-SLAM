@@ -1,0 +1,12 @@
+
+global_costmap:
+   global_frame: map
+   robot_base_frame: rbkairos_base_footprint
+   update_frequency: 20.0
+   publish_frequency: 5.0
+   width: 100.0
+   height: 100.0
+   resolution: 0.05
+   static_map: true
+   rolling_window: false
+

@@ -1,0 +1,2 @@
+ros_ign/ros_ign:ros_ign/ros_ign_bridge:ros_ign/ros_ign_gazebo:ros_ign/ros_ign_gazebo_demos:ros_ign/ros_ign_image
+-DCATKIN_DEVEL_PREFIX=/home/danilo/fortress_ws/devel -DCMAKE_INSTALL_PREFIX=/home/danilo/fortress_ws/install -G Unix Makefiles

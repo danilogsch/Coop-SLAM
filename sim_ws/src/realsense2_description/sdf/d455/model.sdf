@@ -1,0 +1,219 @@
+<?xml version='1.0'?>
+<sdf version='1.6'>
+  <model name='d455'>
+    <link name='d455_map'>
+      <pose frame=''>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose frame=''>0.01125 0.0475 0.0145 0 -0 0</pose>
+        <mass>0.072</mass>
+        <inertia>
+          <ixx>0.00388124</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00049894</iyy>
+          <iyz>0</iyz>
+          <izz>0.00387926</izz>
+        </inertia>
+      </inertial>
+      <gravity>0</gravity>
+      <velocity_decay/>
+      <self_collide>0</self_collide>
+      <enable_wind>0</enable_wind>
+      <kinematic>0</kinematic>
+      <gravity>1</gravity>
+      <sensor name='cameracolor' type='camera'>
+        <camera name='camera'>
+          <horizontal_fov>1.5708</horizontal_fov>
+          <image>
+            <width>1280</width>
+            <height>800</height>
+            <format>RGB_INT8</format>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>100</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0</mean>
+            <stddev>0.007</stddev>
+          </noise>
+        </camera>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <visualize>1</visualize>
+        <pose frame=''>0.01125 0.0475 0.0145 0 -0 0</pose>
+      </sensor>
+      <sensor name='cameraired1' type='camera'>
+        <camera name='camera'>
+          <horizontal_fov>1.5708</horizontal_fov>
+          <image>
+            <width>1280</width>
+            <height>800</height>
+            <format>L_INT8</format>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>100</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0</mean>
+            <stddev>0.05</stddev>
+          </noise>
+        </camera>
+        <always_on>1</always_on>
+        <update_rate>90</update_rate>
+        <visualize>0</visualize>
+        <pose frame=''>0.01125 0.0475 0.0145 0 -0 0</pose>
+      </sensor>
+      <sensor name='cameraired2' type='camera'>
+        <camera name='camera'>
+          <horizontal_fov>1.5708</horizontal_fov>
+          <image>
+            <width>1280</width>
+            <height>800</height>
+            <format>L_INT8</format>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>100</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0</mean>
+            <stddev>0.05</stddev>
+          </noise>
+        </camera>
+        <always_on>1</always_on>
+        <update_rate>90</update_rate>
+        <visualize>0</visualize>
+        <pose frame=''>0.01125 0.0475 0.0145 0 -0 0</pose>
+      </sensor>
+      <sensor name='cameradepth' type='depth'>
+        <camera name='camera'>
+          <horizontal_fov>1.5708</horizontal_fov>
+          <image>
+            <width>1280</width>
+            <height>800</height>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>100</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0</mean>
+            <stddev>0.1</stddev>
+          </noise>
+        </camera>
+        <always_on>1</always_on>
+        <update_rate>90</update_rate>
+        <visualize>0</visualize>
+        <pose frame=''>0.01125 0.0475 0.0145 0 -0 0</pose>
+      </sensor>
+      <visual name='d455_map_fixed_joint_lump__camera_link_visual'>
+        <pose frame=''>0.01125 0 0.0145 1.5708 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>/home/danilo/Desktop/sim_ws/src/realsense2_description/meshes/d455.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>__default__</uri>
+            <name>__default__</name>
+          </script>
+          <shader type='vertex'>
+            <normal_map>__default__</normal_map>
+          </shader>
+        </material>
+        <transparency>0</transparency>
+        <cast_shadows>1</cast_shadows>
+      </visual>
+      <collision name='d455_map_fixed_joint_lump__camera_link_collision'>
+        <laser_retro>0</laser_retro>
+        <max_contacts>10</max_contacts>
+        <pose frame=''>0.0028 0 0.0145 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.026 0.124 0.029</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+              <fdir1>0 0 0</fdir1>
+              <slip1>0</slip1>
+              <slip2>0</slip2>
+            </ode>
+            <torsional>
+              <coefficient>1</coefficient>
+              <patch_radius>0</patch_radius>
+              <surface_radius>0</surface_radius>
+              <use_patch_radius>1</use_patch_radius>
+              <ode>
+                <slip>0</slip>
+              </ode>
+            </torsional>
+          </friction>
+          <bounce>
+            <restitution_coefficient>0</restitution_coefficient>
+            <threshold>1e+06</threshold>
+          </bounce>
+          <contact>
+            <collide_without_contact>0</collide_without_contact>
+            <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+            <collide_bitmask>1</collide_bitmask>
+            <ode>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+13</kp>
+              <kd>1</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0</min_depth>
+            </ode>
+            <bullet>
+              <split_impulse>1</split_impulse>
+              <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+13</kp>
+              <kd>1</kd>
+            </bullet>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+    <static>0</static>
+    <allow_auto_disable>1</allow_auto_disable>
+    <plugin name='camera' filename='librealsense_gazebo_plugin.so'>
+      <prefix>camera</prefix>
+      <depthUpdateRate>30.0</depthUpdateRate>
+      <colorUpdateRate>30.0</colorUpdateRate>
+      <infraredUpdateRate>30.0</infraredUpdateRate>
+      <depthTopicName>depth/image_raw</depthTopicName>
+      <depthCameraInfoTopicName>depth/camera_info</depthCameraInfoTopicName>
+      <colorTopicName>color/image_raw</colorTopicName>
+      <colorCameraInfoTopicName>color/camera_info</colorCameraInfoTopicName>
+      <infrared1TopicName>infra1/image_raw</infrared1TopicName>
+      <infrared1CameraInfoTopicName>infra1/camera_info</infrared1CameraInfoTopicName>
+      <infrared2TopicName>infra2/image_raw</infrared2TopicName>
+      <infrared2CameraInfoTopicName>infra2/camera_info</infrared2CameraInfoTopicName>
+      <colorOpticalframeName>camera_depth_optical_frame</colorOpticalframeName>
+      <depthOpticalframeName>camera_depth_optical_frame</depthOpticalframeName>
+      <infrared1OpticalframeName>camera_left_ir_optical_frame</infrared1OpticalframeName>
+      <infrared2OpticalframeName>camera_right_ir_optical_frame</infrared2OpticalframeName>
+      <rangeMinDepth>0.2</rangeMinDepth>
+      <rangeMaxDepth>10.0</rangeMaxDepth>
+      <pointCloud>1</pointCloud>
+      <pointCloudTopicName>depth/color/points</pointCloudTopicName>
+      <pointCloudCutoff>0.25</pointCloudCutoff>
+      <pointCloudCutoffMax>9.0</pointCloudCutoffMax>
+      <robotNamespace>/</robotNamespace>
+    </plugin>
+  </model>
+</sdf>

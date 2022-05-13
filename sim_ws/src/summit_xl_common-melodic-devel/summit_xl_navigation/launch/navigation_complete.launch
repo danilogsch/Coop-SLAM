@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="config_package" default="$(optenv ROBOT_NAVIGATION_CONFIG_PACKAGE summit_xl_navigation)"/>
+  <arg name="config_folder" default="config"/>
+  <arg name="config_path" default="$(eval find(config_package) + '/' + config_folder)"/>
+
+  <arg name="id_robot" default="$(optenv ROBOT_ID robot)"/>
+  <arg name="differential_robot" default="$(optenv ROBOT_DIFFERENTIAL_KINEMATICS false)"/>
+	
+  <!-- Dockers arguments -->
+  <arg name="has_docker" default="$(optenv ROBOT_HAS_DOCKER false)"/>
+  <arg name="run_camera_docker" default="$(optenv ROBOT_DOCKER_RUN_CAMERA true)"/>
+  <arg name="run_laser_docker" default="$(optenv ROBOT_DOCKER_RUN_LASER false)"/>
+  <arg name="run_laser_filters" default="$(optenv ROBOT_RUN_LASER_FILTERS true)"/>
+  
+  <!-- Move arguments-->
+  <arg name="run_move" default="$(optenv ROBOT_RUN_MOVE true)"/>
+	
+	<group ns="$(arg id_robot)">
+
+      <include if="$(arg has_docker)" file="$(find summit_xl_navigation)/launch/dockers.launch">
+        <arg name="config_path" value="$(arg config_path)/docking"/>
+        <arg name="id_robot" value="$(arg id_robot)"/>
+		    <arg name="docking_qr" value="$(arg run_camera_docker)"/>
+        <arg name="docking_laser_reflectors" value="$(arg run_laser_docker)"/>
+        <arg name="differential_robot" value="$(arg differential_robot)"/>
+      </include>
+    
+      <include if="$(arg run_move)" file="$(find summit_xl_navigation)/launch/move.launch">
+        <arg name="config_path" value="$(arg config_path)"/>
+        <arg name="id_robot" value="$(arg id_robot)"/>
+        <arg name="differential_robot" value="$(arg differential_robot)"/>
+      </include>
+
+      <include if="$(arg run_laser_filters)" file="$(find summit_xl_navigation)/launch/scan_filter.launch">
+        <arg name="node_name" value="front_laser_scan_filter"/>
+        <arg name="input_scan" value="front_laser/scan"/>
+        <arg name="output_scan" value="front_laser/filtered_scan"/>
+        <arg name="config_file" value="scan_filter.yaml"/>
+      </include>
+
+      <include if="$(arg run_laser_filters)" file="$(find summit_xl_navigation)/launch/scan_filter.launch">
+        <arg name="node_name" value="rear_laser_scan_filter"/>
+        <arg name="input_scan" value="rear_laser/scan"/>
+        <arg name="output_scan" value="rear_laser/filtered_scan"/>
+        <arg name="config_file" value="scan_filter.yaml"/>
+      </include>
+    
+	</group>
+</launch>

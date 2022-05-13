@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: rbkairos_description
+    relative_path: robots/rbkairos.urdf.xacro
+    xacro_args: "--inorder "
+  SRDF:
+    relative_path: config/rbkairos.srdf
+  CONFIG:
+    author_name: Marta Millet
+    author_email: mmillet@robotnik.es
+    generated_timestamp: 1544704409
