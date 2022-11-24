@@ -1,0 +1,20 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/danilo/humble_ws/install/ros_gz_interfaces/local/lib/python3.10/dist-packages",
+        "/home/danilo/humble_ws/install/rbkairos_migration_sensor_config_2/lib/python3.10/site-packages",
+        "/home/danilo/humble_ws/install/rbkairos_migration_sensor_config_1/lib/python3.10/site-packages",
+        "/home/danilo/humble_ws/install/pioneer3dx_migration_sensor_config_1/lib/python3.10/site-packages",
+        "/home/danilo/humble_ws/install/datagen_scripts/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/danilo/humble_ws/install/ros_gz_interfaces/local/lib/python3.10/dist-packages",
+        "/home/danilo/humble_ws/install/rbkairos_migration_sensor_config_2/lib/python3.10/site-packages",
+        "/home/danilo/humble_ws/install/rbkairos_migration_sensor_config_1/lib/python3.10/site-packages",
+        "/home/danilo/humble_ws/install/pioneer3dx_migration_sensor_config_1/lib/python3.10/site-packages",
+        "/home/danilo/humble_ws/install/datagen_scripts/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
+}

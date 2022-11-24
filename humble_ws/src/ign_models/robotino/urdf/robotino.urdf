@@ -1,0 +1,118 @@
+<?xml version="1.0" ?>
+<robot name="robotino" xmlns:xacro="http://wiki.ros.org/xacro">
+  <link name="robotino/base_footprint">
+    <visual>
+      <origin rpy="0 0 1.570795" xyz="0.01 0 0"/>
+      <geometry>
+        <mesh filename="package://robotino/meshes/parts/robotino_base.dae" scale="0.01 0.01 0.01"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.025"/>
+      <geometry>
+        <cylinder length="0.05" radius="0.18"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="robotino/front_laser_link"/>
+  <joint name="front_laser_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0.20"/>
+    <parent link="robotino/base_footprint"/>
+    <child link="robotino/front_laser_link"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="-1" lower="-1e+16" upper="1e+16" velocity="-1"/>
+  </joint>
+  <link name="robotino/wheel0_link">
+    <inertial>
+      <mass value="0.00001"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robotino/meshes/parts/robotino_wheel.dae" scale="0.01 0.01 0.01"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="wheel0_joint" type="continuous">
+    <origin rpy="0 0 1.04719666667" xyz="0.065 0.11 0.04"/>
+    <axis xyz="-1 0 0"/>
+    <parent link="robotino/base_footprint"/>
+    <child link="robotino/wheel0_link"/>
+  </joint>
+  <link name="robotino/wheel1_link">
+    <inertial>
+      <mass value="0.00001"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robotino/meshes/parts/robotino_wheel.dae" scale="0.01 0.01 0.01"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="wheel1_joint" type="continuous">
+    <origin rpy="0 0 0" xyz="-0.13 0 0.04"/>
+    <axis xyz="1 0 0"/>
+    <parent link="robotino/base_footprint"/>
+    <child link="robotino/wheel1_link"/>
+  </joint>
+  <link name="robotino/wheel2_link">
+    <inertial>
+      <mass value="0.00001"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robotino/meshes/parts/robotino_wheel.dae" scale="0.01 0.01 0.01"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="wheel2_joint" type="continuous">
+    <origin rpy="0 0 -1.04719666667" xyz="0.065 -0.11 0.04"/>
+    <axis xyz="-1 0 0"/>
+    <parent link="robotino/base_footprint"/>
+    <child link="robotino/wheel2_link"/>
+  </joint>
+  <link name="robotino/command_bridge_link">
+    <inertial>
+      <mass value="0.00001"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+    </inertial>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.25 0.11 0.16"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="command_bridge_joint" type="fixed">
+    <origin rpy="0 0 1.570795" xyz="-0.05 0 0.13"/>
+    <parent link="robotino/base_footprint"/>
+    <child link="robotino/command_bridge_link"/>
+  </joint>
+  <link name="robotino/anglebracketusb_link">
+    <inertial>
+      <mass value="0.00001"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robotino/meshes/parts/angle_bracket_usb_hub.dae" scale="0.01 0.01 0.01"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="anglebracketusb_joint" type="fixed">
+    <origin rpy="0 0 1.570795" xyz="0.008 0 0.137"/>
+    <parent link="robotino/base_footprint"/>
+    <child link="robotino/anglebracketusb_link"/>
+  </joint>
+</robot>

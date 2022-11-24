@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<ignition version='1.0'>
+  <plugin name="ignition::launch::GazeboFactory"
+    filename="ignition-launch-gazebo-factory">
+    
+    <spawn>
+      <name>mecanumlift</name>
+      <allow_renaming>true</allow_renaming>
+      <pose>0 0 0.15 0 0 0</pose>
+      <sdf version='1.9'>
+        <include>
+        <uri>
+	model://Mecanum_lift2
+    	</uri>
+        </include>
+      </sdf>
+    </spawn>
+    
+  </plugin>
+</ignition>

@@ -1,0 +1,25 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: youbot
+    relative_path: urdf/youtbot.urdf
+  srdf:
+    relative_path: config/youbot.srdf
+  package_settings:
+    author_name: Danilo G. Schneider
+    author_email: danilo_gsch@hotmail.com
+    generated_timestamp: 1665019599
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity

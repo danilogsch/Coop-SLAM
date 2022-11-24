@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name='Mecanum_lift'>
+  
+  <link name='Mecanum_lift/base_footprint'/>
+  <link name='Mecanum_lift/front_right_wheel'/>
+  <link name='Mecanum_lift/rear_right_wheel'/>
+  <link name='Mecanum_lift/front_left_wheel'/>
+  <link name='Mecanum_lift/rear_left_wheel'/>
+  <link name="Mecanum_lift/front_laser_link"/>
+  
+  <joint name="front_laser_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 -0.135 0.20"/>
+    <parent link="Mecanum_lift/base_footprint"/>
+    <child link="Mecanum_lift/front_laser_link"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="-1" lower="-1e+16" upper="1e+16" velocity="-1"/>
+  </joint>
+  
+  <joint name="front_left_wheel_joint" type='revolute'>
+    <origin xyz='0.858 0.282 0.186' rpy='0 0 0'/>
+    <parent link='Mecanum_lift/base_footprint'/>
+    <child link='Mecanum_lift/front_right_wheel'/>
+    <axis xyz='0 9.6e-05 1'/>
+    <limit lower='-1e+16' upper='1e+16' effort='-1' velocity='-1'/>
+  </joint>
+  
+  <joint name="front_right_wheel_joint" type='revolute'>
+    <origin xyz='0.858 -0.552 0.186' rpy='0 0 0'/>
+    <parent link='Mecanum_lift/base_footprint'/>
+    <child link='Mecanum_lift/front_left_wheel'/>
+    <axis xyz='0 9.6e-05 1'/>
+    <limit lower='-1e+16' upper='1e+16' effort='-1' velocity='-1'/>
+  </joint>
+
+  <joint name="rear_left_wheel_joint" type='revolute'>
+    <origin xyz='-0.93 0.282 0.186' rpy='0 0 0'/>
+    <parent link='Mecanum_lift/base_footprint'/>
+    <child link='Mecanum_lift/rear_left_wheel'/>
+    <axis xyz='0 9.6e-05 1'/>
+    <limit lower='-1e+16' upper='1e+16' effort='-1' velocity='-1'/>
+  </joint>
+  
+  <joint name="rear_right_wheel_joint" type='revolute'>
+    <origin xyz='-0.93 -0.552 0.186 ' rpy='0 0 0'/>
+    <parent link='Mecanum_lift/base_footprint'/>
+    <child link='Mecanum_lift/rear_right_wheel'/>
+    <axis xyz='0 9.6e-05 1'/>
+    <limit lower='-1e+16' upper='1e+16' effort='-1' velocity='-1'/>
+  </joint>
+
+</robot>

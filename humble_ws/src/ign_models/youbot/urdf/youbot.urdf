@@ -1,0 +1,503 @@
+<?xml version="1.0"?>
+<robot name="youbot">
+  <link name="youbot/base_footprint">
+    <inertial>
+      <origin xyz="0 0 -0.05" rpy="0 -0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+    </inertial>
+    <collision name="base_footprint_geom">
+      <origin xyz="0 0 -0.05" rpy="0 -0 0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <visual name="base_footprint_geom_visual">
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="youbot/base_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <mass value="22"/>
+      <inertia ixx="5.65223" ixy="-0.00972" ixz="1.29399" iyy="5.66947" iyz="-0.00738" izz="3.6832"/>
+    </inertial>
+    <collision name="base_link_geom">
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/base/base_convex.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <visual name="base_link_geom_visual">
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/base/base.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="youbot/arm_link_0">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <mass value="0.845"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+    <collision name="arm_link_0_geom">
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/arm/arm0_convex.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <visual name="arm_link_0_geom_visual">
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/arm/arm0.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="youbot/arm_link_1">
+    <inertial>
+      <origin xyz="0.01489 0.00213 0.00213" rpy="0 -0 0"/>
+      <mass value="2.412"/>
+      <inertia ixx="0.003863" ixy="-0.000979" ixz="0" iyy="0.006196" iyz="0" izz="0.006369"/>
+    </inertial>
+    <collision name="arm_link_1_geom">
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/arm/arm1_convex.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <visual name="arm_link_1_geom_visual">
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/arm/arm1.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="youbot/arm_link_2">
+    <inertial>
+      <origin xyz="0.01053 -0.0307 0.08597" rpy="0 0 -0"/>
+      <mass value="1.155"/>
+      <inertia ixx="0.000823" ixy="0" ixz="-0" iyy="0.004447" iyz="0" izz="0.004439"/>
+    </inertial>
+    <collision name="arm_link_2_geom">
+      <origin xyz="0 -0.032 0.078" rpy="0 0 -0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/arm/arm2_convex.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <visual name="arm_link_2_geom_visual">
+      <origin xyz="0 -0.032 0.078" rpy="0 0 -0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/arm/arm2.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="youbot/arm_link_3">
+    <inertial>
+      <origin xyz="0.0001 0.0207 0.07107" rpy="0 -0 0"/>
+      <mass value="0.934"/>
+      <inertia ixx="0.002459" ixy="0" ixz="0" iyy="0.002571" iyz="-0" izz="0.000535"/>
+    </inertial>
+    <collision name="arm_link_3_geom">
+      <origin xyz="0.000 0.028 0.079" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/arm/arm3_convex.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <visual name="arm_link_3_geom_visual">
+      <origin xyz="0.000 0.028 0.079" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/arm/arm3.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="youbot/arm_link_4">
+    <inertial>
+      <origin xyz="0.00011 -0.02 0.05019" rpy="0 -0 0"/>
+      <mass value="0.877"/>
+      <inertia ixx="0.000869" ixy="0" ixz="-0" iyy="0.001173" iyz="-0.000231" izz="0.001091"/>
+    </inertial>
+    <collision name="arm_link_4_geom">
+      <origin xyz="0 -0.010 0.029" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/arm/arm4_convex.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <visual name="arm_link_4_geom_visual">
+      <origin xyz="0 -0.010 0.029" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/arm/arm4.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="youbot/arm_link_5">
+    <inertial>
+      <origin xyz="0.0 0.00115 -0.01683" rpy="0 -0 0"/>
+      <mass value="0.251"/>
+      <inertia ixx="0.00028" ixy="0" ixz="0" iyy="0.000339" iyz="0" izz="0.000119"/>
+    </inertial>
+    <collision name="arm_link_5_geom">
+      <origin xyz="0.003 0 -0.034" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/arm/arm5_convex.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <visual name="arm_link_5_geom_visual">
+      <origin xyz="0.003 0 -0.034" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/arm/arm5.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="youbot/gripper_palm_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+    <collision name="gripper_palm_link_geom">
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/gripper/palm_convex.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <visual name="gripper_palm_link_geom_visual">
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/gripper/palm.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="youbot/gripper_finger_link_l">
+    <inertial>
+      <origin xyz="0 -0.001 0" rpy="0 -0 0"/>
+      <mass value="0.01"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+    <collision name="gripper_finger_link_l_geom">
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/gripper/finger_convex.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <visual name="gripper_finger_link_l_geom_visual">
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/gripper/finger.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="youbot/gripper_finger_link_r">
+    <inertial>
+      <origin xyz="0 -0.001 0" rpy="0 -0 0"/>
+      <mass value="0.01"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+    <collision name="gripper_finger_link_r_geom">
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/gripper/finger_convex.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <visual name="gripper_finger_link_r_geom_visual">
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/gripper/finger.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="youbot/front_laser_link">
+    <inertial>
+      <origin xyz="0.1 0 -0.11" rpy="0 -0 0"/>
+      <mass value="0.16"/>
+      <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1"/>
+    </inertial>
+    <collision name="front_laser_link_geom">
+      <origin xyz="0.1 0 -0.11" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/hokuyo_convex.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <visual name="front_laser_link_geom_visual">
+      <origin xyz="0.1 0 -0.11" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/hokuyo.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <sensor name="youbot_front_laser_sensor" update_rate="10">
+    <parent link="front_laser_link"/>
+    <origin xyz="-0.1 0 0.11" rpy="0 -0 0"/>
+  </sensor>
+  <link name="youbot/caster_link_bl">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.012412" ixy="-0.000712" ixz="0.000503" iyy="0.015218" iyz="-4e-06" izz="0.011764"/>
+    </inertial>
+  </link>
+  <link name="youbot/wheel_link_bl">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <mass value="0.4"/>
+      <inertia ixx="0.012412" ixy="-0.000712" ixz="0.000503" iyy="0.015218" iyz="-4e-06" izz="0.011764"/>
+    </inertial>
+    <collision name="wheel_link_bl_geom">
+      <origin xyz="0 0 0" rpy="1.5708 -0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.005"/>
+      </geometry>
+    </collision>
+    <visual name="wheel_link_bl_geom_visual">
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/base/back-right_wheel.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="youbot/caster_link_br">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.012412" ixy="-0.000712" ixz="0.000503" iyy="0.015218" iyz="-4e-06" izz="0.011764"/>
+    </inertial>
+  </link>
+  <link name="youbot/wheel_link_br">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <mass value="0.4"/>
+      <inertia ixx="0.012412" ixy="-0.000712" ixz="0.000503" iyy="0.015218" iyz="-4e-06" izz="0.011764"/>
+    </inertial>
+    <collision name="wheel_link_br_geom">
+      <origin xyz="0 0 0" rpy="1.5708 -0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.005"/>
+      </geometry>
+    </collision>
+    <visual name="wheel_link_br_geom_visual">
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/base/back-left_wheel.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="youbot/caster_link_fl">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.012412" ixy="-0.000712" ixz="0.000503" iyy="0.015218" iyz="-4e-06" izz="0.011764"/>
+    </inertial>
+  </link>
+  <link name="youbot/wheel_link_fl">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <mass value="0.4"/>
+      <inertia ixx="0.012412" ixy="-0.000712" ixz="0.000503" iyy="0.015218" iyz="-4e-06" izz="0.011764"/>
+    </inertial>
+    <collision name="wheel_link_fl_geom">
+      <origin xyz="0 0 0" rpy="1.5708 -0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.005"/>
+      </geometry>
+    </collision>
+    <visual name="wheel_link_fl_geom_visual">
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/base/front-left_wheel.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="youbot/caster_link_fr">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.012412" ixy="-0.000712" ixz="0.000503" iyy="0.015218" iyz="-4e-06" izz="0.011764"/>
+    </inertial>
+  </link>
+  <link name="youbot/wheel_link_fr">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <mass value="0.4"/>
+      <inertia ixx="0.012412" ixy="-0.000712" ixz="0.000503" iyy="0.015218" iyz="-4e-06" izz="0.011764"/>
+    </inertial>
+    <collision name="wheel_link_fr_geom">
+      <origin xyz="0 0 0" rpy="1.5708 -0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.005"/>
+      </geometry>
+    </collision>
+    <visual name="wheel_link_fr_geom_visual">
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/base/front-right_wheel.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="youbot/plate_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <mass value="1"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+    <collision name="plate_link_geom">
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/plate/plate_convex.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <visual name="plate_link_geom_visual">
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://youbot/meshes/plate/plate.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="base_footprint_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <parent link="youbot/base_footprint"/>
+    <child link="youbot/base_link"/>
+  </joint>
+  <joint name="arm_joint_0" type="fixed">
+    <origin xyz="0.143 0 0.046" rpy="0 -0 0"/>
+    <parent link="youbot/base_link"/>
+    <child link="youbot/arm_link_0"/>
+  </joint>
+  <joint name="arm_joint_1" type="revolute">
+    <origin xyz="0.024 0 0.096" rpy="0 -0 2.96706"/>
+    <parent link="youbot/arm_link_0"/>
+    <child link="youbot/arm_link_1"/>
+    <axis xyz="0 0 -1"/>
+    <!--<calibration rising="${arm_1_ref}" falling="${arm_1_ref}"/>-->
+    <dynamics damping="1" friction="1"/>
+    <!-- damping - N*s/m, N*s*m/rad -->
+    <!-- friction - N, N*m -->
+    <limit effort="9.5" lower="0" upper="5.89921287174" velocity="1.57079632679"/>
+  </joint>
+  <joint name="arm_joint_2" type="revolute">
+    <origin xyz="0.033 0 0.019" rpy="0 -1.1344640138 0"/>
+    <parent link="youbot/arm_link_1"/>
+    <child link="youbot/arm_link_2"/>
+    <axis xyz="0 1 0"/>
+    <!--<calibration rising="${arm_2_ref}" falling="${arm_2_ref}"/>-->
+    <dynamics damping="1" friction="1"/>
+    <limit effort="9.5" lower="0" upper="2.70526034059" velocity="1.57079632679"/>
+  </joint>
+  <joint name="arm_joint_3" type="revolute">
+    <origin xyz="0.000 0.000 0.155" rpy="0 2.54818070791 0"/>
+    <parent link="youbot/arm_link_2"/>
+    <child link="youbot/arm_link_3"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="1" friction="1"/>
+    <limit effort="6.0" lower="-5.18362787842" upper="0" velocity="1.57079632679"/>
+  </joint>
+  <joint name="arm_joint_4" type="revolute">
+    <origin xyz="0.000 0.000 0.135" rpy="0 -1.78896248329 0"/>
+    <parent link="youbot/arm_link_3"/>
+    <child link="youbot/arm_link_4"/>
+    <axis xyz="0 1 0"/>
+    <!--<calibration rising="${arm_4_ref}" falling="${arm_4_ref}"/>-->
+    <dynamics damping="1" friction="1"/>
+    <limit effort="2.0" lower="0" upper="3.57792496659" velocity="1.57079632679"/>
+  </joint>
+  <joint name="arm_joint_5" type="revolute">
+    <origin xyz="-0.002 0 0.130" rpy="-0 0 2.92342649709"/>
+    <parent link="youbot/arm_link_4"/>
+    <child link="youbot/arm_link_5"/>
+    <axis xyz="0 0 -1"/>
+    <!--<calibration rising="${arm_5_ref}" falling="${arm_5_ref}"/>-->
+    <dynamics damping="1" friction="1"/>
+    <limit effort="1.0" lower="0" upper="5.84685299418" velocity="1.57079632679"/>
+  </joint>
+  <joint name="gripper_palm_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="youbot/arm_link_5"/>
+    <child link="youbot/gripper_palm_link"/>
+  </joint>
+  <joint name="gripper_finger_joint_l" type="prismatic">
+    <origin xyz="0.004 0.008 0.046" rpy="0 0 3.14159265359"/>
+    <parent link="youbot/gripper_palm_link"/>
+    <child link="youbot/gripper_finger_link_l"/>
+    <axis xyz="0 -1 0"/>
+    <dynamics damping="1.0" friction="1.0"/>
+    <limit effort="1" lower="0" upper="0.0115" velocity="0.1"/>
+    <safety_controller k_position="20" k_velocity="25" soft_lower_limit="0.001" soft_upper_limit="0.011"/>
+  </joint>
+  <joint name="gripper_finger_joint_r" type="prismatic">
+    <origin xyz="0.004 -0.008 0.046" rpy="0 0 0"/>
+    <parent link="youbot/gripper_palm_link"/>
+    <child link="youbot/gripper_finger_link_r"/>
+    <axis xyz="0 -1 0"/>
+    <dynamics damping="1.0" friction="1.0"/>
+    <limit effort="1" lower="0" upper="0.0115" velocity="0.1"/>
+    <safety_controller k_position="20" k_velocity="25" soft_lower_limit="0.001" soft_upper_limit="0.011"/>
+  </joint>
+  <joint name="base_laser_front_hokuyo_urg04_laser_joint" type="fixed">
+    <origin xyz="0.2 0 0.08" rpy="0 -0 0"/>
+    <parent link="youbot/base_link"/>
+    <child link="youbot/front_laser_link"/>
+    <dynamics damping="0" friction="0" />
+    <axis xyz="0 0 1"/>
+    <limit lower="0" upper="0" effort="0" velocity="0"/>
+  </joint>
+  <joint name="caster_joint_bl" type="fixed">
+    <origin xyz="-0.228 0.158 -0.034" rpy="0 -0 0"/>
+    <parent link="youbot/base_link"/>
+    <child link="youbot/caster_link_bl"/>
+  </joint>
+  
+  <joint name="wheel_joint_bl" type="revolute">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <parent link="youbot/caster_link_bl"/>
+    <child link="youbot/wheel_link_bl"/>
+    <dynamics damping="0" friction="0" />
+    <axis xyz="0 1 0"/>
+    <limit lower="-1e+16" upper="1e+16" effort="100" velocity="100"/>
+  </joint>
+  <joint name="caster_joint_br" type="fixed">
+    <origin xyz="-0.228 -0.158 -0.034" rpy="0 -0 0"/>
+    <parent link="youbot/base_link"/>
+    <child link="youbot/caster_link_br"/>
+  </joint>
+  <joint name="wheel_joint_br" type="revolute">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <parent link="youbot/caster_link_br"/>
+    <child link="youbot/wheel_link_br"/>
+    <dynamics damping="0" friction="0" />
+    <axis xyz="0 1 0"/>
+    <limit lower="-1e+16" upper="1e+16" effort="100" velocity="100"/>
+  </joint>
+  <joint name="caster_joint_fl" type="fixed">
+    <origin xyz="0.228 0.158 -0.034" rpy="0 -0 0"/>
+    <parent link="youbot/base_link"/>
+    <child link="youbot/caster_link_fl"/>
+  </joint>
+  <joint name="wheel_joint_fl" type="revolute">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <parent link="youbot/caster_link_fl"/>
+    <child link="youbot/wheel_link_fl"/>
+    <dynamics damping="0" friction="0" />
+    <axis xyz="0 1 0"/>
+    <limit lower="-1e+16" upper="1e+16" effort="100" velocity="100"/>
+  </joint>
+  <joint name="caster_joint_fr" type="fixed">
+    <origin xyz="0.228 -0.158 -0.034" rpy="0 -0 0"/>
+    <parent link="youbot/base_link"/>
+    <child link="youbot/caster_link_fr"/>
+  </joint>
+  <joint name="wheel_joint_fr" type="revolute">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <parent link="youbot/caster_link_fr"/>
+    <child link="youbot/wheel_link_fr"/>
+    <dynamics damping="0" friction="0" />
+    <axis xyz="0 1 0"/>
+    <limit lower="-1e+16" upper="1e+16" effort="100" velocity="100"/>
+  </joint>
+  <joint name="plate_joint" type="fixed">
+    <origin xyz="-0.159 0 0.046" rpy="0 -0 0"/>
+    <parent link="youbot/base_link"/>
+    <child link="youbot/plate_link"/>
+  </joint>
+</robot>

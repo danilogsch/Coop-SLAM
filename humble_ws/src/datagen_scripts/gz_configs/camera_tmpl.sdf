@@ -1,0 +1,161 @@
+<model name="dataset_camera">
+  <pose>0 0 2 0 -0.523599 0</pose>
+  <static>true</static>
+      <link name="camera_footprint">
+        <inertial>
+          <mass>0.5</mass>
+          <inertia>
+            <ixx>0.000166667</ixx>
+            <iyy>0.000166667</iyy>
+            <izz>0.000166667</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.1 0.1 0.1</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <pose>0 0 0 0 -0.523599 0</pose>
+          <geometry>
+            <box>
+              <size>0.1 0.1 0.1</size>
+            </box>
+          </geometry>
+        </visual>
+
+        <!--instance <sensor name="instance_segmentation_camera" type="segmentation">
+          <topic>panoptic</topic>
+          <camera>
+            <segmentation_type>instance</segmentation_type>
+            <horizontal_fov>1.57</horizontal_fov>
+            <image>
+              <width>800</width>
+              <height>600</height>
+            </image>
+            <clip>
+              <near>0.1</near>
+              <far>30</far>
+            </clip>
+            <save enabled="true">
+              <path>segmentation_data/instance_camera</path>
+            </save>
+          </camera>
+          <always_on>1</always_on>
+          <update_rate>10</update_rate>
+          <visualize>true</visualize>
+        </sensor> instance-->
+        
+        <!--semantic <sensor name="semantic_segmentation_camera" type="segmentation">
+          <topic>semantic</topic>
+          <camera>
+            <segmentation_type>semantic</segmentation_type>
+            <horizontal_fov>1.57</horizontal_fov>
+            <image>
+              <width>800</width>
+              <height>600</height>
+            </image>
+            <clip>
+              <near>0.1</near>
+              <far>30</far>
+            </clip>
+            <save enabled="true">
+              <path>segmentation_data/semantic_camera</path>
+            </save>
+          </camera>
+          <always_on>1</always_on>
+          <update_rate>10</update_rate>
+          <visualize>true</visualize>
+        </sensor> semantic-->
+        
+        <!--full <sensor name="full_2d" type="boundingbox_camera">
+          <topic>boxes_full_2d</topic>
+          <camera>
+            <box_type>full_2d</box_type>
+            <horizontal_fov>1.57</horizontal_fov>
+            <image>
+              <width>800</width>
+              <height>600</height>
+            </image>
+            <clip>
+              <near>0.1</near>
+              <far>30</far>
+            </clip>
+            <save enabled="true">
+              <path>bounding_box_full_2d_data</path>
+            </save>
+          </camera>
+          <always_on>1</always_on>
+          <update_rate>10</update_rate>
+          <visualize>true</visualize>
+        </sensor> full-->
+
+        <!--vis <sensor name="visible_2d" type="boundingbox_camera">
+          <topic>boxes_visible_2d</topic>
+          <camera>
+            <box_type>visible_2d</box_type>
+            <horizontal_fov>1.57</horizontal_fov>
+            <image>
+              <width>800</width>
+              <height>600</height>
+            </image>
+            <clip>
+              <near>0.1</near>
+              <far>30</far>
+            </clip>
+            <save enabled="true">
+              <path>bounding_box_visible_2d_data</path>
+            </save>
+          </camera>
+          <always_on>1</always_on>
+          <update_rate>10</update_rate>
+          <visualize>true</visualize>
+        </sensor> vis-->
+
+        <!--3d <sensor name="3d" type="boundingbox_camera">
+          <topic>boxes_3d</topic>
+          <camera>
+            <box_type>3d</box_type>
+            <horizontal_fov>1.57</horizontal_fov>
+            <image>
+              <width>800</width>
+              <height>600</height>
+            </image>
+            <clip>
+              <near>0.1</near>
+              <far>30</far>
+            </clip>
+            <save enabled="true">
+              <path>bounding_box_3d_data</path>
+            </save>
+          </camera>
+          <always_on>1</always_on>
+          <update_rate>10</update_rate>
+          <visualize>true</visualize>
+        </sensor> 3d-->
+        
+        <!--depth <sensor name="depth_camera1" type="depth_camera">
+          <topic>depth_camera</topic>
+          <camera>
+            <horizontal_fov>1.57</horizontal_fov>
+            <image>
+              <width>800</width>
+              <height>600</height>
+              <format>R_FLOAT32</format>
+            </image>
+            <clip>
+              <near>0.1</near>
+              <far>30.0</far>
+            </clip>
+            <save enabled="true">
+              <path>depth_data</path>
+            </save>
+          </camera>
+          <always_on>1</always_on>
+          <update_rate>10</update_rate>
+          <visualize>true</visualize>
+          </sensor> depth-->
+      </link>
+</model></world></sdf>

@@ -1,0 +1,27 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/danilo/humble_ws/install/ros_gz_sim/include/**",
+        "/home/danilo/humble_ws/install/ros_gz_bridge/include/**",
+        "/home/danilo/humble_ws/install/ros_gz_interfaces/include/**",
+        "/home/danilo/humble_ws/install/arm_gz_control/include/**",
+        "/opt/ros/humble/include/**",
+        "/home/danilo/humble_ws/src/arm_gz_control/include/**",
+        "/home/danilo/humble_ws/src/ros_gz/ros_gz_bridge/include/**",
+        "/home/danilo/humble_ws/src/ros_gz/ros_gz_sim/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

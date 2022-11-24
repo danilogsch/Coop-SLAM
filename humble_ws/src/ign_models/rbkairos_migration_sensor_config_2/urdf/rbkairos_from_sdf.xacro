@@ -1,0 +1,507 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name='rbkairos'>
+  <xacro:arg name='name' default='rbkairos'/>
+  <xacro:property name='robot_namespace' value='$(arg name)'/>
+  <link name='${robot_namespace}/summit_xl_base_footprint'>
+    <inertial>
+      <origin xyz='0.006539 -4.8e-05 0.14334' rpy='0 -0 0'/>
+      <mass value='131.751'/>
+      <inertia ixx='2.20128' ixy='0.14833' ixz='-0.302225' iyy='7.92558' iyz='0.0013047' izz='6.61545'/>
+    </inertial>
+    <collision name='summit_xl_base_footprint_fixed_joint_lump__summit_xl_base_link_collision'>
+      <origin xyz='0 0 0.127' rpy='0 -0 0'/>
+      <geometry>
+        <mesh filename='meshes/summit_xls_chassis.dae' scale='1 1 1'/>
+      </geometry>
+    </collision>
+    <collision name='summit_xl_base_footprint_fixed_joint_lump__summit_xl_arm_base_link_collision_1'>
+      <origin xyz='0.1883 0 0.50912' rpy='0 -0 2.35619'/>
+      <geometry>
+        <mesh filename='meshes/base.stl' scale='1 1 1'/>
+      </geometry>
+    </collision>
+    <collision name='summit_xl_base_footprint_fixed_joint_lump__summit_xl_front_laser_base_link_collision_2'>
+      <origin xyz='0.2865 -0.20894 0.4243' rpy='3.14159 0 -0.785398'/>
+      <geometry>
+        <mesh filename='meshes/sick_s300.dae' scale='1 1 1'/>
+      </geometry>
+    </collision>
+    <collision name='summit_xl_base_footprint_fixed_joint_lump__summit_xl_front_rgbd_camera_link_collision_3'>
+      <origin xyz='0.3585 0 0.37762' rpy='0 -0 0'/>
+      <geometry>
+        <mesh filename='meshes/orbbec_astra.dae' scale='1 1 1'/>
+      </geometry>
+    </collision>
+    <collision name='summit_xl_base_footprint_fixed_joint_lump__summit_xl_imu_link_collision_4'>
+      <origin xyz='0.127 -0.129 0.339' rpy='0 -0 0'/>
+      <geometry>
+        <box size='0.001 0.001 0.001'/>
+      </geometry>
+    </collision>
+    <collision name='summit_xl_base_footprint_fixed_joint_lump__summit_xl_rear_laser_base_link_collision_5'>
+      <origin xyz='-0.2865 0.20894 0.4243' rpy='3.14159 0 2.35619'/>
+      <geometry>
+        <mesh filename='meshes/sick_s300.dae' scale='1 1 1'/>
+      </geometry>
+    </collision>
+    <visual name='summit_xl_base_footprint_visual'>
+      <origin xyz='0 0 0' rpy='0 -0 0'/>
+      <geometry>
+        <box size='0.001 0.001 0.001'/>
+      </geometry>
+    </visual>
+    <visual name='summit_xl_base_footprint_fixed_joint_lump__summit_xl_base_link_visual_1'>
+      <origin xyz='0 0 0.127' rpy='0 -0 0'/>
+      <geometry>
+        <mesh filename='meshes/summit_xls_chassis.stl' scale='1 1 1'/>
+      </geometry>
+    </visual>
+    <visual name='summit_xl_base_footprint_fixed_joint_lump__summit_xl_arm_base_link_visual_2'>
+      <origin xyz='0.1883 0 0.50912' rpy='0 -0 2.35619'/>
+      <geometry>
+        <mesh filename='meshes/base.dae' scale='1 1 1'/>
+      </geometry>
+    </visual>
+    <visual name='summit_xl_base_footprint_fixed_joint_lump__summit_xl_base_logo_front_visual_3'>
+      <origin xyz='0.345 0 0.127' rpy='0 0 -1.5708'/>
+      <geometry>
+        <mesh filename='meshes/robotnik_logo_chasis.stl' scale='1 1 1'/>
+      </geometry>
+    </visual>
+    <visual name='summit_xl_base_footprint_fixed_joint_lump__summit_xl_base_logo_left_visual_4'>
+      <origin xyz='0 0.28931 0.41762' rpy='0 -0 0'/>
+      <geometry>
+        <mesh filename='meshes/robotnik_logo_chasis.stl' scale='1 1 1'/>
+      </geometry>
+    </visual>
+    <visual name='summit_xl_base_footprint_fixed_joint_lump__summit_xl_base_logo_rear_visual_5'>
+      <origin xyz='-0.345 0 0.127' rpy='0 -0 1.5708'/>
+      <geometry>
+        <mesh filename='meshes/robotnik_logo_chasis.stl' scale='1 1 1'/>
+      </geometry>
+    </visual>
+    <visual name='summit_xl_base_footprint_fixed_joint_lump__summit_xl_base_logo_right_visual_6'>
+      <origin xyz='0 -0.28931 0.41762' rpy='0 -0 3.14159'/>
+      <geometry>
+        <mesh filename='meshes/robotnik_logo_chasis.stl' scale='1 1 1'/>
+      </geometry>
+    </visual>
+    <visual name='summit_xl_base_footprint_fixed_joint_lump__summit_xl_base_chapa_visual_7'>
+      <origin xyz='0 0 0.50762' rpy='0 -0 0'/>
+      <geometry>
+        <mesh filename='meshes/summit_xls_chapas_inox_tapas.stl' scale='1 1 1'/>
+      </geometry>
+    </visual>
+    <visual name='summit_xl_base_footprint_fixed_joint_lump__summit_xl_front_laser_base_link_visual_8'>
+      <origin xyz='0.2865 -0.20894 0.4243' rpy='3.14159 0 -0.785398'/>
+      <geometry>
+        <mesh filename='meshes/sick_s300.dae' scale='1 1 1'/>
+      </geometry>
+    </visual>
+    <visual name='summit_xl_base_footprint_fixed_joint_lump__summit_xl_front_rgbd_camera_link_visual_9'>
+      <origin xyz='0.3585 0 0.37762' rpy='0 -0 0'/>
+      <geometry>
+        <mesh filename='meshes/orbbec_astra.dae' scale='1 1 1'/>
+      </geometry>
+    </visual>
+    <visual name='summit_xl_base_footprint_fixed_joint_lump__summit_xl_imu_link_visual_10'>
+      <origin xyz='0.127 -0.129 0.339' rpy='0 -0 0'/>
+      <geometry>
+        <box size='0.001 0.001 0.001'/>
+      </geometry>
+    </visual>
+    <visual name='summit_xl_base_footprint_fixed_joint_lump__summit_xl_rear_laser_base_link_visual_11'>
+      <origin xyz='-0.2865 0.20894 0.4243' rpy='3.14159 0 2.35619'/>
+      <geometry>
+        <mesh filename='meshes/sick_s300.dae' scale='1 1 1'/>
+      </geometry>
+    </visual>
+  </link>
+  <sensor name='imu_sensor' update_rate='0'>
+    <parent link='${robot_namespace}/summit_xl_base_footprint'/>
+    <origin xyz='0.127 -0.129 0.339' rpy='0 -0 0'/>
+  </sensor>
+  <link name='${robot_namespace}/summit_xl_front_laser_link'>
+    <inertial>
+      <origin xyz='-0.350329 0.054842 0.3083' rpy='-3.14159 2e-06 -0.785398'/>
+      <mass value='1'/>
+      <inertia ixx='1' ixy='0' ixz='0' iyy='1' iyz='0' izz='1'/>
+    </inertial>
+  </link>
+  <sensor name='summit_xl_front_laser_sensor' update_rate='12.5'>
+    <parent link='${robot_namespace}/summit_xl_front_laser_link'/>
+    <origin xyz='0 0 0' rpy='0 -0 0'/>
+  </sensor>
+  <link name='${robot_namespace}/summit_xl_rear_laser_link'>
+    <inertial>
+      <origin xyz='-0.350329 0.054844 0.3083' rpy='3.14159 -2e-06 2.35619'/>
+      <mass value='1'/>
+      <inertia ixx='1' ixy='0' ixz='0' iyy='1' iyz='0' izz='1'/>
+    </inertial>
+  </link>
+  <sensor name='summit_xl_rear_laser_sensor' update_rate='12.5'>
+    <parent link='${robot_namespace}/summit_xl_rear_laser_link'/>
+    <origin xyz='0 0 0' rpy='0 -0 0'/>
+  </sensor>
+  <link name='${robot_namespace}/summit_xl_front_rgbd_camera_depth_link'>
+    <inertial>
+      <origin xyz='-0.3585 0 -0.37762' rpy='0 -0 0'/>
+      <mass value='1'/>
+      <inertia ixx='1' ixy='0' ixz='0' iyy='1' iyz='0' izz='1'/>
+    </inertial>
+  </link>
+  <sensor name='summit_xl_front_rgbd_camera_depth_sensor' update_rate='20'>
+    <parent link='${robot_namespace}/summit_xl_front_rgbd_camera_depth_link'/>
+    <origin xyz='0 0 0' rpy='0 -0 0'/>
+    <camera>
+      <image width='640' height='480' format='R8G8B8' hfov='1.0472' near='0.05' far='100' />
+    </camera>
+  </sensor>
+  <link name='${robot_namespace}/summit_xl_arm_shoulder_link'>
+    <inertial>
+      <origin xyz='0.133148 0.133148 -0.63642' rpy='0 0 -2.35619'/>
+      <mass value='7.778'/>
+      <inertia ixx='0.0314743' ixy='0' ixz='0' iyy='0.0314743' iyz='0' izz='0.0218756'/>
+    </inertial>
+    <collision name='summit_xl_arm_shoulder_link_collision'>
+      <origin xyz='0.133148 0.133148 -0.63642' rpy='0 0 -2.35619'/>
+      <geometry>
+        <mesh filename='meshes/shoulder.stl' scale='1 1 1'/>
+      </geometry>
+    </collision>
+    <visual name='summit_xl_arm_shoulder_link_visual'>
+      <origin xyz='0.133148 0.133148 -0.63642' rpy='0 0 -2.35619'/>
+      <geometry>
+        <mesh filename='meshes/shoulder.dae' scale='1 1 1'/>
+      </geometry>
+    </visual>
+  </link>
+  <link name='${robot_namespace}/summit_xl_arm_upper_arm_link'>
+    <inertial>
+      <origin xyz='-0.306 -0.265941 -0' rpy='0 -1.5708 0'/>
+      <mass value='12.93'/>
+      <inertia ixx='0.421754' ixy='0' ixz='0' iyy='0.421754' iyz='0' izz='0.0363656'/>
+    </inertial>
+    <collision name='summit_xl_arm_upper_arm_link_collision'>
+      <origin xyz='0 -0.220941 0' rpy='0 -1.5708 0'/>
+      <geometry>
+        <mesh filename='meshes/upperarm.stl' scale='1 1 1'/>
+      </geometry>
+    </collision>
+    <visual name='summit_xl_arm_upper_arm_link_visual'>
+      <origin xyz='0 -0.220941 0' rpy='0 -1.5708 0'/>
+      <geometry>
+        <mesh filename='meshes/upperarm.dae' scale='1 1 1'/>
+      </geometry>
+    </visual>
+  </link>
+  <link name='${robot_namespace}/summit_xl_arm_forearm_link'>
+    <inertial>
+      <origin xyz='0 0.1719 -0.32585' rpy='0 -0 0'/>
+      <mass value='3.87'/>
+      <inertia ixx='0.11107' ixy='0' ixz='0' iyy='0.11107' iyz='0' izz='0.0108844'/>
+    </inertial>
+    <collision name='summit_xl_arm_forearm_link_collision'>
+      <origin xyz='0 0.1719 -0.612' rpy='0 -0 0'/>
+      <geometry>
+        <mesh filename='meshes/forearm.stl' scale='1 1 1'/>
+      </geometry>
+    </collision>
+    <visual name='summit_xl_arm_forearm_link_visual'>
+      <origin xyz='0 0.1719 -0.612' rpy='0 -0 0'/>
+      <geometry>
+        <mesh filename='meshes/forearm.dae' scale='1 1 1'/>
+      </geometry>
+    </visual>
+  </link>
+  <link name='${robot_namespace}/summit_xl_arm_wrist_1_link'>
+    <inertial>
+      <origin xyz='0.5723 0.1149 0' rpy='0 -1.5708 0'/>
+      <mass value='1.96'/>
+      <inertia ixx='0.00510825' ixy='0' ixz='0' iyy='0.00510825' iyz='0' izz='0.0055125'/>
+    </inertial>
+    <collision name='summit_xl_arm_wrist_1_link_collision'>
+      <origin xyz='0.5723 0 0' rpy='0 -1.5708 0'/>
+      <geometry>
+        <mesh filename='meshes/wrist1.stl' scale='1 1 1'/>
+      </geometry>
+    </collision>
+    <visual name='summit_xl_arm_wrist_1_link_visual'>
+      <origin xyz='0.5723 0 0' rpy='0 -1.5708 0'/>
+      <geometry>
+        <mesh filename='meshes/wrist1.dae' scale='1 1 1'/>
+      </geometry>
+    </visual>
+  </link>
+  <link name='${robot_namespace}/summit_xl_arm_wrist_2_link'>
+    <inertial>
+      <origin xyz='0 -0.1149 0.1157' rpy='0 -0 0'/>
+      <mass value='1.96'/>
+      <inertia ixx='0.00510825' ixy='0' ixz='0' iyy='0.00510825' iyz='0' izz='0.0055125'/>
+    </inertial>
+    <collision name='summit_xl_arm_wrist_2_link_collision'>
+      <origin xyz='0 -0.1149 0' rpy='0 -0 0'/>
+      <geometry>
+        <mesh filename='meshes/wrist2.stl' scale='1 1 1'/>
+      </geometry>
+    </collision>
+    <visual name='summit_xl_arm_wrist_2_link_visual'>
+      <origin xyz='0 -0.1149 0' rpy='0 -0 0'/>
+      <geometry>
+        <mesh filename='meshes/wrist2.dae' scale='1 1 1'/>
+      </geometry>
+    </visual>
+  </link>
+  <link name='${robot_namespace}/summit_xl_arm_wrist_3_link'>
+    <inertial>
+      <origin xyz='0 0.07695 -0.1157' rpy='1.5708 -0 0'/>
+      <mass value='0.202'/>
+      <inertia ixx='0.000117922' ixy='0' ixz='0' iyy='0.000117922' iyz='0' izz='0.000204525'/>
+    </inertial>
+    <collision name='summit_xl_arm_wrist_3_link_collision'>
+      <origin xyz='0 0 -0.1157' rpy='0 -0 0'/>
+      <geometry>
+        <mesh filename='meshes/wrist3.stl' scale='1 1 1'/>
+      </geometry>
+    </collision>
+    <collision name='summit_xl_arm_wrist_3_link_fixed_joint_lump__summit_xl_arm_ee_link_collision_1'>
+      <origin xyz='-0 0.0822 -0.1157' rpy='0 -0 1.5708'/>
+      <geometry>
+        <box size='0.01 0.01 0.01'/>
+      </geometry>
+    </collision>
+    <collision name='summit_xl_arm_wrist_3_link_fixed_joint_lump__summit_xl_tbp_gripper_base_link_collision_2'>
+      <origin xyz='0 0.0922 -0.1157' rpy='-1.5708 0 0'/>
+      <geometry>
+        <mesh filename='meshes/tbp_tool_holder_collision.stl' scale='0.001 0.001 0.001'/>
+      </geometry>
+    </collision>
+    <collision name='summit_xl_arm_wrist_3_link_fixed_joint_lump__summit_xl_tbp_gripper_camera_holder_collision_3'>
+      <origin xyz='0 0.1052 -0.1157' rpy='-1.5708 0 0'/>
+      <geometry>
+        <mesh filename='meshes/tbp_cam_holder_collision.stl' scale='0.001 0.001 0.001'/>
+      </geometry>
+    </collision>
+    <collision name='summit_xl_arm_wrist_3_link_fixed_joint_lump__summit_xl_wrist_rgbd_link_collision_4'>
+      <origin xyz='0.118674 0.136572 -0.1157' rpy='-1.22173 -1.5708 0'/>
+      <geometry>
+        <cylinder radius='0.0305' length='0.026'/>
+      </geometry>
+    </collision>
+    <collision name='summit_xl_arm_wrist_3_link_fixed_joint_lump__summit_xl_tbp_gripper_screw_nut_collision_5'>
+      <origin xyz='-0.054566 0.338359 -0.1157' rpy='-1.5708 -0 0.522'/>
+      <geometry>
+        <cylinder radius='0.015' length='0.035'/>
+      </geometry>
+    </collision>
+    <visual name='summit_xl_arm_wrist_3_link_visual'>
+      <origin xyz='0 0 -0.1157' rpy='0 -0 0'/>
+      <geometry>
+        <mesh filename='meshes/wrist3.dae' scale='1 1 1'/>
+      </geometry>
+    </visual>
+    <visual name='summit_xl_arm_wrist_3_link_fixed_joint_lump__summit_xl_tbp_gripper_base_link_visual_1'>
+      <origin xyz='0 0.0922 -0.1157' rpy='-1.5708 0 0'/>
+      <geometry>
+        <mesh filename='meshes/tbp_tool_holder.stl' scale='0.001 0.001 0.001'/>
+      </geometry>
+    </visual>
+    <visual name='summit_xl_arm_wrist_3_link_fixed_joint_lump__summit_xl_tbp_gripper_camera_holder_visual_2'>
+      <origin xyz='0 0.1052 -0.1157' rpy='-1.5708 0 0'/>
+      <geometry>
+        <mesh filename='meshes/tbp_cam_holder.stl' scale='0.001 0.001 0.001'/>
+      </geometry>
+    </visual>
+    <visual name='summit_xl_arm_wrist_3_link_fixed_joint_lump__summit_xl_wrist_rgbd_link_visual_3'>
+      <origin xyz='0.114227 0.148788 -0.1157' rpy='-1.22173 -1.5708 0'/>
+      <geometry>
+        <mesh filename='meshes/l515.dae' scale='1 1 1'/>
+      </geometry>
+    </visual>
+    <visual name='summit_xl_arm_wrist_3_link_fixed_joint_lump__summit_xl_tbp_gripper_screw_nut_visual_4'>
+      <origin xyz='-0.04584 0.32319 -0.1157' rpy='-1.5708 -0 0.522'/>
+      <geometry>
+        <mesh filename='meshes/tbp_hex_nut_19mm.stl' scale='0.001 0.001 0.001'/>
+      </geometry>
+    </visual>
+  </link>
+  <link name='${robot_namespace}/summit_xl_back_left_wheel_link'>
+    <inertial>
+      <origin xyz='0.2225 -0.2045 -0.127' rpy='0 -0 0'/>
+      <mass value='6.5'/>
+      <inertia ixx='0.0303095' ixy='0' ixz='0' iyy='0.0524193' iyz='0' izz='0.0303095'/>
+    </inertial>
+    <collision name='summit_xl_back_left_wheel_link_collision'>
+      <origin xyz='0.2225 -0.2045 -0.127' rpy='1.5708 -0 0'/>
+      <geometry>
+        <cylinder radius='0.127' length='0.087'/>
+      </geometry>
+    </collision>
+    <visual name='summit_xl_back_left_wheel_link_visual'>
+      <origin xyz='0.2225 -0.2045 -0.127' rpy='0 -0 0'/>
+      <geometry>
+        <mesh filename='meshes/omni_wheel_2.dae' scale='1 1 1'/>
+      </geometry>
+    </visual>
+  </link>
+  <link name='${robot_namespace}/summit_xl_back_right_wheel_link'>
+    <inertial>
+      <origin xyz='0.2225 0.2045 -0.127' rpy='0 -0 0'/>
+      <mass value='6.5'/>
+      <inertia ixx='0.0303095' ixy='0' ixz='0' iyy='0.0524193' iyz='0' izz='0.0303095'/>
+    </inertial>
+    <collision name='summit_xl_back_right_wheel_link_collision'>
+      <origin xyz='0.2225 0.2045 -0.127' rpy='1.5708 -0 0'/>
+      <geometry>
+        <cylinder radius='0.127' length='0.087'/>
+      </geometry>
+    </collision>
+    <visual name='summit_xl_back_right_wheel_link_visual'>
+      <origin xyz='0.2225 0.2045 -0.127' rpy='0 -0 0'/>
+      <geometry>
+        <mesh filename='meshes/omni_wheel_1.dae' scale='1 1 1'/>
+      </geometry>
+    </visual>
+  </link>
+  <link name='${robot_namespace}/summit_xl_front_left_wheel_link'>
+    <inertial>
+      <origin xyz='-0.2225 -0.2045 -0.127' rpy='0 -0 0'/>
+      <mass value='6.5'/>
+      <inertia ixx='0.0303095' ixy='0' ixz='0' iyy='0.0524193' iyz='0' izz='0.0303095'/>
+    </inertial>
+    <collision name='summit_xl_front_left_wheel_link_collision'>
+      <origin xyz='-0.2225 -0.2045 -0.127' rpy='1.5708 -0 0'/>
+      <geometry>
+        <cylinder radius='0.127' length='0.087'/>
+      </geometry>
+    </collision>
+    <visual name='summit_xl_front_left_wheel_link_visual'>
+      <origin xyz='-0.2225 -0.2045 -0.127' rpy='0 -0 0'/>
+      <geometry>
+        <mesh filename='meshes/omni_wheel_1.dae' scale='1 1 1'/>
+      </geometry>
+    </visual>
+  </link>
+  <link name='${robot_namespace}/summit_xl_front_right_wheel_link'>
+    <inertial>
+      <origin xyz='-0.2225 0.2045 -0.127' rpy='0 -0 0'/>
+      <mass value='6.5'/>
+      <inertia ixx='0.0303095' ixy='0' ixz='0' iyy='0.0524193' iyz='0' izz='0.0303095'/>
+    </inertial>
+    <collision name='summit_xl_front_right_wheel_link_collision'>
+      <origin xyz='-0.2225 0.2045 -0.127' rpy='1.5708 -0 0'/>
+      <geometry>
+        <cylinder radius='0.127' length='0.087'/>
+      </geometry>
+    </collision>
+    <visual name='summit_xl_front_right_wheel_link_visual'>
+      <origin xyz='-0.2225 0.2045 -0.127' rpy='0 -0 0'/>
+      <geometry>
+        <mesh filename='meshes/omni_wheel_2.dae' scale='1 1 1'/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name='summit_xl_front_laser_joint' type='fixed'>
+    <origin xyz='0.2865 -0.20894 0.3083' rpy='3.14159 0 -0.785398'/>
+    <parent link='${robot_namespace}/summit_xl_base_footprint'/>
+    <child link='${robot_namespace}/summit_xl_front_laser_link'/>
+    <axis xyz='0 0 1'/>
+    <limit lower='-1e+16' upper='1e+16' effort='-1' velocity='-1'/>
+  </joint>
+  <joint name='summit_xl_rear_laser_joint' type='fixed'>
+    <origin xyz='-0.2865 0.20894 0.3083' rpy='3.14159 0 2.35619'/>
+    <parent link='${robot_namespace}/summit_xl_base_footprint'/>
+    <child link='${robot_namespace}/summit_xl_rear_laser_link'/>
+    <axis xyz='0 0 1'/>
+    <limit lower='-1e+16' upper='1e+16' effort='-1' velocity='-1'/>
+  </joint>
+  <joint name='summit_xl_front_rgbd_camera_depth_joint' type='fixed'>
+    <origin xyz='0.3585 0 0.37762' rpy='0 -0 0'/>
+    <parent link='${robot_namespace}/summit_xl_base_footprint'/>
+    <child link='${robot_namespace}/summit_xl_front_rgbd_camera_depth_link'/>
+    <axis xyz='0 0 1'/>
+    <limit lower='-1e+16' upper='1e+16' effort='-1' velocity='-1'/>
+  </joint>
+  <joint name='summit_xl_arm_shoulder_pan_joint' type='revolute'>
+    <origin xyz='0.1883 0 0.63642' rpy='0 -0 2.35619'/>
+    <parent link='${robot_namespace}/summit_xl_base_footprint'/>
+    <child link='${robot_namespace}/summit_xl_arm_shoulder_link'/>
+    <dynamics damping='0' friction='0' />
+    <axis xyz='0 0 1'/>
+    <limit lower='-6.28319' upper='6.28319' effort='330' velocity='2.16'/>
+  </joint>
+  <joint name='summit_xl_arm_shoulder_lift_joint' type='revolute'>
+    <origin xyz='0 0.220941 0' rpy='0 1.5708 0'/>
+    <parent link='${robot_namespace}/summit_xl_arm_shoulder_link'/>
+    <child link='${robot_namespace}/summit_xl_arm_upper_arm_link'/>
+    <dynamics damping='0' friction='0' />
+    <axis xyz='0 1 0'/>
+    <limit lower='-6.28319' upper='6.28319' effort='330' velocity='2.16'/>
+  </joint>
+  <joint name='summit_xl_arm_elbow_joint' type='revolute'>
+    <origin xyz='0 -0.1719 0.612' rpy='0 -0 0'/>
+    <parent link='${robot_namespace}/summit_xl_arm_upper_arm_link'/>
+    <child link='${robot_namespace}/summit_xl_arm_forearm_link'/>
+    <dynamics damping='0' friction='0' />
+    <axis xyz='0 1 0'/>
+    <limit lower='-3.14159' upper='3.14159' effort='150' velocity='3.15'/>
+  </joint>
+  <joint name='summit_xl_arm_wrist_1_joint' type='revolute'>
+    <origin xyz='0 0 0.5723' rpy='0 1.5708 0'/>
+    <parent link='${robot_namespace}/summit_xl_arm_forearm_link'/>
+    <child link='${robot_namespace}/summit_xl_arm_wrist_1_link'/>
+    <dynamics damping='0' friction='0' />
+    <axis xyz='0 1 0'/>
+    <limit lower='-6.28319' upper='6.28319' effort='54' velocity='3.2'/>
+  </joint>
+  <joint name='summit_xl_arm_wrist_2_joint' type='revolute'>
+    <origin xyz='0 0.1149 0' rpy='0 -0 0'/>
+    <parent link='${robot_namespace}/summit_xl_arm_wrist_1_link'/>
+    <child link='${robot_namespace}/summit_xl_arm_wrist_2_link'/>
+    <dynamics damping='0' friction='0' />
+    <axis xyz='0 0 1'/>
+    <limit lower='-6.28319' upper='6.28319' effort='54' velocity='3.2'/>
+  </joint>
+  <joint name='summit_xl_arm_wrist_3_joint' type='revolute'>
+    <origin xyz='0 0 0.1157' rpy='0 -0 0'/>
+    <parent link='${robot_namespace}/summit_xl_arm_wrist_2_link'/>
+    <child link='${robot_namespace}/summit_xl_arm_wrist_3_link'/>
+    <dynamics damping='0' friction='0' />
+    <axis xyz='0 1 0'/>
+    <limit lower='-6.28319' upper='6.28319' effort='54' velocity='3.2'/>
+  </joint>
+  <joint name='summit_xl_back_left_wheel_joint' type='revolute'>
+    <origin xyz='-0.2225 0.2045 0.127' rpy='0 -0 0'/>
+    <parent link='${robot_namespace}/summit_xl_base_footprint'/>
+    <child link='${robot_namespace}/summit_xl_back_left_wheel_link'/>
+    <dynamics damping='0' friction='0' />
+    <axis xyz='0 1 0'/>
+    <limit lower='-1e+16' upper='1e+16' effort='100' velocity='100'/>
+  </joint>
+  <joint name='summit_xl_back_right_wheel_joint' type='revolute'>
+    <origin xyz='-0.2225 -0.2045 0.127' rpy='0 -0 0'/>
+    <parent link='${robot_namespace}/summit_xl_base_footprint'/>
+    <child link='${robot_namespace}/summit_xl_back_right_wheel_link'/>
+    <dynamics damping='0' friction='0' />
+    <axis xyz='0 1 0'/>
+    <limit lower='-1e+16' upper='1e+16' effort='100' velocity='100'/>
+  </joint>
+  <joint name='summit_xl_front_left_wheel_joint' type='revolute'>
+    <origin xyz='0.2225 0.2045 0.127' rpy='0 -0 0'/>
+    <parent link='${robot_namespace}/summit_xl_base_footprint'/>
+    <child link='${robot_namespace}/summit_xl_front_left_wheel_link'/>
+    <dynamics damping='0' friction='0' />
+    <axis xyz='0 1 0'/>
+    <limit lower='-1e+16' upper='1e+16' effort='100' velocity='100'/>
+  </joint>
+  <joint name='summit_xl_front_right_wheel_joint' type='revolute'>
+    <origin xyz='0.2225 -0.2045 0.127' rpy='0 -0 0'/>
+    <parent link='${robot_namespace}/summit_xl_base_footprint'/>
+    <child link='${robot_namespace}/summit_xl_front_right_wheel_link'/>
+    <dynamics damping='0' friction='0' />
+    <axis xyz='0 1 0'/>
+    <limit lower='-1e+16' upper='1e+16' effort='100' velocity='100'/>
+  </joint>
+</robot>
+
+

@@ -1,8 +1,0 @@
-prefix=/home/danilo/fortress_ws/install
-
-Name: ros_ign_bridge
-Description: Description of ros_ign_bridge
-Version: 0.111.2
-Cflags: -I${prefix}/include
-Libs: -L${prefix}/lib -lros_ign_bridge_lib
-Requires: 

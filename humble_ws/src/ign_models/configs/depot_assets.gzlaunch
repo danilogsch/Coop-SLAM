@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<ignition version='1.0'>
+  <plugin name="gz::launch::SimFactory"
+    filename="gz-launch-sim-factory">
+    
+    <spawn>
+      <name>mecanumlift</name>
+      <allow_renaming>true</allow_renaming>
+      <pose>4 3 0.0 0 0 0</pose>
+      <sdf version='1.9'>
+        <include>
+        <uri>
+	model://robotino
+    	</uri>
+    	<plugin
+      filename="libgz-sim-sensors-system.so"
+      name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+        </include>
+        
+      </sdf>
+    </spawn>
+    
+  </plugin>
+</ignition>

@@ -1,8 +1,0 @@
-prefix=/home/danilo/fortress_ws/devel
-
-Name: ros_ign_bridge
-Description: Description of ros_ign_bridge
-Version: 0.111.2
-Cflags: -I/home/danilo/fortress_ws/src/ros_ign/ros_ign_bridge/include
-Libs: -L${prefix}/lib -lros_ign_bridge_lib
-Requires: 

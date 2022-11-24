@@ -1,4 +1,0 @@
-<launch>
-  <param name="robot_description" command="$(find xacro)/xacro.py '$(find test)/urdf/caller.xacro'" />
-  <node type="rviz" name="rviz" pkg="rviz" />
-</launch>

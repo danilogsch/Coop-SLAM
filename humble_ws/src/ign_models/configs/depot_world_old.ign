@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<ignition version='1.0'>
+<executable name='gazebo-server'>
+    <command>ign gazebo empty.sdf -r</command>
+</executable>
+  <plugin name="ignition::launch::GazeboFactory"
+    filename="ignition-launch-gazebo-factory">
+    
+    <spawn>
+      <name>Depot</name>
+      <allow_renaming>true</allow_renaming>
+      <pose>0 0 0 0 0 0</pose>
+
+      <sdf version='1.6'>
+        <include>
+          <uri>model://depot_config_1</uri>
+        </include>
+      </sdf>
+    </spawn>
+    
+  </plugin>
+</ignition>

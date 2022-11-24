@@ -1,0 +1,21 @@
+models_df_path: /home/danilo/humble_ws/src/datagen_scripts/gz_configs/data_frame_dict.csv
+model_resouce_path: /home/danilo/humble_ws/src/ign_models
+launch_config_path: /home/danilo/humble_ws/src/datagen_scripts/gz_configs
+camera:
+  instance_seg: false
+  semantic_seg: true
+  bb2d_vis: true
+  bb2d_full: true
+  bb3d: false
+  save_depth: true
+  save_path: depot_dataset_semantic_nsc
+  use_cam_config_pose: false
+  x: 0.0
+  y: 0.0
+  z: 3.0
+  pitch: 0.523599
+  yaw: 0.0
+n_max_r: 2
+n_max_a: 2
+n_max_o: 2
+sim_iterations_per_run: 20000

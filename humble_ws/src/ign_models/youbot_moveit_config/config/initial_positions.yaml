@@ -1,0 +1,10 @@
+# Default initial positions for youbot's ros2_control fake system
+
+initial_positions:
+  arm_joint_1: 0
+  arm_joint_2: 0
+  arm_joint_3: 0
+  arm_joint_4: 0
+  arm_joint_5: 0
+  gripper_finger_joint_l: 0
+  gripper_finger_joint_r: 0

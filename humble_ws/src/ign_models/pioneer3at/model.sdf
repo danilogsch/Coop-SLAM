@@ -1,0 +1,342 @@
+<sdf version="1.9">
+  <model name="pioneer3at">
+    <pose>0 0 0 0 0 0</pose>
+    <static>false</static>
+    <link name="base_footprint">
+      <pose>0 0 0.180 0 0 0</pose>
+      <inertial>
+        <mass>3.5101100000000001</mass>
+        <inertia>
+          <ixx>0.147116667</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>0.334951167</iyy>
+          <iyz>0.0</iyz>
+          <izz>0.3978345</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.501 0.300 0.19</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://pioneer3at/meshes/chassis.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name="kinect_visual">
+        <pose>0 0 0.245 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://pioneer3at/meshes/kinect.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name="box_visual">
+        <pose>-0.03 0 0.145 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.1 0.1</size>
+          </box>
+        </geometry>
+        <material>
+            <ambient>0.1 0.1 1.0 1</ambient>
+            <diffuse>0.1 0.1 1.0 1</diffuse>
+            <specular>0.0 0.0 1.0 1</specular>
+          </material>
+      </visual>
+      <sensor name='pioneer3at_front_laser_sensor' type='gpu_lidar'>
+        <pose>0 0 0.20 0 0 0</pose>
+        <ignition_frame_id>pioneer3at/front_laser_link</ignition_frame_id> 
+        <topic>/pioneer3at/front_laser</topic>
+        <update_rate>20</update_rate>
+        <lidar>
+            <scan>
+                <horizontal>
+                    <samples>541</samples>
+                    <resolution>1</resolution>
+                    <min_angle>-3.1415926535897932</min_angle>
+                    <max_angle>3.1415926535897932</max_angle>
+                </horizontal>
+            </scan>
+            <range>
+                <min>0.1</min>
+                <max>15.0</max>
+                <resolution>0.03</resolution>
+            </range>
+            <!--noise>
+                <type>gaussian</type>
+                <mean>0.0</mean>
+                <stddev>0.03</stddev>
+            </noise-->
+        </lidar>
+        <always_on>1</always_on>
+        <visualize>0</visualize>
+      </sensor>
+    </link>
+    <link name="right_front_wheel">
+      <pose relative_to='right_front'>0 0 0 1.570796326794896 0 0</pose>
+
+      <inertial>
+        <mass>0.51000000000000001</mass>
+        <inertia>
+          <ixx>0.005240625</ixx>
+          <iyy>0.005240625</iyy>
+          <izz>0.009075</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <radius>0.110</radius>
+            <length>0.075</length>
+          </cylinder>
+        </geometry>
+        <surface>
+            <friction>
+              <ode>
+                <mu>0.5</mu>
+                <mu2>1.0</mu2>
+                <fdir1>0 0 1</fdir1>
+              </ode>
+            </friction>
+          </surface>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://pioneer3at/meshes/wheel.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <link name="left_front_wheel">
+      <pose relative_to='left_front'>0 0 0 1.570796326794896 0 0</pose>
+
+      <inertial>
+        <mass>0.51000000000000001</mass>
+        <inertia>
+          <ixx>0.005240625</ixx>
+          <iyy>0.005240625</iyy>
+          <izz>0.009075</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <radius>0.110</radius>
+            <length>0.075</length>
+          </cylinder>
+        </geometry>
+        <surface>
+            <friction>
+              <ode>
+                <mu>0.5</mu>
+                <mu2>1.0</mu2>
+                <fdir1>0 0 1</fdir1>
+              </ode>
+            </friction>
+          </surface>
+      </collision>
+      <visual name="visual">
+
+        <geometry>
+          <mesh>
+            <uri>model://pioneer3at/meshes/wheel.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <link name="right_rear_wheel">
+      <pose relative_to='right_rear'>0 0 0 1.570796326794896 0 0</pose>
+
+      <inertial>
+        <mass>0.51000000000000001</mass>
+        <inertia>
+          <ixx>0.005240625</ixx>
+          <iyy>0.005240625</iyy>
+          <izz>0.009075</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+
+      <collision name="collision">
+
+        <geometry>
+          <cylinder>
+            <radius>0.110</radius>
+            <length>0.075</length>
+          </cylinder>
+        </geometry>
+        <surface>
+            <friction>
+              <ode>
+                <mu>0.5</mu>
+                <mu2>1.0</mu2>
+                <fdir1>0 0 1</fdir1>
+              </ode>
+            </friction>
+          </surface>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://pioneer3at/meshes/wheel.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <link name="left_rear_wheel">
+      <pose relative_to='left_rear'>0 0 0 1.570796326794896 0 0</pose>
+
+      <inertial>
+        <mass>0.51000000000000001</mass>
+        <inertia>
+          <ixx>0.005240625</ixx>
+          <iyy>0.005240625</iyy>
+          <izz>0.009075</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+
+      <collision name="collision">
+
+        <geometry>
+          <cylinder>
+            <radius>0.110</radius>
+            <length>0.075</length>
+          </cylinder>
+        </geometry>
+        <surface>
+            <friction>
+              <ode>
+                <mu>0.5</mu>
+                <mu2>1.0</mu2>
+                <fdir1>0 0 1</fdir1>
+              </ode>
+            </friction>
+          </surface>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://pioneer3at/meshes/wheel.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint type="revolute" name="right_front">
+      <pose relative_to='base_footprint'>0.125 -0.201 -0.06 0 0 0</pose>
+      <child>right_front_wheel</child>
+      <parent>base_footprint</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>100</effort>
+          <velocity>100</velocity>
+          <lower>-10000000000000000</lower>
+          <upper>10000000000000000</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <joint type="revolute" name="right_rear">
+      <pose relative_to='base_footprint'>-0.125 -0.201 -0.06 0 0 0</pose>
+      <child>right_rear_wheel</child>
+      <parent>base_footprint</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>100</effort>
+          <velocity>100</velocity>
+          <lower>-10000000000000000</lower>
+          <upper>10000000000000000</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <joint type="revolute" name="left_front">
+      <pose relative_to='base_footprint'>0.125 0.201 -0.06 0 0 0</pose>
+      <child>left_front_wheel</child>
+      <parent>base_footprint</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>100</effort>
+          <velocity>100</velocity>
+          <lower>-10000000000000000</lower>
+          <upper>10000000000000000</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <joint type="revolute" name="left_rear">
+      <pose relative_to='base_footprint'>-0.125 0.201 -0.06 0 0 0</pose>
+      <child>left_rear_wheel</child>
+      <parent>base_footprint</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>100</effort>
+          <velocity>100</velocity>
+          <lower>-10000000000000000</lower>
+          <upper>10000000000000000</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <plugin
+        filename="ignition-gazebo-diff-drive-system"
+        name="ignition::gazebo::systems::DiffDrive">
+        <left_joint>left_front</left_joint>
+        <left_joint>left_rear</left_joint>
+        <right_joint>right_front</right_joint>
+        <right_joint>right_rear</right_joint>
+        <wheel_separation>0.402</wheel_separation>
+        <wheel_radius>0.110</wheel_radius>
+        <odom_publish_frequency>20</odom_publish_frequency>
+        <max_linear_acceleration>2.5</max_linear_acceleration>
+        <min_linear_acceleration>-2.5</min_linear_acceleration>
+        <max_angular_acceleration>3.2</max_angular_acceleration>
+        <min_angular_acceleration>-3.2</min_angular_acceleration>
+        <max_linear_velocity>0.5</max_linear_velocity>
+        <min_linear_velocity>-0.5</min_linear_velocity>
+        <max_angular_velocity>1</max_angular_velocity>
+        <min_angular_velocity>-1</min_angular_velocity>
+        <topic>pioneer3at/cmd_vel</topic>
+      	<odom_topic>pioneer3at/odom</odom_topic>
+      	<tf_topic>pioneer3at/tf</tf_topic>
+      	<frame_id>pioneer3at/odom</frame_id>
+        <child_frame_id>pioneer3at/base_footprint</child_frame_id>
+      </plugin>
+  </model>
+</sdf>

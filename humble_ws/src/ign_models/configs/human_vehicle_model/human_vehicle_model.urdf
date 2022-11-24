@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name='human_vehicle'>
+  <link name='human_vehicle/base_footprint'>
+    <inertial>
+      <origin xyz='0 0 0.1' rpy='0 -0 0'/>
+      <mass value='1.14395'/>
+      <inertia ixx='0.126164' ixy='0' ixz='0' iyy='0.416519' iyz='0' izz='0.481014'/>
+    </inertial>
+    <collision name='collision'>
+      <origin xyz='0 0 0.1' rpy='0 -0 0'/>
+      <geometry>
+        <cylinder radius='0.55' length='0.15'/>
+      </geometry>
+    </collision>
+    <visual name='visual'>
+      <origin xyz='0 0 0.1' rpy='0 -0 0'/>
+      <geometry>
+        <cylinder radius='0.55' length='0.25'/>
+      </geometry>
+    </visual>
+  </link>
+  <link name='human_vehicle/left_wheel'>
+    <inertial>
+      <origin xyz='0 0 0' rpy='0 -0 0'/>
+      <mass value='2'/>
+      <inertia ixx='0.145833' ixy='0' ixz='0' iyy='0.145833' iyz='0' izz='0.125'/>
+    </inertial>
+    <collision name='collision'>
+      <origin xyz='0 0 0' rpy='0 -0 0'/>
+      <geometry>
+        <sphere radius='0.15'/>
+      </geometry>
+    </collision>
+    <visual name='visual'>
+      <origin xyz='0 0 0' rpy='0 -0 0'/>
+      <geometry>
+        <sphere radius='0.15'/>
+      </geometry>
+    </visual>
+  </link>
+  <link name='human_vehicle/right_wheel'>
+    <inertial>
+      <origin xyz='0 0 0' rpy='0 -0 0'/>
+      <mass value='2'/>
+      <inertia ixx='0.145833' ixy='0' ixz='0' iyy='0.145833' iyz='0' izz='0.125'/>
+    </inertial>
+    <collision name='collision'>
+      <origin xyz='0 0 0' rpy='0 -0 0'/>
+      <geometry>
+        <sphere radius='0.15'/>
+      </geometry>
+    </collision>
+    <visual name='visual'>
+      <origin xyz='0 0 0' rpy='0 -0 0'/>
+      <geometry>
+        <sphere radius='0.15'/>
+      </geometry>
+    </visual>
+  </link>
+  <link name='human_vehicle/caster'>
+    <inertial>
+      <origin xyz='0 0 0' rpy='0 -0 0'/>
+      <mass value='1'/>
+      <inertia ixx='0.1' ixy='0' ixz='0' iyy='0.1' iyz='0' izz='0.1'/>
+    </inertial>
+    <collision name='collision'>
+      <origin xyz='0 0 0' rpy='0 -0 0'/>
+      <geometry>
+        <sphere radius='0.145'/>
+      </geometry>
+    </collision>
+    <visual name='visual'>
+      <origin xyz='0 0 0' rpy='0 -0 0'/>
+      <geometry>
+        <sphere radius='0.145'/>
+      </geometry>
+    </visual>
+  </link>
+  <link name='human_vehicle/caster_front'>
+    <inertial>
+      <origin xyz='0 0 0' rpy='0 -0 0'/>
+      <mass value='1'/>
+      <inertia ixx='0.1' ixy='0' ixz='0' iyy='0.1' iyz='0' izz='0.1'/>
+    </inertial>
+    <collision name='collision'>
+      <origin xyz='0 0 0' rpy='0 -0 0'/>
+      <geometry>
+        <sphere radius='0.145'/>
+      </geometry>
+    </collision>
+    <visual name='visual'>
+      <origin xyz='0 0 0' rpy='0 -0 0'/>
+      <geometry>
+        <sphere radius='0.145'/>
+      </geometry>
+    </visual>
+  </link>
+  <link name='human_vehicle/front_laser_link'>
+    <inertial>
+      <origin xyz='0 0 0' rpy='-3.1415926535897932 0 0'/>
+      <mass value='1'/>
+      <inertia ixx='1' ixy='0' ixz='0' iyy='1' iyz='0' izz='1'/>
+    </inertial>
+    <visual name='visual'>
+      <origin xyz='0 0 0' rpy='-3.1415926535897932 0 0'/>
+      <geometry>
+        <sphere radius='0.05'/>
+      </geometry>
+    </visual>
+  </link>
+  <sensor name='human_vehicle_front_laser_sensor' update_rate='20'>
+    <parent link='front_laser_link'/>
+    <origin xyz='0 0 0' rpy='0 -0 0'/>
+  </sensor>
+  <joint name='front_laser_joint' type='fixed'>
+    <origin xyz='0 0 0' rpy='3.1415926535897932 -0 0'/>
+    <parent link='human_vehicle/base_footprint'/>
+    <child link='human_vehicle/front_laser_link'/>
+    <axis xyz='0 0 1'/>
+    <limit lower='-1e+16' upper='1e+16' effort='-1' velocity='-1'/>
+  </joint>
+  <joint name='left_wheel_joint' type='revolute'>
+    <origin xyz='0 0.3 -0.075' rpy='-1.57071 0 0'/>
+    <parent link='human_vehicle/base_footprint'/>
+    <child link='human_vehicle/left_wheel'/>
+    <axis xyz='0 0 1'/>
+    <limit lower='-1.79769e+308' upper='1.79769e+308' effort='-1' velocity='-1'/>
+  </joint>
+  <joint name='right_wheel_joint' type='revolute'>
+    <origin xyz='0 -0.3 -0.075' rpy='-1.57071 0 0'/>
+    <parent link='human_vehicle/base_footprint'/>
+    <child link='human_vehicle/right_wheel'/>
+    <axis xyz='0 0 1'/>
+    <limit lower='-1.79769e+308' upper='1.79769e+308' effort='-1' velocity='-1'/>
+  </joint>
+  <joint name='caster_wheel' type='fixed'>
+    <origin xyz='-0.357138 0 -0.075' rpy='0 -0 0'/>
+    <parent link='human_vehicle/base_footprint'/>
+    <child link='human_vehicle/caster'/>
+    <axis xyz='0 0 1'/>
+    <limit lower='-1e+16' upper='1e+16' effort='-1' velocity='-1'/>
+  </joint>
+  <joint name='caster_wheel_front' type='fixed'>
+    <origin xyz='0.357138 0 -0.075' rpy='0 -0 0'/>
+    <parent link='human_vehicle/base_footprint'/>
+    <child link='human_vehicle/caster_front'/>
+    <axis xyz='0 0 1'/>
+    <limit lower='-1e+16' upper='1e+16' effort='-1' velocity='-1'/>
+  </joint>
+</robot>
+

@@ -1,8 +1,0 @@
-prefix=/home/danilo/fortress_ws/install
-
-Name: ros_ign_gazebo_demos
-Description: Description of ros_ign_gazebo_demos
-Version: 0.111.2
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

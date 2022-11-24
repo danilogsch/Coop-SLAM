@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/!svn/ver/3087/robotino-ros-pkg/trunk/catkin-pkg/robotino_description/urdf/sensors
+END
+3dsensor_gazebo.urdf.xacro
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/!svn/ver/3087/robotino-ros-pkg/trunk/catkin-pkg/robotino_description/urdf/sensors/3dsensor_gazebo.urdf.xacro
+END
+camera.urdf.xacro
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/!svn/ver/3087/robotino-ros-pkg/trunk/catkin-pkg/robotino_description/urdf/sensors/camera.urdf.xacro
+END
+asus_xtion_pro.urdf.xacro
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/!svn/ver/3087/robotino-ros-pkg/trunk/catkin-pkg/robotino_description/urdf/sensors/asus_xtion_pro.urdf.xacro
+END
+kinect.urdf.xacro
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/!svn/ver/3087/robotino-ros-pkg/trunk/catkin-pkg/robotino_description/urdf/sensors/kinect.urdf.xacro
+END
+hokuyo.urdf.xacro
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/!svn/ver/3087/robotino-ros-pkg/trunk/catkin-pkg/robotino_description/urdf/sensors/hokuyo.urdf.xacro
+END

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<gz version='1.0'>
+<executable name='gazebo-server'>
+    <command>gz sim depot_empty.sdf -r</command>
+</executable>
+  <plugin name="gz::launch::SimFactory"
+    filename="gz-launch-sim-factory">
+  </plugin>
+</gz>
