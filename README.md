@@ -26,19 +26,19 @@ sudo make install
 
 ```
 sudo apt install python3-pip wget lsb-release gnupg curl
-sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+sudo sh -c 'echo "deb http://packages.ros.org/ros2/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros2-latest.list'
 curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
 sudo apt-get update
 sudo apt-get install python3-vcstool python3-colcon-common-extensions
 mkdir -p ~/gz_garden_ws/src
 cd ~/gz_garden_ws/src
-wget https://raw.githubusercontent.com/ignition-tooling/gazebodistro/master/collection-fortress.yaml
-vcs import < collection-fortress.yaml
+wget https://raw.githubusercontent.com/gazebo-tooling/gazebodistro/master/collection-garden.yaml
+vcs import < collection-garden.yaml
 sudo wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
 sudo apt-get update
 sudo apt -y install \
-  $(sort -u $(find . -iname 'packages-'`lsb_release -cs`'.apt' -o -iname 'packages.apt' | grep -v '/\.git/') | sed '/ignition\|sdf/d' | tr '\n' ' ')
+  $(sort -u $(find . -iname 'packages-'`lsb_release -cs`'.apt' -o -iname 'packages.apt' | grep -v '/\.git/') | sed '/gz\|sdf/d' | tr '\n' ' ')
 ```
 Observation: In case mecanum wheels robots are used, gz-sim and gz-math need to be replaced for these ones ([gz-sim](https://github.com/danilogsch/gz-sim/tree/gz-sim7-mwodom) and [gz-math](https://github.com/danilogsch/gz-math/tree/gz-math7-mwodom)) in order to be able to publish odometry and tf topics (needed to navigate the robot). An alternative would be to use their odometry [plugin publisher](https://github.com/gazebosim/gz-sim/tree/gz-sim7/src/systems/odometry_publisher).
 ```
