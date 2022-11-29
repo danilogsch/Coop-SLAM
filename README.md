@@ -88,7 +88,56 @@ Segmentation example output:
 ![](https://github.com/danilogsch/Coop-SLAM/blob/main/rgb.gif)
 ![](https://github.com/danilogsch/Coop-SLAM/blob/main/segmentation.gif)
 
-Documentation about available models, folders structure, parameters and how to add new models will be added soon!
+## Folder Structure (most important files)
+
+```bash
+├── humble_ws/src
+│   ├── arm_gz_control (Package for joint control of robotic arms in Gazebo)
+│   ├── ign_models (Folder containing available models meshes and URDFs)
+│   └── datagen_scripts (Main data generation package)
+│       ├── datagen_scripts (Python scripts)
+│       ├── gz_configs (Configuration files defining the behaviour of the data generation)
+│       │   ├── data_frame_dict.csv (Table with available models and their parameters)
+│       │   └── launch_params.yaml (Launch parameters that configure the data generation algorithm)
+│       ├── moveit_configs (MoveIt related configuration files)
+│       ├── nav2_configs (Navigation2 related configuration files)
+│       ├── jupyter_notebooks (Jupyter notebooks for data conversion and CNN training)
+│       └── launch
+│           └── random_spawner_launch.py (ROS2 python launcher to randomly generation of data)
+├── README.md
+└── Adding_new_models.md
+
+```
+
+
+## Available models
+
+Available used models can be found in the data_frame_dict.csv table. For more information about it and guidance for adding new models check [this]() doc.
+
+## Launch parameters
+
+The following table describes the launch parameters in launch_params.yaml
+
+| Parameters    | Description   |
+| :-------------: |-------------|
+| models_df_path  | Absolute path for data_frame_dict.csv|
+| model_resouce_path  | Absolute path for Gazebo model files |
+| launch_config_path | Absolute path for data generation configuration files |
+| instance_seg | Loads instance segmentation camera sensor |
+| semantic_seg | Loads semantic segmentation camera sensor |
+| bb2d_vis | Loads 2D visible bounding boxes camera sensor |
+| bb2d_full | Loads 2D full bounding boxes camera sensor |
+| bb3d | Loads 3D bounding boxes camera sensor |
+| save_depth | Loads depth camera sensor |
+| save_path | Path for saving current generated data |
+| use_cam_config_pose | Whether or not to use fixed camera pose or generate random x,y positions and yaw orientation|
+| x, y, z | Predefined camera position |
+| pitch, yaw | Predefined camera orientation |
+| n_max_r | Maximum number of robots to spawn in each iteration |
+| n_max_a | Maximum number of actors to spawn in each iteration |
+| n_max_o | Maximum number of objects to spawn in each iteration |
+| sim_iterations_per_run | Number of simulator iterations for each launcher run (1 iteration = 0.001 seconds) |
+
 
 
 
