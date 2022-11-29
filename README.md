@@ -90,10 +90,10 @@ Segmentation example output:
 
 ## Folder Structure (most important files)
 
-````diff
+```
 ├── humble_ws/src
-│   ├── arm_gz_control (+ Package for joint control of robotic arms in Gazebo)
-│   ├── ign_models (+ Folder containing available models meshes and URDFs)
+│   ├── arm_gz_control (## Package for joint control of robotic arms in Gazebo ##)
+│   ├── ign_models (@@ Folder containing available models meshes and URDFs @@)
 │   └── datagen_scripts (Main data generation package)
 │       ├── datagen_scripts (Python scripts)
 │       ├── gz_configs (Configuration files defining the behaviour of the data generation)
@@ -103,11 +103,11 @@ Segmentation example output:
 │       ├── nav2_configs (Navigation2 related configuration files)
 │       ├── jupyter_notebooks (Jupyter notebooks for data conversion and CNN training)
 │       └── launch
-│           └── random_spawner_launch.py (ROS2 python launcher to randomly generation of data)
+│           └── random_spawner_launch.py (ROS2 python launcher for randomly generation of data)
 ├── README.md
 └── Adding_new_models.md
 
-````
+```
 
 
 ## Available models
