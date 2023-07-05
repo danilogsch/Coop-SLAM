@@ -2,7 +2,7 @@
 
 Obs: If you have description files for a model in the Classic Gazebo simulator, This [migration guide](https://github.com/osrf/subt/wiki/Model-Migration-Guide) is a good starting point to migrate it to the new Gazebo Sim.
 
-##Adding a robot
+## Adding a robot
 
 Basic folder structure for the model inside /ign_models:
 
@@ -51,7 +51,7 @@ Moveit2 related description and configuration files are stored in src/datagen_sc
 The Gazebo plugins used for Joint Position, Joint control, Odometry and Navigation can be mirroed from the available models. Make sure to attach them to the correct frames/joints and use the same topic name format as the examples.
 
 
-##Adding an actor
+## Adding an actor
 
 Basic folder structure for the model inside /ign_models:
 
@@ -64,7 +64,7 @@ Basic folder structure for the model inside /ign_models:
 
 In order to control the actors, the plugin "follow-actor-system" was used to follow an invisible differential robot, this robot does not have <visual> tags, meaning that it will not be rendered into simulation nor detected by any sensor. It can be seen in the file "src/datagen_scripts/gz_configs/human_vehicle_model/actor_wrd_tmpl.sdf" but there is no need to modify it.
 
-##Adding an object
+## Adding an object
 
 Basic folder structure for the model inside /ign_models:
 
@@ -76,8 +76,8 @@ Basic folder structure for the model inside /ign_models:
 
 ```
 
-##Camera settings:
+## Camera settings:
 Camera parameters like width, height, HFOV, gaussian noise can be configured in the file "gz_configs/camera_tmpl.sdf" under each specific camera tag.
 
-##Environment model:
+## Environment model:
 There is only one environment model, but one could change it in the end of the file "gz_configs/human_vehicle_model/wrd_bgn_tmpl.sdf". In this case, use any robot in this environment and a SLAM method to generate an Occupancy Grid Map, them save it in the datagen_scripts/map folder replacing the existing one.
