@@ -112,18 +112,18 @@ gz topic -t "/youbot/cmd_vel" -m gz.msgs.Twist -p "linear: {y: 0.4}, angular: {z
 ros2 run coop_detection_and_mapping detection_publisher --ros-args -p use_sim_time:=True
 
 # On a diferent terminal (to record the detections):
-ros2 bag record tf seg_out_topic detections_topic -o bag1 --use-sim-time
+ros2 bag record tf seg_out_topic detections_topic -o bag2 --use-sim-time
 ```
 
-Merged bags with multiple detections can be found in coop_bags folder.
+Merged bags with multiple detections can be found in humble_ws/coop_bags folder.
 To run the multi-robot SLAM node:
 
 ```
-ros2 bag play coop_bags/merged_bag
+ros2 bag play humble_ws/coop_bags/merged_bag
 ros2 run coop_detection_and_mapping centralized_ogm_builder --ros-args -p use_sim_time:=True
 ```
 
-resulting maps can be visualized in cv2 and are published in nav2_msgs/msg/OccupancyGrid msg type under "map" topic. Code to save the dictionary with poses and map images is commented on the code. Available parameters:
+Resulting maps can be visualized in cv2 and are published in nav2_msgs/msg/OccupancyGrid msg type under "map" topic. Code to save the dictionary with poses and map images is commented on the code. Available parameters:
 
 - empty_map_path: Path to the empty resized map of the environment.
 - min_conf: Minimum confidence value to consider detection. (default 0.3)
@@ -153,6 +153,7 @@ ros2 run coop_detection_and_mapping human_data_saver --ros-args -p use_sim_time:
 
 # to generate ground truth:
 ros2 run coop_detection_and_mapping groundtruth_gen --ros-args -p use_sim_time:=True
+ros2 bag play humble_ws/coop_bags/bag1 #Or any bag with tfs recorded
 
 # to run evaluation script and plot errors:
 python3 coop_evaluation.py
