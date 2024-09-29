@@ -14,7 +14,7 @@ For trainning/testing/validating the model use the jupyter notebook: resnet50_fp
 
 If you want to use my generated synth_depot_dataset for trainning/testing/validating the model, download it from this [google drive folder](https://drive.google.com/drive/folders/1HEUbte6S7996iOndTYddwkNz7qlJFa4Y?usp=sharing) and put the contents under humble_ws/synth_depot_dataset.
 
-The model weights and utils obtained during trainning and will be available after peer-review at this link. Put it on checkpoints/fpn_resnet_50_semseg.
+The model weights and utils obtained during trainning will be available after peer-review at this link. Put it on checkpoints/fpn_resnet_50_semseg.
 
 Tested on Ubuntu Jammy (22.04) and ROS2 Humble with Ignition Gazebo (Garden). Future release will use Harmonic LTS with DockerFile to ease installion and usage.
 
