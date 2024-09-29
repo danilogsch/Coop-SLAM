@@ -141,7 +141,7 @@ resulting maps can be visualized in cv2 and are published in nav2_msgs/msg/Occup
 
 Semantic Segmentation example:
 
-![](https://github.com/danilogsch/Coop-SLAM/blob/main/coop_slam.GIF)
+![](https://github.com/danilogsch/Coop-SLAM/blob/main/coopslam.gif)
 
 Paper results available on [this link](https://drive.google.com/drive/folders/1hF9q2466QbS1hW0QMyjwjuKk0YqQm2Uo?usp=sharing).
 
