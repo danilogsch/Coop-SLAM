@@ -9,6 +9,7 @@ import yaml
 import numpy as np
 import math
 import cv2
+from collections import Counter
 
 from ament_index_python.packages import get_package_share_directory, get_package_prefix
 
@@ -23,11 +24,7 @@ from launch_ros.actions import Node, PushRosNamespace
 from launch_ros.descriptions import ParameterValue
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from nav2_common.launch import RewrittenYaml
-#from moveit_configs_utils import MoveItConfigsBuilder
 
-#def Convert(string):
-#    li = list(string.split(" "))
-#    return li
 
 def get_quaternion_from_euler(roll, pitch, yaw):
   """
@@ -48,6 +45,28 @@ def get_quaternion_from_euler(roll, pitch, yaw):
  
   return [qx, qy, qz, qw]
 
+def count_folders_in_directory(directory_path):
+    # Initialize a counter to keep track of the number of folders
+    folder_count = 0
+    # Check if the directory exists, and create it if it doesn't
+    if not os.path.exists(directory_path):
+        os.makedirs(directory_path)
+
+    # Check if the directory exists
+    if os.path.exists(directory_path) and os.path.isdir(directory_path):
+        # List all items in the directory
+        items = os.listdir(directory_path)
+
+        # Iterate through the items and count the folders
+        for item in items:
+            item_path = os.path.join(directory_path, item)
+            if os.path.isdir(item_path):
+                folder_count += 1
+    else:
+        print(f"The directory '{directory_path}' does not exist.")
+
+    return folder_count
+
 def generate_launch_description():
 
     launch_params_path = os.path.join(get_package_share_directory('datagen_scripts'), 'launch_params.yaml')
@@ -56,19 +75,14 @@ def generate_launch_description():
         f_content = f.read()
     launch_params = yaml.safe_load(f_content)
 
-    #print(str(launch_params['camera']['x']))
-
     map_server_dcl = DeclareLaunchArgument(
             'map',
             default_value=os.path.join(get_package_share_directory('datagen_scripts'), 'map.yaml'),
             description='Full path to map yaml file to load')
 
-    #launch_path=os.environ['GZ_LAUNCH_CONFIG_PATH']
     os.environ['GZ_LAUNCH_CONFIG_PATH'] = launch_params['launch_config_path']
     launch_path = launch_params['launch_config_path']
 
-    #resource_path = os.environ['IGN_GAZEBO_RESOURCE_PATH'].split(':')
-    #resource_path = resource_path[-1]
     os.environ['IGN_GAZEBO_RESOURCE_PATH'] = launch_params['model_resouce_path']
     resource_path = launch_params['model_resouce_path']
 
@@ -77,11 +91,10 @@ def generate_launch_description():
     map_restricted_filepath = os.path.join(get_package_share_directory('datagen_scripts'), 'map_restricted.yaml')
     map_filepath = os.path.join(get_package_share_directory('datagen_scripts'), 'map.yaml')
 
-    cam_x = launch_params['camera']['x']
-    cam_y = launch_params['camera']['y']
-    cam_yaw = launch_params['camera']['yaw']
+    cam_x = float(launch_params['camera']['x'])
+    cam_y = float(launch_params['camera']['y'])
+    cam_yaw = float(launch_params['camera']['yaw'])
 
-    #print(launch_params['camera']['use_cam_config_pose'])
     use_cam_config_pose = launch_params['camera']['use_cam_config_pose']
     if use_cam_config_pose == False:
         valid_cam_pose = False
@@ -111,6 +124,9 @@ def generate_launch_description():
             cam_yaw = round(cam_yaw,4)
 
     print('CAMERA', cam_x, cam_y, cam_yaw)
+
+    cam_pose_list = [cam_x, cam_y, cam_yaw]
+    
     [qx, qy, qz, qw] = get_quaternion_from_euler(0, 0, cam_yaw)
     print(r'"{position: {x: '+str(cam_x)+',y: '+str(cam_y)+'}, orientation: {x: '+str(qx)+', y: '+str(qy)+', z: '+str(qz)+', w: '+str(qw)+r'}}" -1')
 
@@ -122,14 +138,145 @@ def generate_launch_description():
     used_models_a = []
     used_models_o = []
 
+    run_number = count_folders_in_directory(str(launch_params['camera']['save_path']))
+
+    os.makedirs(str(launch_params['camera']['save_path'])+f'/{run_number}', exist_ok=True)
+
+    with open(str(launch_params['camera']['save_path'])+f'/{run_number}/camera_pose.txt', 'w') as file:
+        file.write(' '.join(map(str, cam_pose_list)))
+
+    #if run_number!=0 :
+    #    run_number+=1
+
     n_max_r = launch_params['n_max_r']
     n_max_a = launch_params['n_max_a']
     n_max_o = launch_params['n_max_o']
-    #n_max_r = 1 #Max of robots to spawn
-    #n_max_a = 0
-    #n_max_o = 1
 
     #random.seed(632651)
+
+    #Read DataFrame file:
+    df = pandas.read_csv(launch_path+'/data_frame_dict.csv', index_col='Name')
+
+    n_max_i = n_max_r+n_max_a+n_max_o
+
+    df = df.sort_values(
+        by=['type','n_uses', 'label_id']
+        )
+    print(df)
+    n_classes = max(df['label_id'][name] for name in df.index)
+
+    # Create a DataFrame with custom index and a "cls_counter" column
+    data = {"cls_counter": [0] * n_classes}
+
+    cls_counter_df = pandas.DataFrame(data, index=range(1, n_classes+1))
+
+    for cls in range(1, n_classes+1):
+        uses_counter = sum(df['n_uses'][name] for name in df.index if df['label_id'][name]==cls)
+        cls_counter_df.loc[cls,'cls_counter'] = uses_counter
+    
+    cls_counter_df = cls_counter_df.sort_values(
+        by=['cls_counter']
+        )
+
+    #Fill String lists
+    for name in df.index:
+        if df['type'][name] == 'r':
+            models.append(name)
+        elif df['type'][name] == 'a':
+            models_a.append(name)
+        elif df['type'][name] == 'o':
+            models_o.append(name)
+
+
+    cls_counter_df = cls_counter_df[:n_max_i]
+
+    for cls in cls_counter_df.index:
+        
+        for name in df.index:
+            if (df['label_id'][name] == cls):
+                
+                if df['type'][name]=='r' and len(used_models_r)<n_max_r:
+                    used_models_r.append(name)
+                    df.loc[name,'n_uses'] += 1
+                    continue
+                
+                if df['type'][name]=='a' and len(used_models_a)<n_max_a:
+                    used_models_a.append(name)
+                    df.loc[name,'n_uses'] += 1
+                    continue
+                
+                if df['type'][name]=='o' and len(used_models_o)<n_max_o:
+                    used_models_o.append(name)
+                    df.loc[name,'n_uses'] += 1
+                    continue
+
+
+    used_models_r_n = used_models_r
+    count_r = Counter(used_models_r)
+    counter = 0
+    for i in range(len(used_models_r)):
+        print(used_models_r[i])
+        if count_r[used_models_r[i]] >1:
+            used_models_r_n[i] = used_models_r[i]+'_'+str(counter)
+            counter += 1
+        elif count_r[used_models_r[i]] ==1:
+            counter = 0
+            used_models_r_n[i] = used_models_r[i]+'_'+str(counter)
+    used_models_r = used_models_r_n
+    print(used_models_r)
+
+    used_models_a_n = used_models_a
+    count_a = Counter(used_models_a)
+    counter = 0
+    for i in range(len(used_models_a)):
+        print(used_models_a[i])
+        if count_a[used_models_a[i]] >1:
+            used_models_a_n[i] = used_models_a[i]+'_'+str(counter)
+            counter += 1
+        elif count_a[used_models_a[i]] ==1:
+            counter = 0
+            used_models_a_n[i] = used_models_a[i]+'_'+str(counter)
+    used_models_a = used_models_a_n
+    print(used_models_a)
+
+    used_models_o_n = used_models_o
+    count_o = Counter(used_models_o)
+    counter = 0
+    for i in range(len(used_models_o)):
+        print(used_models_o[i])
+        if count_o[used_models_o[i]] >1:
+            used_models_o_n[i] = used_models_o[i]+'_'+str(counter)
+            counter += 1
+        elif count_o[used_models_o[i]] ==1:
+            counter = 0
+            used_models_o_n[i] = used_models_o[i]+'_'+str(counter)
+    used_models_o = used_models_o_n
+    print(used_models_o)
+    aux = []
+    used_models = used_models_r + used_models_o + used_models_a
+    if len(used_models) < n_max_i-1:
+        aux.append(random.choice(used_models)) #DUPLICATE ONLY ONE MODEL
+        df.loc[aux[0][:-2],'n_uses'] += 1
+    #print(df.index)
+    count_r = Counter(used_models_r)
+    count_a = Counter(used_models_a)
+    count_o = Counter(used_models_o)
+    for i in range(len(aux)):
+        if count_r[aux[i]] == 1:
+            used_models_r.append(aux[i][:-1]+str(int(aux[i][-1])+1))
+        if count_a[aux[i]] == 1:
+            used_models_a.append(aux[i][:-1]+str(int(aux[i][-1])+1))
+        if count_o[aux[i]] == 1:
+            used_models_o.append(aux[i][:-1]+str(int(aux[i][-1])+1))
+
+    used_models = used_models_r + used_models_o + used_models_a
+    
+    for i in range(len(used_models)):
+        if df['type'][used_models[i][:-2]] == 'a':
+            used_models[i] = 'human_vehicle_'+str(used_models[i])+'_cam'
+        if used_models[i][:6] == 'youbot' or used_models[i][:6] == 'rbkair':
+            used_models[i] = str(used_models[i])+'_cam'
+    print(f'AQUI OS NOMES ENVIADOS AO AUX_SAVER:{used_models}')
 
     param_substitutions = {
         'yaml_filename': map_filepath}
@@ -200,6 +347,19 @@ def generate_launch_description():
                         {'cam_y': cam_y},
                         {'cam_yaw': cam_yaw}
                         ])
+    
+    aux_data_saver_cmd = Node(
+            package='datagen_scripts',
+            executable='aux_data_saver',
+            name='aux_data_saver',
+            output='screen',
+            parameters=[{'use_sim_time': True},
+                        {'run_number': int(run_number)},
+                        {'save_path': str(launch_params['camera']['save_path'])},
+                        {'used_models': used_models},
+                        {'save_lidar': bool(launch_params['camera']['save_lidar'])},
+                        {'save_depth': bool(launch_params['camera']['save_depth'])}
+                        ])
         
     lyfe_cycle_cmd = Node(
             package='nav2_lifecycle_manager',
@@ -211,21 +371,16 @@ def generate_launch_description():
                         {'autostart': True},
                         {'node_names': ['map_server','filter_mask_server','costmap_filter_info_server']}])
 
-#    lyfe_cycle_cmd_2 = Node(
-#            package='nav2_lifecycle_manager',
-#            executable='lifecycle_manager',
-#            name='lifecycle_manager_costmap_filters',
-#            output='screen',
-#            emulate_tty=True,
-#            parameters=[{'use_sim_time': True},
-#                        {'autostart': True},
-#                        {'node_names': ['filter_mask_server','costmap_filter_info_server']}])
-
     clock_bridge_cmd = Node(
                     package='ros_gz_bridge',
                     executable='parameter_bridge',
                     output='screen',
-                    arguments=['/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock']
+                    arguments=['/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock',
+                               '/lidar/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
+                               '/depth_camera@sensor_msgs/msg/Image[gz.msgs.Image',
+                               '/model/dataset_camera/pose@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V'                               
+                               ],
+                    remappings=[('/model/dataset_camera/pose', '/tf')]
                     )
 
     with open(map_filepath, "r") as f:
@@ -259,7 +414,7 @@ def generate_launch_description():
     # because origin in yaml is at bottom left of image
     cam_y_map = grid_map.shape[0] - cam_y_map
 
-    hfov = 90 * math.pi/180 #Camera's horizontal field of view
+    hfov = 120 * math.pi/180 #Camera's horizontal field of view
 
     angle1 = (float(-cam_yaw) + (hfov/2))
     if angle1 > math.pi:
@@ -280,7 +435,8 @@ def generate_launch_description():
     point_3_y = cam_y_map + ((camera_dist* math.sin(angle2)))//1
 
     # Arbitrary maximum camera reach
-    points_max_dist = (grid_map.shape[0] + grid_map.shape[1])//2 
+    #points_max_dist = (grid_map.shape[0] + grid_map.shape[1])//2 
+    points_max_dist = 10.5 // map_meta["resolution"] 
 
     #Points far of camera
     point_4_x = point_2_x + ((points_max_dist* math.cos(angle1)))//1
@@ -295,33 +451,6 @@ def generate_launch_description():
     cv2.fillConvexPoly(mask, polly_points, 0)
     grid_map = cv2.bitwise_or(grid_map,mask)
 
-
-    
-    #Read DataFrame file:
-    df = pandas.read_csv(launch_path+'/data_frame_dict.csv', index_col='Name')
-    #print(df['type']['rbkairos_migration_sensor_config_1'])
-    df = df.sort_values(
-        by=['type','n_uses']
-        )
-    print(df)
-    #Fill String lists
-    for name in df.index:
-        if df['type'][name] == 'r':
-            models.append(name)
-        elif df['type'][name] == 'a':
-            models_a.append(name)
-        elif df['type'][name] == 'o':
-            models_o.append(name)
-
-    if len(models) > n_max_r:
-        models = models[:(n_max_r+2)]
-
-    if len(models_a) > n_max_a:
-        models_a = models_a[:(n_max_a+2)]
-    #print (models_a)
-    if len(models_o) > n_max_o:
-        models_o = models_o[:(n_max_o+2)]
-
     #Initialize world file (actors need to be loaded directly in the world.sdf file in order to spawn and follow target correctly)
     world = os.path.join(resource_path, 'depot_empty.sdf')
     with open(os.path.join(launch_path, 'human_vehicle_model/wrd_bgn_tmpl.sdf')) as f:
@@ -333,16 +462,6 @@ def generate_launch_description():
     with open(os.path.join(launch_path, 'launcher_tmpl.ign'), 'w') as launchp:
         launchp.write(r'<?xml version="1.0"?><gz version="1.0"><plugin name="ignition::launch::GazeboFactory" filename="ignition-launch-gazebo-factory">')
 
-    while len(used_models_r) < n_max_r:
-        i=0
-        curr_model=random.choice(models)
-        curr_model_name = curr_model + '_'+ str(i)
-
-        while curr_model_name in used_models_r:
-            i += 1
-            curr_model_name = curr_model + '_'+ str(i)    
-        used_models_r.append(curr_model_name)
-        df.loc[curr_model,'n_uses'] += 1
 
     
     model_instances_cmds = []
@@ -359,12 +478,12 @@ def generate_launch_description():
         #xml = xml.replace('<sdf version="1.6">', '')
         #xml = xml.replace('<sdf version="1.10">', '')
         xml = xml.replace('</sdf>', '')
-        xml = xml.replace('</model>', '<plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>'+str(df['class_id'][robot[:-2]])+'</label></plugin></model>')
+        xml = xml.replace('</model>', '<plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>'+str(df['class_id'][robot[:-2]])+'</label></plugin><plugin filename="gz-sim-pose-publisher-system" name="gz::sim::systems::PosePublisher"><publish_link_pose>false</publish_link_pose><publish_collision_pose>false</publish_collision_pose><publish_visual_pose>false</publish_visual_pose><publish_nested_model_pose>true</publish_nested_model_pose><use_pose_vector_msg>true</use_pose_vector_msg><static_update_frequency>10</static_update_frequency></plugin></model>')
         xml = xml.replace(robot[:-2], robot)
+        #xml = xml.replace('<path>depth_data</path>', '<path>'+str(launch_params['camera']['save_path'])+'/'+str(run_number)+'/instances/'+robot+'/depth</path>')
+        xml = xml.replace('<path>segmentation_data/instance_camera</path>', '<path>'+str(launch_params['camera']['save_path'])+'/'+str(run_number)+'/instances/'+robot+'/instance_data</path>')
         xml = xml.replace('model://'+robot, 'model://'+robot[:-2])
-        #FIX ABSOLUTE PATH
-        #xml = xml.replace('meshes', os.path.join(get_package_share_directory(curr_model), 'meshes'))
-        #xml = xml.replace('materials', os.path.join(get_package_share_directory(curr_model), 'materials'))
+
 
         is_valid_pose = False
         while (is_valid_pose == False):
@@ -400,15 +519,6 @@ def generate_launch_description():
         yaw = float(yaw)
         print(x,y,yaw)
 
-        ##xml = xml.encode('unicode-escape').decode()
-        #spawn_args = r'sdf: "'+ xml + r'" pose: {position: {x: '+x+r', y: '+y+r', z: '+z+r'}, orientation: {yaw:'+yaw+r'}} name: "'+robot+r'" allow_renaming: true'
-
-        #bridge = os.path.join(get_package_share_directory(robot[-2]), 'bridge_topics.txt')
-        #with open(bridge) as f:
-        #    bridge_topics = f.read() #.encode('unicode-escape').decode()
-        #bridge_topics = bridge_topics.replace(robot[-2], robot)
-        #bridge_topics = bridge_topics.strip()
-        ##bridge_topics = bridge_topics.replace('', robot)
 
         urdf_file_name = robot[:-2]+'/urdf/'+robot[:-2]+'.urdf'
         urdf = os.path.join(resource_path,urdf_file_name)
@@ -419,13 +529,9 @@ def generate_launch_description():
 
 
         with open(world, 'a') as launchp:
-            launchp.write(xml.replace('<pose>0 0 0 0 0 0</pose>', '<pose>'+str(x)+' '+str(y)+' 0.3 0 0 '+str(yaw)+'</pose>'))
+            launchp.write(xml.replace('<pose>0 0 0 0 0 0</pose>', '<pose>'+str(x)+' '+str(y)+' 0.1 0 0 '+str(yaw)+'</pose>'))
 
-        #with open(os.path.join(launch_path, 'launcher_tmpl.ign'), 'a') as launchp:
-        #    launchp.write('<spawn><name>'+robot+'</name><allow_renaming>true</allow_renaming><pose>'+str(x)+' '+str(y)+' '+str(z)+' 0 0 '+str(yaw)+'</pose>'+xml+'</spawn>')
-        #    #ign_launch = ign_launch.replace('<!--key-->','<spawn><name>'+robot+'</name><allow_renaming>true</allow_renaming><pose>'+x+' '+y+' '+z+' 0 0 '+yaw+'</pose><sdf version="1.9"><include><uri></uri></include></sdf></spawn>')
 
-        #params_file = LaunchConfiguration(robot + "_params_file")
         if (df['has_arm'][robot[:-2]] == 1) or (df['has_arm'][robot[:-2]] == 2):
             # Common moveit2 params for 6dof and 5dof arms
             # Load and reconfigure YAML moveit2 configs
@@ -502,25 +608,12 @@ def generate_launch_description():
             trajectory_execution=''
             planning_scene_monitor_parameters=''
 
-    #    moveit_config = (
-    #    MoveItConfigsBuilder("moveit_resources_panda")
-    #    .robot_description(file_path="config/panda.urdf.xacro")
-    #    .robot_description_semantic(file_path="config/panda.srdf")
-    #    .trajectory_execution(file_path="config/gripper_moveit_controllers.yaml")
-    #    .planning_pipelines(pipelines=["ompl", "chomp"])
-    #    .to_moveit_configs()
-    #)
 
         if (df['mode'][robot[:-2]] == 1):
             nav2_param_file = os.path.join(get_package_share_directory('datagen_scripts'), 'nav2_params_omni.yaml')
         elif (df['mode'][robot[:-2]] == 0):
             nav2_param_file = os.path.join(get_package_share_directory('datagen_scripts'), 'nav2_params.yaml')
-        # Nav Parameters:
-        #with open(os.path.join(get_package_share_directory('datagen_scripts'),'nav2_params.yaml'), "r") as f:
-        #    joint_limits_content = f.read()
-        #with open(os.path.join(get_package_share_directory('datagen_scripts'),'nav2_params.yaml'), "r") as f:
-        #    joint_limits_content = f.read()
-        #    joint_limits_yaml = yaml.safe_load(joint_limits_content)
+
         robot_param_substitutions = {
             'base_frame_id': [robot,'/base_footprint'],
             'odom_frame_id': [robot,'/odom'],
@@ -545,12 +638,6 @@ def generate_launch_description():
 
         group = GroupAction(
             [
-
-                #SPAWN MODELS ON GZ WITH NAMESPACE
-                #ExecuteProcess(
-                #    cmd=['ign', 'service', '-s', '/world/depot/create','--reqtype','ignition.msgs.EntityFactory','--reptype','ignition.msgs.Boolean','--timeout','300','--req', spawn_args],
-                #    output='screen'),
-
                 #Execute bridge node
                 PushRosNamespace(
                     namespace=robot),
@@ -564,10 +651,13 @@ def generate_launch_description():
                         #'/'+robot+'/rear_laser@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan',
                         '/'+robot+'/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist',
                         '/'+robot+'/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
+                        '/model/'+robot+'/pose@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
+                        '/'+robot+'/depth_camera@sensor_msgs/msg/Image[gz.msgs.Image',
+                        '/'+robot+'/panoptic/colored_map@sensor_msgs/msg/Image[gz.msgs.Image',
                         '/'+robot+'/joint_states@sensor_msgs/msg/JointState[gz.msgs.Model'
                         ],
                     parameters=[{'use_sim_time': True}],
-                    remappings=[('/'+robot+'/tf', '/tf')]),
+                    remappings=[('/'+robot+'/tf', '/tf'),('/model/'+robot+'/pose', '/tf')]),
 
                 Node(
                     package='robot_state_publisher',
@@ -713,36 +803,16 @@ def generate_launch_description():
 
                 LogInfo(condition=IfCondition(log_settings), msg=["Launching ", robot]),
 
-                #LogInfo(
-                #    condition=IfCondition(log_settings),
-                #    msg=[robot, " SDF: ", xml],
-                #),
-                #LogInfo(
-                #    condition=IfCondition(log_settings), msg=[robot, " URDF: ", robot_desc]
-                #)
             ]
         )
         
         model_instances_cmds.append(group)
 
 
-    while len(used_models_a) < n_max_a:
-        i=0
-        curr_model=random.choice(models_a)
-        curr_model_name = curr_model + '_'+ str(i)
-
-        while curr_model_name in used_models_a:
-            i += 1
-            curr_model_name = curr_model + '_'+ str(i)    
-        used_models_a.append(curr_model_name)
-        df.loc[curr_model,'n_uses'] += 1
-
-
-
     i = 0
     model_a_instances_cmds = []
     for actor in used_models_a:
-        human_vehicle_name = 'human_vehicle_'+str(i)
+        human_vehicle_name = 'human_vehicle_'+actor
         print(str(actor))
 
         
@@ -785,11 +855,11 @@ def generate_launch_description():
         yaw = float(yaw)
         print(x,y,yaw)
 
-        
-
-
         xml = xml.replace('human_vehicle', human_vehicle_name)
         xml = xml.replace('actor_name', actor)
+        #xml = xml.replace('<path>depth_data</path>', '<path>'+str(launch_params['camera']['save_path'])+'/'+str(run_number)+'/instances/'+human_vehicle_name+'/depth</path>')
+        xml = xml.replace('<path>segmentation_data/instance_camera</path>', '<path>'+str(launch_params['camera']['save_path'])+'/'+str(run_number)+'/instances/'+human_vehicle_name+'/instance_data</path>')
+
         xml = xml.replace('<pose>0 0 0.325 0 0 0</pose>', '<pose>'+str(x)+' '+str(y)+' 0.325 0 0 '+str(yaw)+'</pose>')
         xml = xml.replace('<pose>0 0 1.0 0 0 0</pose>', '<pose>'+str(x)+' '+str(y)+' 0 0 0 0</pose>')
         xml = xml.replace('<uri></uri>', '<uri>model://'+actor[:-2]+'</uri><plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>'+str(df['class_id'][actor[:-2]])+'</label></plugin>')
@@ -802,9 +872,7 @@ def generate_launch_description():
         urdf = os.path.join(launch_path,urdf_file_name)
         with open(urdf, 'r') as infp:
             hv_desc = infp.read()
-        hv_desc = hv_desc.replace('human_vehicle', human_vehicle_name)
-
-        
+        hv_desc = hv_desc.replace('human_vehicle', human_vehicle_name)        
        
         i += 1
 
@@ -832,12 +900,6 @@ def generate_launch_description():
 
         group = GroupAction(
             [
-                ###to do: RANDOM POSE GENERATION
-                #SPAWN MODELS ON GZ WITH NAMESPACE
-                #ExecuteProcess(
-                #    cmd=['ign', 'service', '-s', '/world/depot/create','--reqtype','ignition.msgs.EntityFactory','--reptype','ignition.msgs.Boolean','--timeout','300','--req', spawn_args],
-                #    output='screen'),
-
                 #Execute bridge node
                 PushRosNamespace(
                     namespace=human_vehicle_name),
@@ -851,10 +913,13 @@ def generate_launch_description():
                         #'/'+robot+'/rear_laser@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan',
                         '/'+human_vehicle_name+'/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist',
                         '/'+human_vehicle_name+'/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
-                        '/'+human_vehicle_name+'/joint_states@sensor_msgs/msg/JointState[gz.msgs.Model'
+                        '/'+human_vehicle_name+'/joint_states@sensor_msgs/msg/JointState[gz.msgs.Model',
+                        '/model/'+human_vehicle_name+'/pose@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
+                        '/'+human_vehicle_name+'/depth_camera@sensor_msgs/msg/Image[gz.msgs.Image',
+                        '/'+human_vehicle_name+'/panoptic/colored_map@sensor_msgs/msg/Image[gz.msgs.Image'
                         ],
                     parameters=[{'use_sim_time': True}],
-                    remappings=[('/'+human_vehicle_name+'/tf', '/tf')]),
+                    remappings=[('/'+human_vehicle_name+'/tf', '/tf'), ('/model/'+human_vehicle_name+'/pose', '/tf')]),
 
                 Node(
                     package='robot_state_publisher',
@@ -931,39 +996,16 @@ def generate_launch_description():
 
                 LogInfo(condition=IfCondition(log_settings), msg=["Launching ", actor]),
 
-                #LogInfo(
-                #    condition=IfCondition(log_settings),
-                #    msg=[robot, " SDF: ", xml],
-                #),
-                #LogInfo(
-                #    condition=IfCondition(log_settings), msg=[robot, " URDF: ", robot_desc]
-                #)
             ]
         )
         
         model_a_instances_cmds.append(group)
 
 
-
-
-
-    while len(used_models_o) < n_max_o:
-        i=0
-        curr_model=random.choice(models_o)
-        curr_model_name = curr_model + '_'+ str(i)
-
-        while curr_model_name in used_models_o:
-            i += 1
-            curr_model_name = curr_model + '_'+ str(i)    
-        used_models_o.append(curr_model_name)
-        df.loc[curr_model,'n_uses'] += 1
-
+    model_o_instances_cmds = []
     for object in used_models_o:
 
         print(object)
-        #sdf = os.path.join(resource_path, object[:-2]+'/model.sdf')
-        #with open(sdf) as f:
-        #    xml = f.read()
 
         is_valid_pose = False
         while (is_valid_pose == False):
@@ -1000,56 +1042,75 @@ def generate_launch_description():
         print(x,y,yaw)
 
         with open(world, 'a') as launchp:
-            launchp.write('<include><name>'+object+'</name><pose>'+str(x)+' '+str(y)+' 0.5 0 0 '+str(yaw)+'</pose><uri>model://'+object[:-2]+'</uri><plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>'+str(df['class_id'][object[:-2]])+'</label></plugin><static>false</static></include>')
+            launchp.write('<include><name>'+object+'</name><pose>'+str(x)+' '+str(y)+' 0.1 0 0 '+str(yaw)+'</pose><uri>model://'+object[:-2]+'</uri><plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>'+str(df['class_id'][object[:-2]])+'</label></plugin><static>false</static><plugin filename="gz-sim-pose-publisher-system" name="gz::sim::systems::PosePublisher"><publish_link_pose>false</publish_link_pose><publish_collision_pose>false</publish_collision_pose><publish_visual_pose>false</publish_visual_pose><publish_nested_model_pose>true</publish_nested_model_pose><use_pose_vector_msg>true</use_pose_vector_msg><static_update_frequency>10</static_update_frequency></plugin></include>')
 
-        #with open(os.path.join(launch_path, 'launcher_tmpl.ign'), 'a') as launchp:
-        #    launchp.write('<spawn><name>'+object+'</name><allow_renaming>true</allow_renaming><pose>'+str(x)+' '+str(y)+' 0.5 0 0 '+str(yaw)+'</pose><sdf version="1.6"><include><uri>model://'+object[:-2]+'</uri><static>false</static></include></sdf></spawn>')
+        group = GroupAction(
+            [
+                #Execute bridge node
+                PushRosNamespace(
+                    namespace=object),
+
+                Node(
+                    package='ros_gz_bridge',
+                    executable='parameter_bridge',
+                    output='screen',
+                    arguments=[
+                        '/model/'+object+'/pose@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
+                        '/'+object+'/depth_camera@sensor_msgs/msg/Image[gz.msgs.Image',
+                        '/'+object+'/panoptic/colored_map@sensor_msgs/msg/Image[gz.msgs.Image'
+                        ],
+                    parameters=[{'use_sim_time': True}],
+                    remappings=[('/model/'+object+'/pose', '/tf')]),
+                    LogInfo(condition=IfCondition(log_settings), msg=["Launching ", object]),
+            ]
+        )    
+        model_o_instances_cmds.append(group)
+
     ## Save data frame in CSV format
     df.to_csv(launch_path+'/data_frame_dict.csv', index=True)
     ## Add camera sensors and close world file and create launch_cmd
     camera_sdf = os.path.join(launch_path, 'camera_tmpl.sdf')
     with open(camera_sdf) as f:
         cam_xml = f.read()
-
-    cam_xml = cam_xml.replace('<pose>0 0 2 0 -0.523599 0</pose>', '<pose>'+str(cam_x)+' '+str(cam_y)+' '+str(launch_params['camera']['z'])+' 0 '+str(launch_params['camera']['pitch'])+' '+str(cam_yaw)+'</pose>')
+    cam_z = float(launch_params['camera']['z'])-0.03585
+    cam_xml = cam_xml.replace('<pose>0 0 2 0 -0.523599 0</pose>', '<pose>'+str(cam_x)+' '+str(cam_y)+' '+str(cam_z)+' 0 '+str(launch_params['camera']['pitch'])+' '+str(cam_yaw)+'</pose>')
     
     if launch_params['camera']['instance_seg'] == true:
         cam_xml = cam_xml.replace('<!--instance','')
         cam_xml = cam_xml.replace('instance-->','')
-        cam_xml = cam_xml.replace('segmentation_data/instance_camera',  str(launch_params['camera']['save_path'])+'/segmentation_data/instance_camera')
+        cam_xml = cam_xml.replace('segmentation_data/instance_camera',  str(launch_params['camera']['save_path'])+'/'+str(run_number)+'/segmentation_data/instance_camera')
 
     if launch_params['camera']['semantic_seg'] == true:
         cam_xml = cam_xml.replace('<!--semantic','')
         cam_xml = cam_xml.replace('semantic-->','')
-        cam_xml = cam_xml.replace('segmentation_data/semantic_camera',  str(launch_params['camera']['save_path'])+'/segmentation_data/semantic_camera')
+        cam_xml = cam_xml.replace('segmentation_data/semantic_camera',  str(launch_params['camera']['save_path'])+'/'+str(run_number)+'/segmentation_data/semantic_camera')
 
     if launch_params['camera']['bb2d_vis'] == true:
         cam_xml = cam_xml.replace('<!--vis','')
         cam_xml = cam_xml.replace('vis-->','')
-        cam_xml = cam_xml.replace('bounding_box_visible_2d_data',  str(launch_params['camera']['save_path'])+'/bounding_box_visible_2d_data')
+        cam_xml = cam_xml.replace('bounding_box_visible_2d_data',  str(launch_params['camera']['save_path'])+'/'+str(run_number)+'/bounding_box_visible_2d_data')
 
     if launch_params['camera']['bb2d_full'] == true:
         cam_xml = cam_xml.replace('<!--full','')
         cam_xml = cam_xml.replace('full-->','')
-        cam_xml = cam_xml.replace('bounding_box_full_2d_data',  str(launch_params['camera']['save_path'])+'/bounding_box_full_2d_data')
+        cam_xml = cam_xml.replace('bounding_box_full_2d_data',  str(launch_params['camera']['save_path'])+'/'+str(run_number)+'/bounding_box_full_2d_data')
 
     if launch_params['camera']['bb3d'] == true:
         cam_xml = cam_xml.replace('<!--3d','')
         cam_xml = cam_xml.replace('3d-->','')
-        cam_xml = cam_xml.replace('bounding_box_3d_data',  str(launch_params['camera']['save_path'])+'/bounding_box_3d_data')
+        cam_xml = cam_xml.replace('bounding_box_3d_data',  str(launch_params['camera']['save_path'])+'/'+str(run_number)+'/bounding_box_3d_data')
 
     if launch_params['camera']['save_depth'] == true:
         cam_xml = cam_xml.replace('<!--depth','')
         cam_xml = cam_xml.replace('depth-->','')
-        cam_xml = cam_xml.replace('depth_data', str(launch_params['camera']['save_path'])+'/depth_data')
+        cam_xml = cam_xml.replace('depth_data', str(launch_params['camera']['save_path'])+'/'+str(run_number)+'/depth_data')
+
+    if launch_params['camera']['save_lidar'] == true:
+        cam_xml = cam_xml.replace('<!--lidar','')
+        cam_xml = cam_xml.replace('lidar-->','')
 
     with open(world, 'a') as launchp:
             launchp.write(cam_xml)
-    ##Close launch file and create launch_cmd
-    #with open(os.path.join(launch_path, 'launcher_tmpl.ign'), 'a') as launchp:
-    #    launchp.write('</plugin></gz>')
-
-    
 
     cam_pose_pub_cmd = ExecuteProcess(
         #cmd=['ros2', 'topic', 'pub', '/camera_pose', 'geometry_msgs/msg/Pose', '\'{position: {x: '+str(cam_x)+',y: '+str(cam_y)+'}, orientation: {x: '+str(qx)+', y: '+str(qy)+', z: '+str(qz)+', w: '+str(qw)+'}}\'', '-1'],
@@ -1059,12 +1120,8 @@ def generate_launch_description():
     launch_world_cmd = ExecuteProcess(
         #cmd=['gz', 'launch', 'depot_world.gzlaunch'],
         cmd=['gz', 'sim', 'depot_empty.sdf', '-r', '-s', '--iterations', str(launch_params['sim_iterations_per_run'])],
+        #cmd=['gz', 'sim', 'depot_empty.sdf', '-r', '--iterations', str(launch_params['sim_iterations_per_run'])],
         output='screen')
-
-
-    #launch_cmd = ExecuteProcess(
-    #    cmd=['ign', 'launch', 'launcher_tmpl.ign'],
-    #    output='screen')
 
     # Create the launch description and populate
     ld = LaunchDescription()
@@ -1086,6 +1143,7 @@ def generate_launch_description():
                     filter_mask_server_cmd,
                     costmap_filter_info_server_cmd,
                     map_restricter_cmd,
+                    aux_data_saver_cmd,
                     clock_bridge_cmd,
                     #cam_pose_pub_cmd,
                 ]
@@ -1118,6 +1176,19 @@ def generate_launch_description():
 
         )
 
+    for simulation_o_instance_cmd in model_o_instances_cmds:
+        ld.add_action(RegisterEventHandler(
+            OnProcessStart(
+                target_action=clock_bridge_cmd,
+                on_start=[
+                        simulation_o_instance_cmd
+
+                    ]
+            )
+        )
+
+        )
+
     ld.add_action(
         RegisterEventHandler(
             OnProcessExit(
@@ -1129,26 +1200,5 @@ def generate_launch_description():
             )
         ),
     )
-#
-#    ld.add_action(lyfe_cycle_cmd)
-#    #ld.add_action(lyfe_cycle_cmd_2)
-#
-#    ld.add_action(map_server_cmd)
-#    ld.add_action(filter_mask_server_cmd)
-#    ld.add_action(costmap_filter_info_server_cmd)
-#    ld.add_action(map_restricter_cmd)
-#    
-#    #ld.add_action(launch_cmd)
-#    ld.add_action(clock_bridge_cmd)
-#
-#    for simulation_instance_cmd in model_instances_cmds:
-#        ld.add_action(simulation_instance_cmd)
-#
-#    for simulation_a_instance_cmd in model_a_instances_cmds:
-#        ld.add_action(simulation_a_instance_cmd)
-    # show the image, provide window name first
-    #cv2.imshow('image window', grid_map)
-    # add wait key. window waits until user presses a key
-    #cv2.waitKey(0)
-    #
+
     return ld

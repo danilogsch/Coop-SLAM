@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <sdf version="1.7">
   <actor name="MaleVisitor">
+  <pose>2 1 1 0 0 3.14</pose>
     <skin>
       <filename>meshes/MaleVisitorWalk.dae</filename>
       <scale>1.0</scale>
@@ -27,3 +28,4 @@
     </script>
   </actor>
 </sdf>
+

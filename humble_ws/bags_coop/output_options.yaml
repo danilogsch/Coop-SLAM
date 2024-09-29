@@ -1,0 +1,5 @@
+output_bags:
+- uri: merged_bag_2_tf
+  all: false
+  topics: [/tf]
+  max_bagfile_duration: 10

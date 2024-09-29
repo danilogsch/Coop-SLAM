@@ -31,6 +31,7 @@ setup(
     entry_points={
         'console_scripts': [
                 'map_restricter = datagen_scripts.map_restricter:main',
+                'aux_data_saver = datagen_scripts.aux_data_saver:main',
                 'moveit2 = datagen_scripts.moveit2:main',
                 'test_pose_goal = datagen_scripts.test_pose_goal:main',
                 'test_pose_goal_5 = datagen_scripts.test_pose_goal_5:main',

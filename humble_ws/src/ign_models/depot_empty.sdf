@@ -28,159 +28,7 @@
       <render_engine>ogre2</render_engine>
     </plugin>
     
-        <gui fullscreen="0">
-
-      <!-- 3D scene -->
-      <plugin filename="MinimalScene" name="3D View">
-        <gz-gui>
-          <title>3D View</title>
-          <property type="bool" key="showTitleBar">false</property>
-          <property type="string" key="state">docked</property>
-        </gz-gui>
-
-        <engine>ogre2</engine>
-        <scene>scene</scene>
-        <ambient_light>1.0 1.0 1.0</ambient_light>
-        <background_color>0.8 0.8 0.8</background_color>
-        <camera_pose>-6 0 6 0 0.5 0</camera_pose>
-      </plugin>
-
-      <!-- Plugins that add functionality to the scene -->
-      <plugin filename="EntityContextMenuPlugin" name="Entity context menu">
-        <gz-gui>
-          <property key="state" type="string">floating</property>
-          <property key="width" type="double">5</property>
-          <property key="height" type="double">5</property>
-          <property key="showTitleBar" type="bool">false</property>
-        </gz-gui>
-      </plugin>
-      <plugin filename="GzSceneManager" name="Scene Manager">
-        <gz-gui>
-          <property key="resizable" type="bool">false</property>
-          <property key="width" type="double">5</property>
-          <property key="height" type="double">5</property>
-          <property key="state" type="string">floating</property>
-          <property key="showTitleBar" type="bool">false</property>
-        </gz-gui>
-      </plugin>
-      <plugin filename="InteractiveViewControl" name="Interactive view control">
-        <gz-gui>
-          <property key="resizable" type="bool">false</property>
-          <property key="width" type="double">5</property>
-          <property key="height" type="double">5</property>
-          <property key="state" type="string">floating</property>
-          <property key="showTitleBar" type="bool">false</property>
-        </gz-gui>
-      </plugin>
-      <plugin filename="CameraTracking" name="Camera Tracking">
-        <gz-gui>
-          <property key="resizable" type="bool">false</property>
-          <property key="width" type="double">5</property>
-          <property key="height" type="double">5</property>
-          <property key="state" type="string">floating</property>
-          <property key="showTitleBar" type="bool">false</property>
-        </gz-gui>
-      </plugin>
-      <!-- World control -->
-      <plugin filename="WorldControl" name="World control">
-        <gz-gui>
-          <title>World control</title>
-          <property type="bool" key="showTitleBar">false</property>
-          <property type="bool" key="resizable">false</property>
-          <property type="double" key="height">72</property>
-          <property type="double" key="width">121</property>
-          <property type="double" key="z">1</property>
-
-          <property type="string" key="state">floating</property>
-          <anchors target="3D View">
-            <line own="left" target="left"/>
-            <line own="bottom" target="bottom"/>
-          </anchors>
-        </gz-gui>
-
-        <play_pause>true</play_pause>
-        <step>true</step>
-        <start_paused>true</start_paused>
-        <use_event>true</use_event>
-
-      </plugin>
-
-      <!-- World statistics -->
-      <plugin filename="WorldStats" name="World stats">
-        <gz-gui>
-          <title>World stats</title>
-          <property type="bool" key="showTitleBar">false</property>
-          <property type="bool" key="resizable">false</property>
-          <property type="double" key="height">110</property>
-          <property type="double" key="width">290</property>
-          <property type="double" key="z">1</property>
-
-          <property type="string" key="state">floating</property>
-          <anchors target="3D View">
-            <line own="right" target="right"/>
-            <line own="bottom" target="bottom"/>
-          </anchors>
-        </gz-gui>
-
-        <sim_time>true</sim_time>
-        <real_time>true</real_time>
-        <real_time_factor>true</real_time_factor>
-        <iterations>true</iterations>
-      </plugin>
-
-      <plugin filename="ImageDisplay" name="Full 2D">
-        <topic>boxes_full_2d_image</topic>
-        <gz-gui>
-          <title>Full 2D</title>
-          <property key="state" type="string">docked</property>
-          <property type="double" key="height">400</property>
-          <property type="double" key="width">600</property>
-        </gz-gui>
-      </plugin>
-
-      <plugin filename="ImageDisplay" name="Visible 2D">
-        <topic>boxes_visible_2d_image</topic>
-        <gz-gui>
-          <title>Visible 2D</title>
-          <property key="state" type="string">docked</property>
-          <property type="double" key="height">400</property>
-          <property type="double" key="width">600</property>
-        </gz-gui>
-      </plugin>
-
-      <plugin filename="ImageDisplay" name="3D">
-        <topic>boxes_3d_image</topic>
-        <gz-gui>
-          <title>3D</title>
-          <property key="state" type="string">docked</property>
-          <property type="double" key="height">400</property>
-          <property type="double" key="width">600</property>
-        </gz-gui>
-      </plugin>
-      
-      <plugin filename="ImageDisplay" name="Image Display">
-        <gz-gui>
-        </gz-gui>
-        <topic>semantic/colored_map</topic>
-      </plugin>
-      <plugin filename="ImageDisplay" name="Image Display">
-        <gz-gui>
-        </gz-gui>
-        <topic>panoptic/colored_map</topic>
-      </plugin>
-      <plugin filename="ImageDisplay" name="Image Display">
-        <gz-gui>
-        </gz-gui>
-        <topic>semantic/labels_map</topic>
-      </plugin>      
-      <plugin filename="ImageDisplay" name="Image Display">
-        <gz-gui>
-        </gz-gui>
-        <topic>depth_camera</topic>
-      </plugin>
-
-    </gui>
-
+        
 
     <!--light type="directional" name="sun">
       <cast_shadows>true</cast_shadows>
@@ -229,1337 +77,83 @@
         <uri>model://depot_config_1</uri>
     </include>
     
+    
+    <include><name>OfficeChairBlue_0</name><pose>-3.118 -1.4279 0.1 0 0 0.0888</pose><uri>model://OfficeChairBlue</uri><plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>31</label></plugin><static>false</static><plugin filename="gz-sim-pose-publisher-system" name="gz::sim::systems::PosePublisher"><publish_link_pose>false</publish_link_pose><publish_collision_pose>false</publish_collision_pose><publish_visual_pose>false</publish_visual_pose><publish_nested_model_pose>true</publish_nested_model_pose><use_pose_vector_msg>true</use_pose_vector_msg><static_update_frequency>10</static_update_frequency></plugin></include>
+    <include><name>OfficeChairGrey_0</name><pose>-5.118 -2.4279 0.1 0 0 0.0888</pose><uri>model://OfficeChairGrey</uri><plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>31</label></plugin><static>false</static><plugin filename="gz-sim-pose-publisher-system" name="gz::sim::systems::PosePublisher"><publish_link_pose>false</publish_link_pose><publish_collision_pose>false</publish_collision_pose><publish_visual_pose>false</publish_visual_pose><publish_nested_model_pose>true</publish_nested_model_pose><use_pose_vector_msg>true</use_pose_vector_msg><static_update_frequency>10</static_update_frequency></plugin></include>
 
     
 
 
-
-  <model name="pioneer3at_0">
-    <pose>-2.7217 4.5407 0.3 0 0 0.4678</pose>
-    <static>false</static>
-    <link name="base_footprint">
-      <pose>0 0 0.180 0 0 0</pose>
-      <inertial>
-        <mass>3.5101100000000001</mass>
-        <inertia>
-          <ixx>0.147116667</ixx>
-          <ixy>0.0</ixy>
-          <ixz>0.0</ixz>
-          <iyy>0.334951167</iyy>
-          <iyz>0.0</iyz>
-          <izz>0.3978345</izz>
-        </inertia>
-      </inertial>
-      <collision name="collision">
-        <geometry>
-          <box>
-            <size>0.501 0.300 0.19</size>
-          </box>
-        </geometry>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>model://pioneer3at/meshes/chassis.dae</uri>
-          </mesh>
-        </geometry>
-      </visual>
-      <visual name="kinect_visual">
-        <pose>0 0 0.245 0 0 0</pose>
-        <geometry>
-          <mesh>
-            <uri>model://pioneer3at/meshes/kinect.dae</uri>
-          </mesh>
-        </geometry>
-      </visual>
-      <visual name="box_visual">
-        <pose>-0.03 0 0.145 0 0 0</pose>
-        <geometry>
-          <box>
-            <size>0.1 0.1 0.1</size>
-          </box>
-        </geometry>
-        <material>
-            <ambient>0.1 0.1 1.0 1</ambient>
-            <diffuse>0.1 0.1 1.0 1</diffuse>
-            <specular>0.0 0.0 1.0 1</specular>
-          </material>
-      </visual>
-      <sensor name="pioneer3at_0_front_laser_sensor" type="gpu_lidar">
-        <pose>0 0 0.20 0 0 0</pose>
-        <ignition_frame_id>pioneer3at_0/front_laser_link</ignition_frame_id> 
-        <topic>/pioneer3at_0/front_laser</topic>
-        <update_rate>20</update_rate>
-        <lidar>
-            <scan>
-                <horizontal>
-                    <samples>541</samples>
-                    <resolution>1</resolution>
-                    <min_angle>-3.1415926535897932</min_angle>
-                    <max_angle>3.1415926535897932</max_angle>
-                </horizontal>
-            </scan>
-            <range>
-                <min>0.1</min>
-                <max>15.0</max>
-                <resolution>0.03</resolution>
-            </range>
-            <!--noise>
-                <type>gaussian</type>
-                <mean>0.0</mean>
-                <stddev>0.03</stddev>
-            </noise-->
-        </lidar>
-        <always_on>1</always_on>
-        <visualize>0</visualize>
-      </sensor>
-    </link>
-    <link name="right_front_wheel">
-      <pose relative_to="right_front">0 0 0 1.570796326794896 0 0</pose>
-
-      <inertial>
-        <mass>0.51000000000000001</mass>
-        <inertia>
-          <ixx>0.005240625</ixx>
-          <iyy>0.005240625</iyy>
-          <izz>0.009075</izz>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyz>0</iyz>
-        </inertia>
-      </inertial>
-
-      <collision name="collision">
-        <geometry>
-          <cylinder>
-            <radius>0.110</radius>
-            <length>0.075</length>
-          </cylinder>
-        </geometry>
-        <surface>
-            <friction>
-              <ode>
-                <mu>0.5</mu>
-                <mu2>1.0</mu2>
-                <fdir1>0 0 1</fdir1>
-              </ode>
-            </friction>
-          </surface>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>model://pioneer3at/meshes/wheel.dae</uri>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-    <link name="left_front_wheel">
-      <pose relative_to="left_front">0 0 0 1.570796326794896 0 0</pose>
-
-      <inertial>
-        <mass>0.51000000000000001</mass>
-        <inertia>
-          <ixx>0.005240625</ixx>
-          <iyy>0.005240625</iyy>
-          <izz>0.009075</izz>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyz>0</iyz>
-        </inertia>
-      </inertial>
-
-      <collision name="collision">
-        <geometry>
-          <cylinder>
-            <radius>0.110</radius>
-            <length>0.075</length>
-          </cylinder>
-        </geometry>
-        <surface>
-            <friction>
-              <ode>
-                <mu>0.5</mu>
-                <mu2>1.0</mu2>
-                <fdir1>0 0 1</fdir1>
-              </ode>
-            </friction>
-          </surface>
-      </collision>
-      <visual name="visual">
-
-        <geometry>
-          <mesh>
-            <uri>model://pioneer3at/meshes/wheel.dae</uri>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-    <link name="right_rear_wheel">
-      <pose relative_to="right_rear">0 0 0 1.570796326794896 0 0</pose>
-
-      <inertial>
-        <mass>0.51000000000000001</mass>
-        <inertia>
-          <ixx>0.005240625</ixx>
-          <iyy>0.005240625</iyy>
-          <izz>0.009075</izz>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyz>0</iyz>
-        </inertia>
-      </inertial>
-
-      <collision name="collision">
-
-        <geometry>
-          <cylinder>
-            <radius>0.110</radius>
-            <length>0.075</length>
-          </cylinder>
-        </geometry>
-        <surface>
-            <friction>
-              <ode>
-                <mu>0.5</mu>
-                <mu2>1.0</mu2>
-                <fdir1>0 0 1</fdir1>
-              </ode>
-            </friction>
-          </surface>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>model://pioneer3at/meshes/wheel.dae</uri>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-    <link name="left_rear_wheel">
-      <pose relative_to="left_rear">0 0 0 1.570796326794896 0 0</pose>
-
-      <inertial>
-        <mass>0.51000000000000001</mass>
-        <inertia>
-          <ixx>0.005240625</ixx>
-          <iyy>0.005240625</iyy>
-          <izz>0.009075</izz>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyz>0</iyz>
-        </inertia>
-      </inertial>
-
-      <collision name="collision">
-
-        <geometry>
-          <cylinder>
-            <radius>0.110</radius>
-            <length>0.075</length>
-          </cylinder>
-        </geometry>
-        <surface>
-            <friction>
-              <ode>
-                <mu>0.5</mu>
-                <mu2>1.0</mu2>
-                <fdir1>0 0 1</fdir1>
-              </ode>
-            </friction>
-          </surface>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>model://pioneer3at/meshes/wheel.dae</uri>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-    <joint type="revolute" name="right_front">
-      <pose relative_to="base_footprint">0.125 -0.201 -0.06 0 0 0</pose>
-      <child>right_front_wheel</child>
-      <parent>base_footprint</parent>
-      <axis>
-        <xyz>0 1 0</xyz>
-        <limit>
-          <effort>100</effort>
-          <velocity>100</velocity>
-          <lower>-10000000000000000</lower>
-          <upper>10000000000000000</upper>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-      </axis>
-    </joint>
-    <joint type="revolute" name="right_rear">
-      <pose relative_to="base_footprint">-0.125 -0.201 -0.06 0 0 0</pose>
-      <child>right_rear_wheel</child>
-      <parent>base_footprint</parent>
-      <axis>
-        <xyz>0 1 0</xyz>
-        <limit>
-          <effort>100</effort>
-          <velocity>100</velocity>
-          <lower>-10000000000000000</lower>
-          <upper>10000000000000000</upper>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-      </axis>
-    </joint>
-    <joint type="revolute" name="left_front">
-      <pose relative_to="base_footprint">0.125 0.201 -0.06 0 0 0</pose>
-      <child>left_front_wheel</child>
-      <parent>base_footprint</parent>
-      <axis>
-        <xyz>0 1 0</xyz>
-        <limit>
-          <effort>100</effort>
-          <velocity>100</velocity>
-          <lower>-10000000000000000</lower>
-          <upper>10000000000000000</upper>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-      </axis>
-    </joint>
-    <joint type="revolute" name="left_rear">
-      <pose relative_to="base_footprint">-0.125 0.201 -0.06 0 0 0</pose>
-      <child>left_rear_wheel</child>
-      <parent>base_footprint</parent>
-      <axis>
-        <xyz>0 1 0</xyz>
-        <limit>
-          <effort>100</effort>
-          <velocity>100</velocity>
-          <lower>-10000000000000000</lower>
-          <upper>10000000000000000</upper>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-      </axis>
-    </joint>
-    <plugin
-        filename="ignition-gazebo-diff-drive-system"
-        name="ignition::gazebo::systems::DiffDrive">
-        <left_joint>left_front</left_joint>
-        <left_joint>left_rear</left_joint>
-        <right_joint>right_front</right_joint>
-        <right_joint>right_rear</right_joint>
-        <wheel_separation>0.402</wheel_separation>
-        <wheel_radius>0.110</wheel_radius>
-        <odom_publish_frequency>20</odom_publish_frequency>
-        <max_linear_acceleration>2.5</max_linear_acceleration>
-        <min_linear_acceleration>-2.5</min_linear_acceleration>
-        <max_angular_acceleration>3.2</max_angular_acceleration>
-        <min_angular_acceleration>-3.2</min_angular_acceleration>
-        <max_linear_velocity>0.5</max_linear_velocity>
-        <min_linear_velocity>-0.5</min_linear_velocity>
-        <max_angular_velocity>1</max_angular_velocity>
-        <min_angular_velocity>-1</min_angular_velocity>
-        <topic>pioneer3at_0/cmd_vel</topic>
-      	<odom_topic>pioneer3at_0/odom</odom_topic>
-      	<tf_topic>pioneer3at_0/tf</tf_topic>
-      	<frame_id>pioneer3at_0/odom</frame_id>
-        <child_frame_id>pioneer3at_0/base_footprint</child_frame_id>
-      </plugin>
-  <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>10</label></plugin></model>
-
-
-  <model name="pioneer3at_1">
-    <pose>-5.9993 -0.4002 0.3 0 0 -1.0357</pose>
-    <static>false</static>
-    <link name="base_footprint">
-      <pose>0 0 0.180 0 0 0</pose>
-      <inertial>
-        <mass>3.5101100000000001</mass>
-        <inertia>
-          <ixx>0.147116667</ixx>
-          <ixy>0.0</ixy>
-          <ixz>0.0</ixz>
-          <iyy>0.334951167</iyy>
-          <iyz>0.0</iyz>
-          <izz>0.3978345</izz>
-        </inertia>
-      </inertial>
-      <collision name="collision">
-        <geometry>
-          <box>
-            <size>0.501 0.300 0.19</size>
-          </box>
-        </geometry>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>model://pioneer3at/meshes/chassis.dae</uri>
-          </mesh>
-        </geometry>
-      </visual>
-      <visual name="kinect_visual">
-        <pose>0 0 0.245 0 0 0</pose>
-        <geometry>
-          <mesh>
-            <uri>model://pioneer3at/meshes/kinect.dae</uri>
-          </mesh>
-        </geometry>
-      </visual>
-      <visual name="box_visual">
-        <pose>-0.03 0 0.145 0 0 0</pose>
-        <geometry>
-          <box>
-            <size>0.1 0.1 0.1</size>
-          </box>
-        </geometry>
-        <material>
-            <ambient>0.1 0.1 1.0 1</ambient>
-            <diffuse>0.1 0.1 1.0 1</diffuse>
-            <specular>0.0 0.0 1.0 1</specular>
-          </material>
-      </visual>
-      <sensor name="pioneer3at_1_front_laser_sensor" type="gpu_lidar">
-        <pose>0 0 0.20 0 0 0</pose>
-        <ignition_frame_id>pioneer3at_1/front_laser_link</ignition_frame_id> 
-        <topic>/pioneer3at_1/front_laser</topic>
-        <update_rate>20</update_rate>
-        <lidar>
-            <scan>
-                <horizontal>
-                    <samples>541</samples>
-                    <resolution>1</resolution>
-                    <min_angle>-3.1415926535897932</min_angle>
-                    <max_angle>3.1415926535897932</max_angle>
-                </horizontal>
-            </scan>
-            <range>
-                <min>0.1</min>
-                <max>15.0</max>
-                <resolution>0.03</resolution>
-            </range>
-            <!--noise>
-                <type>gaussian</type>
-                <mean>0.0</mean>
-                <stddev>0.03</stddev>
-            </noise-->
-        </lidar>
-        <always_on>1</always_on>
-        <visualize>0</visualize>
-      </sensor>
-    </link>
-    <link name="right_front_wheel">
-      <pose relative_to="right_front">0 0 0 1.570796326794896 0 0</pose>
-
-      <inertial>
-        <mass>0.51000000000000001</mass>
-        <inertia>
-          <ixx>0.005240625</ixx>
-          <iyy>0.005240625</iyy>
-          <izz>0.009075</izz>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyz>0</iyz>
-        </inertia>
-      </inertial>
-
-      <collision name="collision">
-        <geometry>
-          <cylinder>
-            <radius>0.110</radius>
-            <length>0.075</length>
-          </cylinder>
-        </geometry>
-        <surface>
-            <friction>
-              <ode>
-                <mu>0.5</mu>
-                <mu2>1.0</mu2>
-                <fdir1>0 0 1</fdir1>
-              </ode>
-            </friction>
-          </surface>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>model://pioneer3at/meshes/wheel.dae</uri>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-    <link name="left_front_wheel">
-      <pose relative_to="left_front">0 0 0 1.570796326794896 0 0</pose>
-
-      <inertial>
-        <mass>0.51000000000000001</mass>
-        <inertia>
-          <ixx>0.005240625</ixx>
-          <iyy>0.005240625</iyy>
-          <izz>0.009075</izz>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyz>0</iyz>
-        </inertia>
-      </inertial>
-
-      <collision name="collision">
-        <geometry>
-          <cylinder>
-            <radius>0.110</radius>
-            <length>0.075</length>
-          </cylinder>
-        </geometry>
-        <surface>
-            <friction>
-              <ode>
-                <mu>0.5</mu>
-                <mu2>1.0</mu2>
-                <fdir1>0 0 1</fdir1>
-              </ode>
-            </friction>
-          </surface>
-      </collision>
-      <visual name="visual">
-
-        <geometry>
-          <mesh>
-            <uri>model://pioneer3at/meshes/wheel.dae</uri>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-    <link name="right_rear_wheel">
-      <pose relative_to="right_rear">0 0 0 1.570796326794896 0 0</pose>
-
-      <inertial>
-        <mass>0.51000000000000001</mass>
-        <inertia>
-          <ixx>0.005240625</ixx>
-          <iyy>0.005240625</iyy>
-          <izz>0.009075</izz>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyz>0</iyz>
-        </inertia>
-      </inertial>
-
-      <collision name="collision">
-
-        <geometry>
-          <cylinder>
-            <radius>0.110</radius>
-            <length>0.075</length>
-          </cylinder>
-        </geometry>
-        <surface>
-            <friction>
-              <ode>
-                <mu>0.5</mu>
-                <mu2>1.0</mu2>
-                <fdir1>0 0 1</fdir1>
-              </ode>
-            </friction>
-          </surface>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>model://pioneer3at/meshes/wheel.dae</uri>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-    <link name="left_rear_wheel">
-      <pose relative_to="left_rear">0 0 0 1.570796326794896 0 0</pose>
-
-      <inertial>
-        <mass>0.51000000000000001</mass>
-        <inertia>
-          <ixx>0.005240625</ixx>
-          <iyy>0.005240625</iyy>
-          <izz>0.009075</izz>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyz>0</iyz>
-        </inertia>
-      </inertial>
-
-      <collision name="collision">
-
-        <geometry>
-          <cylinder>
-            <radius>0.110</radius>
-            <length>0.075</length>
-          </cylinder>
-        </geometry>
-        <surface>
-            <friction>
-              <ode>
-                <mu>0.5</mu>
-                <mu2>1.0</mu2>
-                <fdir1>0 0 1</fdir1>
-              </ode>
-            </friction>
-          </surface>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>model://pioneer3at/meshes/wheel.dae</uri>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-    <joint type="revolute" name="right_front">
-      <pose relative_to="base_footprint">0.125 -0.201 -0.06 0 0 0</pose>
-      <child>right_front_wheel</child>
-      <parent>base_footprint</parent>
-      <axis>
-        <xyz>0 1 0</xyz>
-        <limit>
-          <effort>100</effort>
-          <velocity>100</velocity>
-          <lower>-10000000000000000</lower>
-          <upper>10000000000000000</upper>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-      </axis>
-    </joint>
-    <joint type="revolute" name="right_rear">
-      <pose relative_to="base_footprint">-0.125 -0.201 -0.06 0 0 0</pose>
-      <child>right_rear_wheel</child>
-      <parent>base_footprint</parent>
-      <axis>
-        <xyz>0 1 0</xyz>
-        <limit>
-          <effort>100</effort>
-          <velocity>100</velocity>
-          <lower>-10000000000000000</lower>
-          <upper>10000000000000000</upper>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-      </axis>
-    </joint>
-    <joint type="revolute" name="left_front">
-      <pose relative_to="base_footprint">0.125 0.201 -0.06 0 0 0</pose>
-      <child>left_front_wheel</child>
-      <parent>base_footprint</parent>
-      <axis>
-        <xyz>0 1 0</xyz>
-        <limit>
-          <effort>100</effort>
-          <velocity>100</velocity>
-          <lower>-10000000000000000</lower>
-          <upper>10000000000000000</upper>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-      </axis>
-    </joint>
-    <joint type="revolute" name="left_rear">
-      <pose relative_to="base_footprint">-0.125 0.201 -0.06 0 0 0</pose>
-      <child>left_rear_wheel</child>
-      <parent>base_footprint</parent>
-      <axis>
-        <xyz>0 1 0</xyz>
-        <limit>
-          <effort>100</effort>
-          <velocity>100</velocity>
-          <lower>-10000000000000000</lower>
-          <upper>10000000000000000</upper>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-      </axis>
-    </joint>
-    <plugin
-        filename="ignition-gazebo-diff-drive-system"
-        name="ignition::gazebo::systems::DiffDrive">
-        <left_joint>left_front</left_joint>
-        <left_joint>left_rear</left_joint>
-        <right_joint>right_front</right_joint>
-        <right_joint>right_rear</right_joint>
-        <wheel_separation>0.402</wheel_separation>
-        <wheel_radius>0.110</wheel_radius>
-        <odom_publish_frequency>20</odom_publish_frequency>
-        <max_linear_acceleration>2.5</max_linear_acceleration>
-        <min_linear_acceleration>-2.5</min_linear_acceleration>
-        <max_angular_acceleration>3.2</max_angular_acceleration>
-        <min_angular_acceleration>-3.2</min_angular_acceleration>
-        <max_linear_velocity>0.5</max_linear_velocity>
-        <min_linear_velocity>-0.5</min_linear_velocity>
-        <max_angular_velocity>1</max_angular_velocity>
-        <min_angular_velocity>-1</min_angular_velocity>
-        <topic>pioneer3at_1/cmd_vel</topic>
-      	<odom_topic>pioneer3at_1/odom</odom_topic>
-      	<tf_topic>pioneer3at_1/tf</tf_topic>
-      	<frame_id>pioneer3at_1/odom</frame_id>
-        <child_frame_id>pioneer3at_1/base_footprint</child_frame_id>
-      </plugin>
-  <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>10</label></plugin></model>
-
-
-
-      <model name='human_vehicle_0'>
-      <pose>-3.8812 1.0743 0.325 0 0 0.5519</pose>
-
-      <link name='base_footprint'>
-        <pose>0 -0 0.1 0 -0 0</pose>
-        <inertial>
-          <mass>1.14395</mass>
-          <inertia>
-            <ixx>0.126164</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.416519</iyy>
-            <iyz>0</iyz>
-            <izz>0.481014</izz>
-          </inertia>
-        </inertial>
-        <!--visual name='visual'>
-          <geometry>
-          <cylinder>
-          <radius>0.55</radius>
-          <length>0.250</length>
-          </cylinder>
-          </geometry>
-          <material>
-            <ambient>0.5 0.5 1.0 1</ambient>
-            <diffuse>0.5 0.5 1.0 1</diffuse>
-            <specular>0.0 0.0 1.0 1</specular>
-          </material>
-        </visual-->
-        <collision name='collision'>
-          <geometry>
-            <cylinder>
-          <radius>0.55</radius>
-          <length>0.150</length>
-          </cylinder>
-          </geometry>
-        </collision>
-      </link>
-
-      <link name='left_wheel'>
-        <pose>0.0 0.3 -0.075 -1.570707963267948966 0 0</pose>
-        <inertial>
-          <mass>2</mass>
-          <inertia>
-            <ixx>0.145833</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.145833</iyy>
-            <iyz>0</iyz>
-            <izz>0.125</izz>
-          </inertia>
-        </inertial>
-        <!--visual name='visual'>
-          <geometry>
-            <sphere>
-              <radius>0.15</radius>
-            </sphere>
-          </geometry>
-          <material>
-            <ambient>0.5 0.5 1.0 1</ambient>
-            <diffuse>0.5 0.5 1.0 1</diffuse>
-            <specular>0.0 0.0 1.0 1</specular>
-          </material>
-        </visual-->
-        <collision name='collision'>
-          <geometry>
-            <sphere>
-              <radius>0.15</radius>
-            </sphere>
-          </geometry>
-        </collision>
-      </link>
-
-      <link name='right_wheel'>
-        <pose>0.0 -0.3 -0.075 -1.570707963267948966 0 0</pose>
-        <inertial>
-          <mass>2</mass>
-          <inertia>
-            <ixx>0.145833</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.145833</iyy>
-            <iyz>0</iyz>
-            <izz>0.125</izz>
-          </inertia>
-        </inertial>
-        <!--visual name='visual'>
-          <geometry>
-            <sphere>
-              <radius>0.15</radius>
-            </sphere>
-          </geometry>
-          <material>
-            <ambient>0.5 0.5 1.0 1</ambient>
-            <diffuse>0.5 0.5 1.0 1</diffuse>
-            <specular>0.0 0.0 1.0 1</specular>
-          </material>
-          </visual-->
-        <collision name='collision'>
-          <geometry>
-            <sphere>
-              <radius>0.15</radius>
-            </sphere>
-          </geometry>
-        </collision>
-      </link>
-
-      <link name='caster'>
-        <pose>-0.357138 -0 -0.075 0 -0 0</pose>
-        <inertial>
-          <mass>1</mass>
-          <inertia>
-            <ixx>0.1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.1</iyy>
-            <iyz>0</iyz>
-            <izz>0.1</izz>
-          </inertia>
-        </inertial>
-        <!--visual name='visual'>
-          <geometry>
-            <sphere>
-              <radius>0.145</radius>
-            </sphere>
-          </geometry>
-          <material>
-            <ambient>0.5 0.5 1.0 1</ambient>
-            <diffuse>0.5 0.5 1.0 1</diffuse>
-            <specular>0.0 0.0 1.0 1</specular>
-          </material>
-          </visual-->
-        <collision name='collision'>
-          <geometry>
-            <sphere>
-              <radius>0.145</radius>
-            </sphere>
-          </geometry>
-        </collision>
-      </link>
-      
-      <link name='caster_front'>
-        <pose>0.357138 -0 -0.075 0 -0 0</pose>
-        <inertial>
-          <mass>1</mass>
-          <inertia>
-            <ixx>0.1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.1</iyy>
-            <iyz>0</iyz>
-            <izz>0.1</izz>
-          </inertia>
-        </inertial>
-        <!--visual name='visual'>
-          <geometry>
-            <sphere>
-              <radius>0.145</radius>
-            </sphere>
-          </geometry>
-          <material>
-            <ambient>0.5 0.5 1.0 1</ambient>
-            <diffuse>0.5 0.5 1.0 1</diffuse>
-            <specular>0.0 0.0 1.0 1</specular>
-          </material>
-          </visual-->
-        <collision name='collision'>
-          <geometry>
-            <sphere>
-              <radius>0.145</radius>
-            </sphere>
-          </geometry>
-        </collision>
-      </link>
-      
-      <joint name='front_laser_joint' type='fixed'>
-          <!--pose relative_to='base_footprint'>0.000 -0.0 0.25083 3.1415926535897932 0.000 0.000</pose-->
-          <pose relative_to='base_footprint'>0.000 -0.0 0.0 3.1415926535897932 0.000 0.000</pose>
-      	  <parent>base_footprint</parent>
-     	  <child>front_laser_link</child>
-      </joint>
-    
-      <link name="front_laser_link">
-      <pose relative_to='front_laser_joint'>0 0 0 0 0 0</pose>
-        <sensor name='human_vehicle_0_front_laser_sensor' type='gpu_lidar'>
-        <ignition_frame_id>human_vehicle_0/front_laser_link</ignition_frame_id> 
-        <topic>/human_vehicle_0/front_laser</topic>
-        <update_rate>20</update_rate>
-        <lidar>
-            <scan>
-                <horizontal>
-                    <samples>541</samples>
-                    <resolution>1</resolution>
-                    <min_angle>-3.1415926535897932</min_angle>
-                    <max_angle>3.1415926535897932</max_angle>
-                </horizontal>
-            </scan>
-            <range>
-                <min>0.56</min>
-                <max>15.0</max>
-                <resolution>0.03</resolution>
-            </range>
-            <!--noise>
-                <type>gaussian</type>
-                <mean>0.0</mean>
-                <stddev>0.03</stddev>
-            </noise-->
-        </lidar>
-        <always_on>1</always_on>
-        <visualize>0</visualize>
-      </sensor>  
-      
-      <!--visual name='visual'>
-          <geometry>
-            <sphere>
-              <radius>0.05</radius>
-            </sphere>
-          </geometry>
-          <material>
-            <ambient>0.5 0.5 1.0 1</ambient>
-            <diffuse>0.5 0.5 1.0 1</diffuse>
-            <specular>0.0 0.0 1.0 1</specular>
-          </material>
-          </visual-->
-      
-      </link>    
-
-      <joint name='left_wheel_joint' type='revolute'>
-        <parent>base_footprint</parent>
-        <child>left_wheel</child>
-        <axis>
-          <xyz>0 0 1</xyz>
-          <limit>
-            <lower>-1.79769e+308</lower>
-            <upper>1.79769e+308</upper>
-          </limit>
-        </axis>
-      </joint>
-
-      <joint name='right_wheel_joint' type='revolute'>
-        <parent>base_footprint</parent>
-        <child>right_wheel</child>
-        <axis>
-          <xyz>0 0 1</xyz>
-          <limit>
-            <lower>-1.79769e+308</lower>
-            <upper>1.79769e+308</upper>
-          </limit>
-        </axis>
-      </joint>
-
-      <joint name='caster_wheel' type='ball'>
-        <parent>base_footprint</parent>
-        <child>caster</child>
-      </joint>
-      
-      <joint name='caster_wheel_front' type='ball'>
-        <parent>base_footprint</parent>
-        <child>caster_front</child>
-      </joint>
-
-      <plugin
-        filename="ignition-gazebo-diff-drive-system"
-        name="ignition::gazebo::systems::DiffDrive">
-        <left_joint>left_wheel_joint</left_joint>
-        <right_joint>right_wheel_joint</right_joint>
-        <wheel_separation>0.6</wheel_separation>
-        <wheel_radius>0.15</wheel_radius>
-        <odom_publish_frequency>20</odom_publish_frequency>
-        <max_linear_acceleration>2.5</max_linear_acceleration>
-        <min_linear_acceleration>-2.5</min_linear_acceleration>
-        <max_angular_acceleration>3.2</max_angular_acceleration>
-        <min_angular_acceleration>-3.2</min_angular_acceleration>
-        <max_linear_velocity>0.5</max_linear_velocity>
-        <min_linear_velocity>-0.5</min_linear_velocity>
-        <max_angular_velocity>1</max_angular_velocity>
-        <min_angular_velocity>-1</min_angular_velocity>
-        <topic>human_vehicle_0/cmd_vel</topic>
-      	<odom_topic>human_vehicle_0/odom</odom_topic>
-      	<tf_topic>human_vehicle_0/tf</tf_topic>
-      	<frame_id>human_vehicle_0/odom</frame_id>
-        <child_frame_id>human_vehicle_0/base_footprint</child_frame_id>
-      </plugin>
-    </model>
-    
-    
-
-    
-    
-
-        <include>
-        <name>PatientRollingWalker_0</name>
-        <pose>-3.8812 1.0743 0 0 0 0</pose>
-        <uri>model://PatientRollingWalker</uri><plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>20</label></plugin>
-    	<plugin filename="ignition-gazebo-follow-actor-system"
-              name="ignition::gazebo::systems::FollowActor">
-        <target>human_vehicle_0</target>
-        <min_distance>0.1</min_distance>
-        <max_distance>15.0</max_distance>
-        <velocity>1</velocity>
-        <animation_x_vel>1.5</animation_x_vel>
-      	</plugin>
-        </include>
-
- 
-
-
-      <model name='human_vehicle_1'>
-      <pose>-2.0504 2.2743 0.325 0 0 -0.3747</pose>
-
-      <link name='base_footprint'>
-        <pose>0 -0 0.1 0 -0 0</pose>
-        <inertial>
-          <mass>1.14395</mass>
-          <inertia>
-            <ixx>0.126164</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.416519</iyy>
-            <iyz>0</iyz>
-            <izz>0.481014</izz>
-          </inertia>
-        </inertial>
-        <!--visual name='visual'>
-          <geometry>
-          <cylinder>
-          <radius>0.55</radius>
-          <length>0.250</length>
-          </cylinder>
-          </geometry>
-          <material>
-            <ambient>0.5 0.5 1.0 1</ambient>
-            <diffuse>0.5 0.5 1.0 1</diffuse>
-            <specular>0.0 0.0 1.0 1</specular>
-          </material>
-        </visual-->
-        <collision name='collision'>
-          <geometry>
-            <cylinder>
-          <radius>0.55</radius>
-          <length>0.150</length>
-          </cylinder>
-          </geometry>
-        </collision>
-      </link>
-
-      <link name='left_wheel'>
-        <pose>0.0 0.3 -0.075 -1.570707963267948966 0 0</pose>
-        <inertial>
-          <mass>2</mass>
-          <inertia>
-            <ixx>0.145833</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.145833</iyy>
-            <iyz>0</iyz>
-            <izz>0.125</izz>
-          </inertia>
-        </inertial>
-        <!--visual name='visual'>
-          <geometry>
-            <sphere>
-              <radius>0.15</radius>
-            </sphere>
-          </geometry>
-          <material>
-            <ambient>0.5 0.5 1.0 1</ambient>
-            <diffuse>0.5 0.5 1.0 1</diffuse>
-            <specular>0.0 0.0 1.0 1</specular>
-          </material>
-        </visual-->
-        <collision name='collision'>
-          <geometry>
-            <sphere>
-              <radius>0.15</radius>
-            </sphere>
-          </geometry>
-        </collision>
-      </link>
-
-      <link name='right_wheel'>
-        <pose>0.0 -0.3 -0.075 -1.570707963267948966 0 0</pose>
-        <inertial>
-          <mass>2</mass>
-          <inertia>
-            <ixx>0.145833</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.145833</iyy>
-            <iyz>0</iyz>
-            <izz>0.125</izz>
-          </inertia>
-        </inertial>
-        <!--visual name='visual'>
-          <geometry>
-            <sphere>
-              <radius>0.15</radius>
-            </sphere>
-          </geometry>
-          <material>
-            <ambient>0.5 0.5 1.0 1</ambient>
-            <diffuse>0.5 0.5 1.0 1</diffuse>
-            <specular>0.0 0.0 1.0 1</specular>
-          </material>
-          </visual-->
-        <collision name='collision'>
-          <geometry>
-            <sphere>
-              <radius>0.15</radius>
-            </sphere>
-          </geometry>
-        </collision>
-      </link>
-
-      <link name='caster'>
-        <pose>-0.357138 -0 -0.075 0 -0 0</pose>
-        <inertial>
-          <mass>1</mass>
-          <inertia>
-            <ixx>0.1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.1</iyy>
-            <iyz>0</iyz>
-            <izz>0.1</izz>
-          </inertia>
-        </inertial>
-        <!--visual name='visual'>
-          <geometry>
-            <sphere>
-              <radius>0.145</radius>
-            </sphere>
-          </geometry>
-          <material>
-            <ambient>0.5 0.5 1.0 1</ambient>
-            <diffuse>0.5 0.5 1.0 1</diffuse>
-            <specular>0.0 0.0 1.0 1</specular>
-          </material>
-          </visual-->
-        <collision name='collision'>
-          <geometry>
-            <sphere>
-              <radius>0.145</radius>
-            </sphere>
-          </geometry>
-        </collision>
-      </link>
-      
-      <link name='caster_front'>
-        <pose>0.357138 -0 -0.075 0 -0 0</pose>
-        <inertial>
-          <mass>1</mass>
-          <inertia>
-            <ixx>0.1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.1</iyy>
-            <iyz>0</iyz>
-            <izz>0.1</izz>
-          </inertia>
-        </inertial>
-        <!--visual name='visual'>
-          <geometry>
-            <sphere>
-              <radius>0.145</radius>
-            </sphere>
-          </geometry>
-          <material>
-            <ambient>0.5 0.5 1.0 1</ambient>
-            <diffuse>0.5 0.5 1.0 1</diffuse>
-            <specular>0.0 0.0 1.0 1</specular>
-          </material>
-          </visual-->
-        <collision name='collision'>
-          <geometry>
-            <sphere>
-              <radius>0.145</radius>
-            </sphere>
-          </geometry>
-        </collision>
-      </link>
-      
-      <joint name='front_laser_joint' type='fixed'>
-          <!--pose relative_to='base_footprint'>0.000 -0.0 0.25083 3.1415926535897932 0.000 0.000</pose-->
-          <pose relative_to='base_footprint'>0.000 -0.0 0.0 3.1415926535897932 0.000 0.000</pose>
-      	  <parent>base_footprint</parent>
-     	  <child>front_laser_link</child>
-      </joint>
-    
-      <link name="front_laser_link">
-      <pose relative_to='front_laser_joint'>0 0 0 0 0 0</pose>
-        <sensor name='human_vehicle_1_front_laser_sensor' type='gpu_lidar'>
-        <ignition_frame_id>human_vehicle_1/front_laser_link</ignition_frame_id> 
-        <topic>/human_vehicle_1/front_laser</topic>
-        <update_rate>20</update_rate>
-        <lidar>
-            <scan>
-                <horizontal>
-                    <samples>541</samples>
-                    <resolution>1</resolution>
-                    <min_angle>-3.1415926535897932</min_angle>
-                    <max_angle>3.1415926535897932</max_angle>
-                </horizontal>
-            </scan>
-            <range>
-                <min>0.56</min>
-                <max>15.0</max>
-                <resolution>0.03</resolution>
-            </range>
-            <!--noise>
-                <type>gaussian</type>
-                <mean>0.0</mean>
-                <stddev>0.03</stddev>
-            </noise-->
-        </lidar>
-        <always_on>1</always_on>
-        <visualize>0</visualize>
-      </sensor>  
-      
-      <!--visual name='visual'>
-          <geometry>
-            <sphere>
-              <radius>0.05</radius>
-            </sphere>
-          </geometry>
-          <material>
-            <ambient>0.5 0.5 1.0 1</ambient>
-            <diffuse>0.5 0.5 1.0 1</diffuse>
-            <specular>0.0 0.0 1.0 1</specular>
-          </material>
-          </visual-->
-      
-      </link>    
-
-      <joint name='left_wheel_joint' type='revolute'>
-        <parent>base_footprint</parent>
-        <child>left_wheel</child>
-        <axis>
-          <xyz>0 0 1</xyz>
-          <limit>
-            <lower>-1.79769e+308</lower>
-            <upper>1.79769e+308</upper>
-          </limit>
-        </axis>
-      </joint>
-
-      <joint name='right_wheel_joint' type='revolute'>
-        <parent>base_footprint</parent>
-        <child>right_wheel</child>
-        <axis>
-          <xyz>0 0 1</xyz>
-          <limit>
-            <lower>-1.79769e+308</lower>
-            <upper>1.79769e+308</upper>
-          </limit>
-        </axis>
-      </joint>
-
-      <joint name='caster_wheel' type='ball'>
-        <parent>base_footprint</parent>
-        <child>caster</child>
-      </joint>
-      
-      <joint name='caster_wheel_front' type='ball'>
-        <parent>base_footprint</parent>
-        <child>caster_front</child>
-      </joint>
-
-      <plugin
-        filename="ignition-gazebo-diff-drive-system"
-        name="ignition::gazebo::systems::DiffDrive">
-        <left_joint>left_wheel_joint</left_joint>
-        <right_joint>right_wheel_joint</right_joint>
-        <wheel_separation>0.6</wheel_separation>
-        <wheel_radius>0.15</wheel_radius>
-        <odom_publish_frequency>20</odom_publish_frequency>
-        <max_linear_acceleration>2.5</max_linear_acceleration>
-        <min_linear_acceleration>-2.5</min_linear_acceleration>
-        <max_angular_acceleration>3.2</max_angular_acceleration>
-        <min_angular_acceleration>-3.2</min_angular_acceleration>
-        <max_linear_velocity>0.5</max_linear_velocity>
-        <min_linear_velocity>-0.5</min_linear_velocity>
-        <max_angular_velocity>1</max_angular_velocity>
-        <min_angular_velocity>-1</min_angular_velocity>
-        <topic>human_vehicle_1/cmd_vel</topic>
-      	<odom_topic>human_vehicle_1/odom</odom_topic>
-      	<tf_topic>human_vehicle_1/tf</tf_topic>
-      	<frame_id>human_vehicle_1/odom</frame_id>
-        <child_frame_id>human_vehicle_1/base_footprint</child_frame_id>
-      </plugin>
-    </model>
-    
-    
-
-    
-    
-
-        <include>
-        <name>FemaleVisitorWalk_0</name>
-        <pose>-2.0504 2.2743 0 0 0 0</pose>
-        <uri>model://FemaleVisitorWalk</uri><plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>20</label></plugin>
-    	<plugin filename="ignition-gazebo-follow-actor-system"
-              name="ignition::gazebo::systems::FollowActor">
-        <target>human_vehicle_1</target>
-        <min_distance>0.1</min_distance>
-        <max_distance>15.0</max_distance>
-        <velocity>1</velocity>
-        <animation_x_vel>1.5</animation_x_vel>
-      	</plugin>
-        </include>
-
- 
-<include><name>aws_robomaker_warehouse_PalletJackB_01_0</name><pose>-3.1255 6.1694 0.5 0 0 0.2335</pose><uri>model://aws_robomaker_warehouse_PalletJackB_01</uri><plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>30</label></plugin><static>false</static></include><include><name>aws_robomaker_warehouse_TrashCanC_01_0</name><pose>-0.0297 3.9754 0.5 0 0 1.196</pose><uri>model://aws_robomaker_warehouse_TrashCanC_01</uri><plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>30</label></plugin><static>false</static></include><model name="dataset_camera">
-  <pose>-4.262 -4.223 3.0 0 0.523599 1.5076</pose>
+<include><name>pallet_box_mobile_0</name><pose>-3.118 0.4279 0.1 0 0 0.0888</pose><uri>model://pallet_box_mobile</uri><plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>32</label></plugin><static>false</static><plugin filename="gz-sim-pose-publisher-system" name="gz::sim::systems::PosePublisher"><publish_link_pose>false</publish_link_pose><publish_collision_pose>false</publish_collision_pose><publish_visual_pose>false</publish_visual_pose><publish_nested_model_pose>true</publish_nested_model_pose><use_pose_vector_msg>true</use_pose_vector_msg><static_update_frequency>10</static_update_frequency></plugin></include><include><name>AdjTable_0</name><pose>-5.8188 -0.5673 0.1 0 0 1.1229</pose><uri>model://AdjTable</uri><plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>33</label></plugin><static>false</static><plugin filename="gz-sim-pose-publisher-system" name="gz::sim::systems::PosePublisher"><publish_link_pose>false</publish_link_pose><publish_collision_pose>false</publish_collision_pose><publish_visual_pose>false</publish_visual_pose><publish_nested_model_pose>true</publish_nested_model_pose><use_pose_vector_msg>true</use_pose_vector_msg><static_update_frequency>10</static_update_frequency></plugin></include><include><name>aws_robomaker_warehouse_TrashCanC_01_0</name><pose>0.1963 0.3042 0.1 0 0 -0.2584</pose><uri>model://aws_robomaker_warehouse_TrashCanC_01</uri><plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>34</label></plugin><static>false</static><plugin filename="gz-sim-pose-publisher-system" name="gz::sim::systems::PosePublisher"><publish_link_pose>false</publish_link_pose><publish_collision_pose>false</publish_collision_pose><publish_visual_pose>false</publish_visual_pose><publish_nested_model_pose>true</publish_nested_model_pose><use_pose_vector_msg>true</use_pose_vector_msg><static_update_frequency>10</static_update_frequency></plugin></include><include><name>cart_model2_0</name><pose>-1.353 -0.3787 0.1 0 0 -0.4981</pose><uri>model://cart_model2</uri><plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>35</label></plugin><static>false</static><plugin filename="gz-sim-pose-publisher-system" name="gz::sim::systems::PosePublisher"><publish_link_pose>false</publish_link_pose><publish_collision_pose>false</publish_collision_pose><publish_visual_pose>false</publish_visual_pose><publish_nested_model_pose>true</publish_nested_model_pose><use_pose_vector_msg>true</use_pose_vector_msg><static_update_frequency>10</static_update_frequency></plugin></include><model name="dataset_camera">
+  <pose>-4.7844 -4.5196 0.46415 0 0.0 1.4797</pose>
   <static>true</static>
+      <frame name="lidar_frame" attached_to="camera_footprint">
+      <pose>0 0 0.03585 0 0 0</pose>
+      </frame>
       <link name="camera_footprint">
-        <inertial>
-          <mass>0.5</mass>
-          <inertia>
-            <ixx>0.000166667</ixx>
-            <iyy>0.000166667</iyy>
-            <izz>0.000166667</izz>
-          </inertia>
-        </inertial>
-        <collision name="collision">
-          <geometry>
-            <box>
-              <size>0.1 0.1 0.1</size>
-            </box>
-          </geometry>
-        </collision>
-        <visual name="visual">
-          <pose>0 0 0 0 -0.523599 0</pose>
-          <geometry>
-            <box>
-              <size>0.1 0.1 0.1</size>
-            </box>
-          </geometry>
-        </visual>
+      <inertial>
+        <pose>0 0 0.03585 0 0 0</pose>
+        <mass>0.83</mass>
+        <inertia>
+          <ixx>0.0009080594249999999</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0009080594249999999</iyy>
+          <iyz>0</iyz>
+          <izz>0.0011049624</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <pose>0 0 0.03585 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.0516</radius>
+            <length>0.0717</length>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://Lidar 3d v1/meshes/lidar_3d_v1.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+       <sensor name="gpu_lidar" type="gpu_lidar">
+          <pose relative_to='lidar_frame'>0 0 0 0 0 0</pose>
+          <topic>lidar</topic>
+          <update_rate>10</update_rate>
+          <visualize>0</visualize>
+          <lidar>
+            <scan>
+              <horizontal>
+                <samples>2000</samples>
+                <resolution>0.18</resolution>
+                <min_angle>-3.141592654</min_angle>
+                <max_angle>3.141592654</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>32</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.2793</min_angle>
+                <max_angle>0.2618</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.01</min>
+              <max>30</max>
+              <resolution>0.01</resolution>
+            </range>
+            <noise>
+            <type>gaussian</type>
+            <mean>0.005</mean>
+            <stddev>0.01</stddev>
+          </noise>
+          </lidar>
+        </sensor> 
 
         <!--instance <sensor name="instance_segmentation_camera" type="segmentation">
+        <pose relative_to='lidar_frame'>0 0 0 0 0 0</pose>
           <topic>panoptic</topic>
           <camera>
             <segmentation_type>instance</segmentation_type>
@@ -1581,7 +175,8 @@
           <visualize>true</visualize>
         </sensor> instance-->
         
-         <sensor name="semantic_segmentation_camera" type="segmentation">
+        <!--semantic <sensor name="semantic_segmentation_camera" type="segmentation">
+        <pose relative_to='lidar_frame'>0 0 0 0 0 0</pose>
           <topic>semantic</topic>
           <camera>
             <segmentation_type>semantic</segmentation_type>
@@ -1595,15 +190,16 @@
               <far>30</far>
             </clip>
             <save enabled="true">
-              <path>depot_dataset_semantic_nsc/segmentation_data/semantic_camera</path>
+              <path>segmentation_data/semantic_camera</path>
             </save>
           </camera>
           <always_on>1</always_on>
           <update_rate>10</update_rate>
           <visualize>true</visualize>
-        </sensor> 
+        </sensor> semantic-->
         
-         <sensor name="full_2d" type="boundingbox_camera">
+        <!--full <sensor name="full_2d" type="boundingbox_camera">
+        <pose relative_to='lidar_frame'>0 0 0 0 0 0</pose>
           <topic>boxes_full_2d</topic>
           <camera>
             <box_type>full_2d</box_type>
@@ -1617,15 +213,16 @@
               <far>30</far>
             </clip>
             <save enabled="true">
-              <path>depot_dataset_semantic_nsc/bounding_box_full_2d_data</path>
+              <path>bounding_box_full_2d_data</path>
             </save>
           </camera>
           <always_on>1</always_on>
           <update_rate>10</update_rate>
           <visualize>true</visualize>
-        </sensor> 
+        </sensor> full-->
 
-         <sensor name="visible_2d" type="boundingbox_camera">
+        <!--vis <sensor name="visible_2d" type="boundingbox_camera">
+        <pose relative_to='lidar_frame'>0 0 0 0 0 0</pose>
           <topic>boxes_visible_2d</topic>
           <camera>
             <box_type>visible_2d</box_type>
@@ -1639,56 +236,71 @@
               <far>30</far>
             </clip>
             <save enabled="true">
-              <path>depot_dataset_semantic_nsc/bounding_box_visible_2d_data</path>
+              <path>bounding_box_visible_2d_data</path>
+            </save>
+          </camera>
+          <always_on>1</always_on>
+          <update_rate>10</update_rate>
+          <visualize>true</visualize>
+        </sensor> vis-->
+
+         <sensor name="3d" type="boundingbox_camera">
+        <pose relative_to='lidar_frame'>0 0 0 0 0 0</pose>
+          <topic>boxes_3d</topic>
+          <camera>
+            <box_type>3d</box_type>
+            <horizontal_fov>2.1206</horizontal_fov>
+            <image>
+              <width>1920</width>
+              <height>1200</height>
+            </image>
+            <clip>
+              <near>0.1</near>
+              <far>11.0</far>
+            </clip>
+            <save enabled="true">
+              <path>data_dump/68/bounding_box_3d_data</path>
             </save>
           </camera>
           <always_on>1</always_on>
           <update_rate>10</update_rate>
           <visualize>true</visualize>
         </sensor> 
-
-        <!--3d <sensor name="3d" type="boundingbox_camera">
-          <topic>boxes_3d</topic>
-          <camera>
-            <box_type>3d</box_type>
-            <horizontal_fov>1.57</horizontal_fov>
-            <image>
-              <width>800</width>
-              <height>600</height>
-            </image>
-            <clip>
-              <near>0.1</near>
-              <far>30</far>
-            </clip>
-            <save enabled="true">
-              <path>bounding_box_3d_data</path>
-            </save>
-          </camera>
-          <always_on>1</always_on>
-          <update_rate>10</update_rate>
-          <visualize>true</visualize>
-        </sensor> 3d-->
         
-         <sensor name="depth_camera1" type="depth_camera">
+        <!--depth <sensor name="depth_camera1" type="depth_camera">
+        <pose relative_to='lidar_frame'>0 0 0 0 0 0</pose>
           <topic>depth_camera</topic>
           <camera>
-            <horizontal_fov>1.57</horizontal_fov>
+            <horizontal_fov>2.1206</horizontal_fov>
             <image>
-              <width>800</width>
-              <height>600</height>
+              <width>1920</width>
+              <height>1200</height>
               <format>R_FLOAT32</format>
             </image>
             <clip>
               <near>0.1</near>
-              <far>30.0</far>
+              <far>11.0</far>
             </clip>
-            <save enabled="true">
-              <path>depot_dataset_semantic_nsc/depth_data</path>
+            <noise>
+            	<type>gaussian</type>
+            	<mean>0.03346</mean>
+            	<stddev>0.017</stddev>
+            </noise>
+            <save enabled="false">
+              <path>depth_data</path>
             </save>
           </camera>
           <always_on>1</always_on>
           <update_rate>10</update_rate>
           <visualize>true</visualize>
-          </sensor> 
+          </sensor> depth-->
       </link>
+      <plugin filename="gz-sim-pose-publisher-system" name="gz::sim::systems::PosePublisher">
+      <publish_link_pose>false</publish_link_pose>
+      <publish_collision_pose>false</publish_collision_pose>
+      <publish_visual_pose>false</publish_visual_pose>
+      <publish_nested_model_pose>true</publish_nested_model_pose>
+      <use_pose_vector_msg>true</use_pose_vector_msg>
+      <static_update_frequency>10</static_update_frequency>
+      </plugin>
 </model></world></sdf>

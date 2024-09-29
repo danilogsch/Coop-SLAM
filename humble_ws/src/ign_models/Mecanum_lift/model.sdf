@@ -1,8 +1,10 @@
 <sdf version="1.9">
     <model name="Mecanum_lift">
     	<pose>0 0 0 0 0 0</pose>
+    	<link name="gt"/>
+    	<pose>0 0 0.01 0 0 0</pose>
         <link name="base_footprint">
-            <pose>0 0 0.01 0 0 0</pose>
+            <pose relative_to='gt_joint'>0 0 0 0 0 0</pose>
             <inertial>
                 <mass>1.14395</mass>
                 <inertia>
@@ -287,6 +289,18 @@
                 </material>
             </visual>
         </link>
+        <joint name="gt_joint" type="revolute">
+            <pose relative_to='gt'>0 0.135 0 0 0 0</pose>
+            <parent>gt</parent>
+            <child>base_footprint</child>
+            <axis>
+                <xyz>0 1 0</xyz>
+                <limit>
+                    <lower>-1.79769e+308</lower>
+                    <upper>1.79769e+308</upper>
+                </limit>
+            </axis>
+        </joint>
         <joint name="front_left_wheel_joint" type="revolute">
             <pose relative_to='base_footprint'>0.858 0.282 0.186 0 0 0</pose>
             <parent>base_footprint</parent>

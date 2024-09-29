@@ -245,6 +245,50 @@
         <updateRate>10.0</updateRate>
         <pose>0.127 -0.129 0.339 0 -0 0</pose>
       </sensor>
+      <sensor name="depth_camera1" type="depth_camera">
+        <pose>0 0 4 0 1.570796 0</pose>
+          <topic>/rbkairos_migration_sensor_config_1/depth_camera</topic>
+          <camera>
+            <horizontal_fov>1.57</horizontal_fov>
+            <image>
+              <width>800</width>
+              <height>600</height>
+              <format>R_FLOAT32</format>
+            </image>
+            <clip>
+              <near>0.1</near>
+              <far>10.0</far>
+            </clip>
+            <save enabled="false">
+              <path>depth_data</path>
+            </save>
+          </camera>
+          <always_on>1</always_on>
+          <update_rate>10</update_rate>
+          <visualize>true</visualize>
+          </sensor>
+          <sensor name="instance_segmentation_camera" type="segmentation">
+          <pose>0 0 4 0 1.570796 0</pose>
+          <topic>rbkairos_migration_sensor_config_1/panoptic</topic>
+          <camera>
+            <segmentation_type>instance</segmentation_type>
+            <horizontal_fov>1.57</horizontal_fov>
+            <image>
+              <width>800</width>
+              <height>600</height>
+            </image>
+            <clip>
+              <near>0.1</near>
+              <far>10</far>
+            </clip>
+            <save enabled="true">
+              <path>segmentation_data/instance_camera</path>
+            </save>
+          </camera>
+          <always_on>1</always_on>
+          <update_rate>10</update_rate>
+          <visualize>true</visualize>
+        </sensor>
     </link>
     
     <joint name='front_laser_joint' type='fixed'>

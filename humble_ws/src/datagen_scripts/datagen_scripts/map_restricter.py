@@ -17,16 +17,7 @@ class MapRestricterServer(Node):
     
     def __init__(self):
         super().__init__('map_restricter') 
-        #self.map_publisher_info_ = self.create_publisher(CostmapFilterInfo, 'costmap_filter_info', 5)
-        #self.rest_map_msg = OccupancyGrid()
-        #self.filter_info_msg = CostmapFilterInfo()
-        #self.filter_info_msg.base = np.float(0)
-        #self.filter_info_msg.multiplier = np.float(1)
-        #self.filter_info_msg.type = 0
-        #self.filter_info_msg.filter_mask_topic = 'filter_mask'
-        #timer_period = 0.5  # seconds
-        #self.timer = self.create_timer(timer_period, self.timer_callback())
-        super().__init__('random_goal_handler')
+
         self.declare_parameters(
             namespace='',
             parameters=[
@@ -83,7 +74,7 @@ class MapRestricterServer(Node):
         #q=[self.camera_pose.orientation.x,self.camera_pose.orientation.y,self.camera_pose.orientation.z,self.camera_pose.orientation.w]
         #[r, p, theta] = euler_from_quaternion(q) #rad
         theta = self.get_parameter("cam_yaw").value
-        hfov = 90 * math.pi/180 #Camera's horizontal field of view
+        hfov = 120 * math.pi/180 #Camera's horizontal field of view
 
         angle1 = (float(-theta) + (hfov/2))
         if angle1 > math.pi:
@@ -103,7 +94,8 @@ class MapRestricterServer(Node):
         point_3.x = point_1.x + ((camera_dist* math.cos(angle2)))//1
         point_3.y = point_1.y + ((camera_dist* math.sin(angle2)))//1
 
-        points_max_dist = (mapwidth + mapheight)//2
+        #points_max_dist = (mapwidth + mapheight)//2
+        points_max_dist = 10.5 // res
 
         #Points far of camera
         point_4 = Point()
@@ -126,48 +118,7 @@ class MapRestricterServer(Node):
         self.req.map_url = os.path.join(get_package_share_directory('datagen_scripts'), 'map_restricted.yaml')
 
         self.cli.call_async(self.req)
-        #rclpy.spin_until_future_complete(self, wait)
-        #if wait.result() is not None:
-        #    self.get_logger().info('Request was responded')
-        #    print(wait.result())
-        #else:
-        #    self.get_logger().info('Request Failed')
-        
-        #self.future = self.cli.call_async(self.req)
-        #while rclpy.ok():
-        #    rclpy.spin_once(self)
-        #    if self.future.done():
-        #        self.response.result = self.future.result()
-        #        print(self.response.result)
-        #        if self.response.result == 0:
-        #            self.get_logger().info('KEEP OUT ZONES UPDATED!')
-        #        break
 
-
-
-
-    #def timer_callback(self):
-    #    #Update Headers & info
-    #    
-    #    self.rest_map_msg.header.frame_id = self.response.map.header.frame_id
-    #    self.rest_map_msg.info = self.response.map.info
-    #    self.rest_map_msg.header.stamp = self.get_clock().now().to_msg()
-    #    #self.rest_map_msg.header.frame_id = 'map'
-    #    self.filter_info_msg.header.frame_id = self.rest_map_msg.header.frame_id
-    #    self.filter_info_msg.header.stamp = self.get_clock().now().to_msg()
-    #    #self.map_publisher_.publish(self.rest_map_msg)
-    #    #self.map_publisher_info_.publish(self.filter_info_msg)
-    #    self.get_logger().info('Published filtered masks: "%i"' % self.i)
-    #    self.i += 1
-
-    #def send_request(self):
-    #    self.future = self.cli.call_async(self.req)
-    #    while rclpy.ok():
-    #        rclpy.spin_once(self)
-    #        if self.future.done():
-    #            self.response = self.future.result()
-    #            self.get_logger().info('GOT MAP')
-    #            break
 
 def main(args=None):
     rclpy.init(args=args)

@@ -4,7 +4,7 @@
     <pose>0 0 0 0 0 0</pose>
     <!-- BASE_LINK FRAME -->
     <link name='base_link'>
-      <pose>0 0 0 0 0 -1.57079632679</pose>
+      <pose>0.5 0 0.05 0 0 -1.57079632679</pose>
       <inertial>
         <pose>0 -0.5 0.5 0 0 0</pose>
         <mass>30</mass>
@@ -116,7 +116,7 @@
 
     <!-- Back Left -->
     <link name="back_left">
-      <pose>-1.04 -0.245 -0.05 0 0 1.570796327</pose>
+      <pose>-0.54 -0.245 0 0 0 1.570796327</pose>
       <inertial>
         <pose>0 0 0 0 1.570796327 0</pose>
         <mass>0.01</mass>
@@ -181,7 +181,7 @@
 
     <!-- Back Right -->
     <link name="back_right">
-      <pose>-1.04 0.245 -0.05 0 0 1.570796327</pose>
+      <pose>-0.54 0.245 0 0 0 1.570796327</pose>
       <inertial>
         <pose>0 0 0 0 1.570796327 0</pose>
         <mass>0.01</mass>
@@ -246,7 +246,7 @@
 
     <!-- Front Left -->
     <link name='wheel_sup_front_left'>
-      <pose>0 -0.245 0.05 0 0 1.570796327</pose>
+      <pose>0.5 -0.245 0.1 0 0 1.570796327</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
         <mass>0.01</mass>
@@ -282,7 +282,7 @@
     </joint>
 
     <link name="front_left">
-      <pose>-0.04 -0.245 -0.05 0 0 1.570796327</pose>
+      <pose>0.46 -0.245 0 0 0 1.570796327</pose>
       <inertial>
         <pose>0 0 0 0 1.570796327 0</pose>
         <mass>0.01</mass>
@@ -348,7 +348,7 @@
     <!-- Front Right -->
 
     <link name='wheel_sup_front_right'>
-      <pose>0 0.245 0.05 0 0 1.570796327</pose>
+      <pose>0.5 0.245 0.1 0 0 1.570796327</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
         <mass>0.01</mass>
@@ -385,7 +385,7 @@
 
 
     <link name="front_right">
-      <pose>-0.04 0.245 -0.05 0 0 1.570796327</pose>
+      <pose>0.46 0.245 0 0 0 1.570796327</pose>
       <inertial>
         <pose>0 0 0 0 1.570796327 0</pose>
         <mass>0.01</mass>

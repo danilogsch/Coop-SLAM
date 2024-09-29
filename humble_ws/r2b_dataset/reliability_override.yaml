@@ -1,0 +1,12 @@
+/tf_static:
+    reliability: best_effort
+    history: keep_last
+    depth: 10
+    durability: transient_local
+    
+/pandar_xt_32_0_lidar:
+    reliability: best_effort
+    history: keep_last
+    depth: 10
+    durability: transient_local
+    

@@ -1,5 +1,6 @@
 <sdf version="1.6">
     <actor name="actor">
+    <pose>5 0 0 0 0 3.14</pose>
       <skin>
         <filename>model://PatientWalkingCane/meshes/PatientWalkingCane.dae</filename>
         <scale>1.0</scale>
