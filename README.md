@@ -98,7 +98,7 @@ gz sim coop_slam.sdf
 #On different terminal (since the world contains a person):
 ros2 run coop_detection_and_mapping human_data_saver --ros-args -p use_sim_time:=True
 
-# On a diferent terminal:
+# On a diferent terminal (bridge simulation and ROS2):
 ros2 run ros_gz_bridge parameter_bridge '/human_vehicle/depth_camera@sensor_msgs/msg/Image[gz.msgs.Image' '/human_vehicle/panoptic/colored_map@sensor_msgs/msg/Image[gz.msgs.Image' '/rbkairos_migration_sensor_config_3_1/lidar/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked' '/clock@rosgraph_msgs/msg/Clock@gz.msgs.Clock' '/model/rbkairos_migration_sensor_config_3_0/pose@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V' '/model/rbkairos_migration_sensor_config_3_1/pose@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V' '/model/rbkairos_migration_sensor_config_3_2/pose@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V' '/model/human_vehicle/pose@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V' '/model/youbot/pose@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V' '/model/pallet_box_mobile/pose@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V' '/model/aws_robomaker_warehouse_PalletJackB_01/pose@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V' '/model/cart_model2/pose@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V' --ros-args -r '/model/rbkairos_migration_sensor_config_3_0/pose:=/tf' -r '/model/rbkairos_migration_sensor_config_3_1/pose:=/tf' -r '/model/rbkairos_migration_sensor_config_3_2/pose:=/tf' -r '/model/human_vehicle/pose:=/tf' -r '/model/youbot/pose:=/tf' -r '/model/pallet_box_mobile/pose:=/tf' -r '/model/aws_robomaker_warehouse_PalletJackB_01/pose:=/tf' -r '/model/cart_model2/pose:=/tf' 
 
 # On a diferent terminal (to give the models velocity comands, press play on simulation after these commands):
