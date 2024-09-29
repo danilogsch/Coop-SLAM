@@ -143,7 +143,7 @@ Semantic Segmentation example:
 
 ![](https://github.com/danilogsch/Coop-SLAM/blob/main/coopslam.gif)
 
-Paper results available on [this link](https://drive.google.com/drive/folders/1hF9q2466QbS1hW0QMyjwjuKk0YqQm2Uo?usp=sharing).
+Paper results and videos available on [this link](https://drive.google.com/drive/folders/1hF9q2466QbS1hW0QMyjwjuKk0YqQm2Uo?usp=sharing).
 
 To generate ground truth:
 
